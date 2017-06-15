@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?> 
+<command-request>
+    <deployment-id>gov.hud.cares.ONAPBPMS:ONAPBPMS:1.6.0</deployment-id>
+    <ver>6.4.0.1</ver>
+    <start-process processId="ONAPBPMS.ONAPProcess">
+        <parameter>
+            <item key="borrower">
+                <value xsi:type="borrowr" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                    <blkPlot>blkPlot</blkPlot>
+                    <borrowerTypeCode>borrowerTypeCode</borrowerTypeCode>
+                    <city>city</city>
+                    <personBirthDate>2016-08-04T22:39:38.508-03:00</personBirthDate>
+                    <firstName>first name</firstName>
+                    <lastName>last name</lastName>
+                    <lot>lot</lot>
+                    <middleInitial>middle initial</middleInitial>
+                    <ssn>111223333</ssn>
+                    <state>state</state>
+                    <street>street</street>
+                    <suffix>suffix</suffix>
+                    <tribalAffiliationCode>tribalAffiliationCode</tribalAffiliationCode>
+                    <underwritingTypeCode>type code</underwritingTypeCode>
+                    <zipCode>zip Code</zipCode>
+                </value>
+            </item>
+        </parameter>
+    </start-process>
+</command-request>

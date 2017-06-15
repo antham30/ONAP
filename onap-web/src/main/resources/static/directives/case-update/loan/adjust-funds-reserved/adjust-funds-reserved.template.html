@@ -1,0 +1,78 @@
+<div class="container adjust-funds-reserved-form">
+	<div class="row">
+	<form name="adjustFundsForm" id="adjustFundsForm">
+	<fieldset ng-disabled="vm.disableModificationForm()">
+		<div class="col-md-5 col-lg-5">
+		<label for="fundsAmount">Current Funds Reserved</label>
+		<input readonly disabled type="text" class="currency form-control full-width-form-element" ng-model="rofAmount" id="fundsAmount" name="fundsAmount"/>
+		</div>
+		<div class="col-md-5 col-lg-5">
+		<label for="modFundsAmount">Adjusted Funds Reserved</label>
+		<input type="text" class="currency form-control full-width-form-element" ng-model="vm.adjustedReservationAmt" id="modFundsAmount" name="modFundsAmount" ng-change="vm.calcRofMax()" />
+		</div>
+		<div class="col-md-2 col-lg-2">
+			<button type="submit" id="confirmFundsChange" class="btn btn-block background-red" ng-disabled="!cohortNumber" data-target="#adjustmentConfirmation"  data-toggle="modal">Confirm</button>
+		</div>
+	</fieldset>
+	</form>
+	</div>
+	<div class="row">
+	<div class="col-lg-12 col-md-12">
+	<table id="fundsAlterationsTable" datatable="ng" class="table table-responsive display table-bordered" cellspacing="0">
+        <thead>
+            <tr>
+                <th class="text-center background-gold">Cohort #</th>
+				<th class="text-center background-gold">Adjustment</th>
+                <th class="text-center background-gold">Total Funds Reserved</th>
+                <th class="text-center background-gold">Effective Start Date</th>
+                <th class="text-center background-gold">Effective End Date</th>
+                <th class="text-center background-gold">Reservation of Funds Document</th>
+			</tr>
+        </thead>
+        <tbody>
+           <tr ng-repeat="details in vm.modsList">
+				<td>{{details.cohortModNumber}}</td>
+                <td>{{details.adjustedAmount | currency}}</td>
+				<td>{{details.modFirmCommitmentAmount | currency}}</td>
+				<td>{{details.effectiveStartDt | date: 'MM/dd/yyyy h:mma'}}</td>
+				<td>{{details.effectiveEndDt | date: 'MM/dd/yyyy h:mma'}}</td>
+				<td><button type="button" id="viewROF{{$index}}" name="viewROF{{$index}}" 
+							class="btn btn-block background-red" 
+							ng-click="vm.viewReservationOfFunds(details)">View</button></td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+	</div>
+</div>
+<div class="modal fade" id="adjustmentConfirmation" role="dialog">
+					<div class="modal-dialog">
+						<!-- Modal content-->
+						<div class="modal-content cart-on-main">
+							<div class="modal-header background-red">
+								<button type="button" class="close close-login"
+									data-dismiss="modal">&times;</button>
+								<h4 class="modal-title align-center color-fff font_family_fft">Confirmation</h4>
+							</div>
+							<div class="modal-body">
+								<div class="row">
+									<div class="text-center m-btm20">
+										<div class="f-size18 m-btm20">Are you sure you want to adjust funds reserved to reflect {{vm.adjustedReservationAmt | currency}}?</div>
+										<div class="col-lg-offset-3 col-lg-6 col-lg-offset-3 m-btm20">
+											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+												<button
+													class="btn btn-block pull-left align-yesBtn background-gold"
+													ng-click="vm.confirmFundsChange()" data-dismiss="modal">Yes</button>
+											</div>
+											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+												<button
+													class="btn btn-block pull-right align-noBtn background-gold"
+													data-dismiss="modal">No</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>

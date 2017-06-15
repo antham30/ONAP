@@ -1,0 +1,129 @@
+<div class="row m-top20">
+	<div class="col-md-12 col-xs-12 col-lg-12">
+		<form name="reconciliationForm"
+			ng-submit="vm.saveReconciliationData()" novalidate>
+			<ng-form name="reconciliationFields" id="reconciliationFields">
+			<div class="form-horizontal">
+				<div class="row m-top30">
+  <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong>Actual Appraiser</strong>
+        </div>
+        <div class="panel-body">
+        <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2">
+					<div class="form-group">
+					<label for="state" class="control-label">State</label>
+						<select id="state" class="form-control" ng-model="data.editable.stCd" title="state">
+                            <option value="">Select State</option>
+                             <option value="{{state.referenceCodeName}}" ng-repeat="state in vm.statesList | orderBy:'referenceCodeName'">{{state.referenceCodeName}}</option>
+                        </select>
+                        <div ng-show="vm.showStateError" class="color-red">{{vm.stateError}}</div>
+					</div>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2">
+						<div class="form-group">
+							<label class="control-label" for="licenseNumber">License
+								No.</label> <input type="text" id="licenseNumber" name="licenseNumber"
+								class="form-control reconciliation-form-field"
+								title="License Number" ng-model="data.editable.aprsrStLcncNbr" />
+								<div ng-show="vm.showLicenseNumberError" class="color-red">{{vm.licenseNumberError}}</div>
+						</div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3">
+					<div class="form-group">
+					<label class="control-label" for="appraisalLicenseType">Appraiser License Type</label>
+						<select id="appraisalLicenseType" name="appraisalLicenseType"   
+								class="form-control" ng-model="data.editable.aprsrLicTypeCd" title="Appraiser License Type">
+                            <option value="">Select Appraiser License Type</option>
+                             <option value="{{type.referenceCodeValue}}" ng-repeat="type in vm.appraiserLicenseTypes">{{type.referenceCodeName}}</option>
+                        </select>
+                        <div ng-show="vm.showLicenseTypeError" class="color-red">{{vm.licenseTypeError}}</div>
+					</div>
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-5">
+						<div class="col-lg-5 col-md-5">
+							<div class="form-group name-box">
+								<label class="control-label labelheader">Name</label> <label
+									class="control-label" for="firstName">First</label> <input
+									type="text" id="firstName"
+									class="form-control property-form-field" title="First Name"
+									name="firstName" ng-model="data.editable.frstNm" />
+								<div ng-show="vm.showFirstNameError" class="color-red">{{vm.firstNameError}}</div>
+							</div>
+						</div>
+						<div class="col-lg-2 col-md-2">
+							<div class="form-group name-box">
+								<label class="control-label" for="middleInitial">MI</label> <input
+									type="text" id="middleInitial"
+									class="form-control property-form-field" title="Middle Initial"
+									name="middleInitial" ng-model="data.editable.mdlNm" />
+							</div>
+						</div>
+						<div class="col-lg-5 col-md-5">
+							<div class="form-group name-box">
+								<label class="control-label" for="lastName">Last</label> <input
+									type="text" id="lastName"
+									class="form-control property-form-field" title="Last Name"
+									name="lastName" ng-model="data.editable.lastNm" />
+								<div ng-show="vm.showLastNameError" class="color-red">{{vm.lastNameError}}</div>
+							</div>
+						</div>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+				</div>
+				<div class="row">
+					<div class="col-lg-2 col-md-2 col-sm-2">
+						<div class="form-group">
+							<label class="control-label" for="appraisalValue">Appraisal 
+								Value</label> 
+								<span class="textBeforeInput">$</span>
+								<input type="text" id="appraisalValue"
+								name="appraisalValue"
+								class="form-control inputBeforeText reconciliation reconciliation-form-field"
+								title="Appraisal Value" name="appraisalValue"
+								ng-model="data.editable.aprsdVal" /> <span
+								class="textAfterInput reconciliation">.00</span>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+						<div class="form-group">
+							<label class="control-label" for="appraisedAs">Appraised
+								As</label> <br> <select id="appraisedAs" name="appraisedAs"
+								ng-model="data.editable.aprslTypeCd">
+								<option value="">Select Appraised As</option>
+								<option ng-repeat="option in vm.appraisalMethodOptions"
+									value="{{option.referenceCodeValue}}">{{option.referenceCodeName}}</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+						<div class="form-group">
+							<label class="control-label" for="dateOfAppraisal">Effective
+								Date of Appraisal</label> <input type="text" id="dateOfAppraisal"
+								class="form-control property-form-field"
+								title="Effective Date of Appraisal" name="dateOfAppraisal"
+								ng-model="data.editable.aprslDt"
+								ng-pattern="/^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$/" />
+								<div ng-show="vm.showAppraisalDateError" class="color-red">{{vm.appraisalDateError}}</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="m-top30 col-lg-11 col-lg-offset-1 col-md-12 col-sm-12 col-xs-12">
+						<div class="pull-right m-top25">
+							<button ng-disabled="vm.hasAllEmptyFields()" type="submit"
+								class="btn m-right30 background-red"
+								id="saveReconciliationFields">Save</button>
+							<a class="btn" ng-click="vm.resetFormData()">Cancel</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			</ng-form>
+		</form>
+	</div>
+</div>

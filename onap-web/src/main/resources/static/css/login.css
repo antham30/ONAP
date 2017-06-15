@@ -1,0 +1,109 @@
+/* GENERAL TAG
+------------------------------------------------------------------ */
+#login-container {
+    margin:0px auto;
+    position:relative;
+    margin-top:100px;
+    width:320px;    
+}
+#login {
+    padding: 10px 30px 30px;
+    border: 1px solid #eee;
+    box-shadow: 0px 3px 2px #eee;
+}
+.login-logo {
+    border-bottom: 1px solid #eee;
+    margin-bottom: 30px;
+}
+.login-head {
+    margin-bottom: 30px;
+}
+.login-head .login-title {
+    text-transform: uppercase;
+    font-size: 15pt;
+    font-weight: bold;
+}
+.login-head .login-desc {
+    margin: 10px 0;
+    color: #33589E; 
+}
+.login-frm {
+    
+}
+.login-frm .fi {
+    margin-bottom: 15px;
+    border: 1px solid #eee;
+    height: 40px;
+    line-height: 40px;
+    transition: .5s all linear;
+}
+.login-frm .fi.active {
+    box-shadow: 0 0 3px #33589E;
+}
+.login-frm .fi.nborder {
+    border: none;
+    height: auto;
+    line-height: 20px;
+}
+.login-frm .fi .ic {
+    height: 40px;
+    width: 14%;
+    text-align: center;
+    vertical-align: middle;
+    border-right: 1px solid #eee;
+    transition: .2s color linear;
+}
+.login-frm .fi.active .ic {
+    color: #33589E;
+}
+.login-frm .fi .input {
+    width: 86%;
+}
+.login-frm .fi input[type="text"], .login-frm .fi input[type="password"] {
+    padding: 5px 10px;
+    width: 100%;
+    box-shadow: none !important;
+    border: none;
+    line-height: normal;
+}
+.login-frm .btn {
+    border: none;
+    padding: 11px 0;
+    margin-bottom: 15px;
+    background: #33589E;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    display: block;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: .2s all linear;
+}
+.login-frm .btn:hover {
+    background: #000;
+}
+.login-frm .btn:disabled {
+    background-color: #eee !important;
+    color: #999 !important;
+    cursor: not-allowed;    
+}
+.login-frm .btn:active {
+    background: #666;
+    transition: none;
+}
+.login-frm .error {
+    color: red;
+}
+.login-footer {
+    margin-top: 20px;
+    color: #999;
+    font-size: 0.9em;
+    text-align: center;
+}
+.login-footer div {
+    margin-top: 10px;
+}
+.login-footer a {
+    padding: 0 5px;
+}

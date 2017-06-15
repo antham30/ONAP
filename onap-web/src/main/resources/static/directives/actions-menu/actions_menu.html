@@ -1,0 +1,188 @@
+<div id="top_menu_container">
+	<div id="top_links">
+		<ul id="top_links_items">
+			<li id="role1" ng-if="actionsMenu.isLender"><strong>Lender
+					Name:</strong> {{lndrName}}</li>
+			<li id="username"><strong>User:</strong> {{userName}}</li>
+			<li id="role"><strong>Role:</strong> <span
+				ng-if="actionsMenu.isLender">Lender</span> <span
+				ng-if="actionsMenu.isOLG">OLG Endorser</span><span
+				ng-if="actionsMenu.isOLGSupervisor">OLG Supervisor</span><span
+				ng-if="actionsMenu.isOLGAdmin">OLG Administrator</span></li>
+			<li id="logout" ng-controller="logoutController"><a
+				role="button" title="Logout" ng-click="logoutApp()" href="#"> <span
+					class="glyphicon glyphicon-log-out"></span> Logout
+			</a></li>
+			<li id="contactUs"><a href="mailto:support.onap.los@hud.gov"
+				class="color-blue">Contact Us</a></li>
+		</ul>
+	</div>
+	<!-- Hide the menu from admin for now -->
+	<div id="menu_container">
+		<ul id="menu" role="menu">
+			<li role="menuitem" id="dashboard"><a
+				ng-if="actionsMenu.isLender && !actionsMenu.isOLGAdmin"
+				ng-class="{'active': actionsMenu.isLenderDashboardPage()}"
+				role="button" aria-haspopup="true" aria-expanded="true"
+				title="Dashboard" id="dashboard-link" ng-href="#/lenderDashboard">
+					<span class="glyphicon glyphicon-th-list" id="dashboard-icon"></span>
+					Dashboard
+			</a><a ng-if="actionsMenu.isOLGMember && !actionsMenu.isOLGAdmin"
+				ng-class="{'active': actionsMenu.isOLGDashboardPage()}"
+				role="button" aria-haspopup="true" aria-expanded="true"
+				title="Dashboard" id="dashboard-link" ng-href="#/olgDashboard">
+					<span class="glyphicon glyphicon-th-list" id="dashboard-icon"></span>
+					My Cases
+			</a></li>
+			<li role="menuitem" id="dashboard"
+				ng-if="actionsMenu.isOLGAdmin || actionsMenu.isOLG || actionsMenu.isOLGSupervisor"><a
+				ng-class="{'active': actionsMenu.isOLGCasesDashboardPage()}"
+				role="button" aria-haspopup="true" aria-expanded="true"
+				title="Dashboard" id="dashboard-link" ng-href="#/olgCasesDashboard">
+					<span class="glyphicon glyphicon-th-list" id="dashboard-icon"></span>
+					OLG Cases Dashboard
+			</a></li>
+			<li role="menuitem" id="register-a-case" ng-if="actionsMenu.isLender">
+				<a ng-class="{'active': actionsMenu.isCaseRegistrationPage()}"
+				role="button" class="dropdown-toggle" data-toggle="dropdown"
+				aria-haspopup="true" aria-expanded="true" title="Register A Case"
+				id="register-case"> <span class="glyphicon glyphicon-briefcase"
+					id="register-icon"></span> Case <span class="caret"></span>
+			</a>
+				<ul class="dropdown-menu" role="menu"
+					id="register-a-newcase-dropdown">
+					<li role="menuitem"><a ng-href="#/lender"
+						ng-click="actionsMenu.clearRegisterCase()"
+						ng-class="{'active': currentPath === '/lender'}">Register a
+							case</a></li>
+					<li role="menuitem"><a href="#/loanSearch"
+						ng-class="{'active': currentPath === '/loanSearch'}">Search by
+							Case #</a></li>
+					<li role="menuitem"><a ng-href="#/cancelSearch"
+						ng-class="{'active': currentPath === '/cancelSearch'}">Cancel
+							a case</a></li>
+				</ul>
+			</li>
+			<li role="menuitem" id="register-a-case"
+				ng-if="actionsMenu.isOLG || actionsMenu.isOLGSupervisor"><a
+				ng-class="{'active': actionsMenu.isCaseRegistrationPage()}"
+				role="button" class="dropdown-toggle" data-toggle="dropdown"
+				aria-haspopup="true" aria-expanded="true" title="Register A Case"
+				id="register-case"> <span class="glyphicon glyphicon-briefcase"
+					id="register-icon"></span> Case <span class="caret"></span>
+			</a>
+				<ul class="dropdown-menu" role="menu"
+					id="register-a-newcase-dropdown">
+					<li role="menuitem"><a href="#/loanSearch"
+						ng-class="{'active': currentPath === '/loanSearch'}">Search by
+							Case #</a></li>
+				</ul></li>
+			<li role="menuitem" id="reserve-funds" ng-if="actionsMenu.isLender">
+				<a ng-class="{'active': actionsMenu.isFundsReservationPage()}"
+				role="button" class="dropdown-toggle" data-toggle="dropdown"
+				aria-haspopup="true" aria-expanded="true" title="Reserve Funds"
+				id="reserve-link"> <span class="glyphicon glyphicon-credit-card"
+					id="reserve-funds-icon"></span> Reserve Funds <span class="caret"></span>
+			</a>
+				<ul class="dropdown-menu" role="menu" id="reserve-funds-dropdown">
+					<li role="menuitem"><a ng-href="#/loanSearch/appraisalLogging">Appraisal
+							Logging</a></li>
+					<li role="menuitem"><a
+						ng-href="#/loanSearch/adjustFundsReserved"
+						ng-class="{'active': currentPath === '/loanSearch/adjustFundsReserveds'}">Adjust
+							Funds Reserved</a></li>
+				</ul>
+			</li>
+			<li role="menuitem" id="endorsement-item"
+				ng-if="actionsMenu.isLender"><a
+				ng-class="{'active': actionsMenu.isEndorsementPage()}" role="button"
+				class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+				aria-expanded="true" title="Endorsement" id="endorsement"> <span
+					class="glyphicon glyphicon-folder-open" id="endorsement-icon"></span>
+					Endorsement <span class="caret"></span>
+			</a>
+				<ul class="dropdown-menu" role="menu" id="endorse-case-dropdown">
+					<li role="menuitem"><a ng-href="#/loanSearch/endorsement">
+							Submit Case for Endorsement</a></li>
+				</ul></li>
+			<li role="menuitem" id="reports"
+				ng-if="actionsMenu.isOLGMember || actionsMenu.isOLGAdmin"><a
+				role="button" class="dropdown-toggle" data-toggle="dropdown"
+				aria-haspopup="true" aria-expanded="true" title="Reports"
+				id="reports-link" ng-class="{'active': actionsMenu.isReportsPage()}">
+					<span class="glyphicon glyphicon-list-alt" id="reports-icon1"></span>
+					Reports <span class="caret"></span>
+			</a>
+				<ul class="dropdown-menu" role="menu" id="reports-dropdown">
+					<li role="menuitem"><a class="cohort" ng-href="#/cohort">Cohort
+							Report</a></li>
+					<li role="menuitem"><a class="daily" ng-href="#/daily">Daily
+							ARC</a></li>
+				</ul></li>
+			<li role="menuitem" id="administrative-functions"
+				ng-if="actionsMenu.isOLGAdmin"><a role="button"
+				class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+				aria-expanded="true" title="Administrative Functions"
+				id="administrative-functions-link"
+				ng-class="{'active': actionsMenu.isAdminFunctionsPage()}"> <span
+					class="glyphicon glyphicon-cog" id="administrative-functions-icon"></span>
+					Administrative Functions <span class="caret"></span>
+			</a>
+				<ul class="dropdown-menu" role="menu"
+					id="administrative-functions-dropdown">
+					<li role="menuitem"><a title="Case Number Search"
+						ng-href="#/loanSearch" name="caseNumberSearch"
+						id="caseNumberSearch">Search by Case #</a>
+					<li role="menuitem"><a title="Subsidy Maintenance" class=""
+						id="subsdy" ng-href="#/subsidy" name="subsdy">Subsidy
+							Maintenance</a></li>
+					<li role="menuitem"><a title="Extend Expiration Date"
+						ng-href="#/extendExpireDate" name="extend">Extend Expiration
+							Dates</a></li>
+					<li role="menuitem"><a title="case cancel"
+						ng-href="#/cancelSearch" name="cancelcase" id="cnclcase">Cancel
+							a case</a></li>
+					<li role="menuitem"><a title="manage Mortgage"
+						ng-href="#/ManageMortageLimit" name="manageMortage"
+						id="manageMortgage">Manage Mortgage Limits </a></li>
+					<li role="menuitem"><a title="Manage Underwriters"
+						ng-href="#/ManageDgUnderwriters" name="manageMortage"
+						id="manageDG">Manage DG Underwriters </a></li>
+					<li role="menuitem"
+						ng-if="actionsMenu.isOLG || actionsMenu.isOLGAdmin"><a
+						title="Upload LG Fees Paid" ng-href="#/UploadLGFeesPaid"
+						name="Upload" id="upload_lg_fee">Upload LG Fees Paid </a></li>
+				</ul></li>
+			<li role="menuitem" id="administrative-Lender "
+				ng-if="actionsMenu.isOLG || actionsMenu.isOLGAdmin"><a
+				role="button" class="dropdown-toggle" data-toggle="dropdown"
+				aria-haspopup="true" aria-expanded="true"
+				title="Lender Administration" id="lender-Administration-link"
+				ng-class="{'active': actionsMenu.isLenderAdminFunctionsPage()}">
+					<span class="glyphicon glyphicon-cog"
+					id="lender-Administration-icon"></span> Lender Administration <span
+					class="caret"></span>
+			</a>
+				<ul class="dropdown-menu" role="menu"
+					id="administrative-address-dropdown">
+					<li role="menuitem"><a title="Address Maintenance" class=""
+						id="Address_maintenance" ng-href="#/addressMaintenance"
+						name="Addres_maintenance">Address Maintenance</a></li>
+
+				</ul></li>
+
+			<li role="menuitem" id="profile-item"><a
+				ng-class="{'active': actionsMenu.isCaseProfilePage()}" role="button"
+				class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+				aria-expanded="true" title="Profile" id="profile"> <span
+					class="glyphicon glyphicon-user" id="profile-icon"></span> Profile
+					<span class="caret"></span>
+			</a>
+				<ul class="dropdown-menu" role="menu" id="change-a-case-dropdown">
+					<li role="menuitem"><a ng-href="#/changePassword"
+						ng-class="{'active': currentPath === '/changePassword'}">
+							Change Password</a></li>
+				</ul></li>
+		</ul>
+	</div>
+</div>

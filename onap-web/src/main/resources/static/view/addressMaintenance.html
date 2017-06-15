@@ -1,0 +1,202 @@
+<!--
+  This is the exemplar view.  Please follow this for proper coding guidance.
+
+  * This view has dependent javascript in the main.js file.  there are two bindings on loanSearchView scoped items.
+  -->
+
+<section id="content">
+    <div class="container" style="padding:25px;">
+        <form role="form" ng-submit="vm.searchLoans()">
+            <div class="form-group col-sm-offset-4">
+                <div id="loanIdDiv">
+                    <label for="caseId1" class="control-label">Search By TIN #</label>
+                    <input type="text" style="float:none; margin-right:10px; width:200px;" 
+                    	   placeholder="##-#######" ng-model="vm.tin" 
+                    	   class="form-control form-control-width-md ng-pristine ng-valid" id="tin" name="tinfield" autofocus>
+                    <br>
+               
+                    
+                </div>
+				 <p>
+                    <input type="submit" id="tinsearchbtn" style="max-width:100px;" type="submit" name="tinsearch" class="btn background-red" value="Search" ng-click="vm.searchBtn(vm.tin)">
+                </p>
+                <p>
+        </form>
+</div>
+        <div ng-if="vm.showAssociatedTable"></div>
+        <div>
+		   <div class="row">
+                                 <div class=" col-lg-12  col-md-12  col-sm-12 col-xs-12">
+                                    <div class="">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+											   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+											   <div class="form-group">
+													 
+												  <div><label  class="control-label">TIN:</label></div>
+                                                        <input type="text" title="Tin" id="tinmasking" class="form-control" ng-model="vm.getLenderDetails.taxIdNumber" placeholder="TIN"  readonly/>
+                                                    </div>
+                                               
+                                                </div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+												 <div class="form-group">
+													 
+												  <div><label  class="control-label">Lender Name:</label></div>
+                                                        <input type="text" title="lname" id="lname" class="form-control" maxlength="40" ng-model="vm.getLenderDetails.lenderName" placeholder="Lender Name" readonly />
+                                                    </div> 
+												</div>
+												
+											  </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+											   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+											   <div class="form-group">
+													 
+												  <div><label  class="control-label"><i class="fa fa-asterisk requiredField"></i>Street Address:</label></div>
+                                                        <input type="text" title="street address" id="staddress" class="form-control" maxlength="40"
+														ng-model="vm.getLenderDetails.streetName" placeholder=" Street Address" />
+														
+														<div ng-if="vm.errorAddressOne" class="color-red"><span ng-bind="vm.errorAddressOneText"></span></div>
+                                                    </div>
+                                               
+                                                </div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+												 <div class="form-group">
+													 
+												  <div><label  class="control-label"><i class="fa fa-asterisk requiredField"></i>City:</label></div>
+                                                        <input type="text" title="city" id="city" class="form-control" ng-model="vm.getLenderDetails.cityName" placeholder="City" maxlength="40" />
+
+														<div ng-if="vm.errorCity" class="color-red"><span ng-bind="vm.errorCityText"></span></div>
+														<div ng-if="vm.errorCityValid" class="color-red"><span ng-bind="vm.errorCityValidText"></span></div>
+                                                    </div>
+                                               
+												</div>
+												
+											  </div>
+                                            
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+											   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+											   <div class="form-group">
+													 
+												  <div><label  class="control-label"><i class="fa fa-asterisk requiredField"></i>State:</label></div>
+                                                       
+														<select class="form-control" ng-model="vm.getLenderDetails.state" title="state">
+                                                            <option value="">Select State</option>
+                                                            <option value="{{statePrefix.referenceCodeName}}" ng-repeat="statePrefix in statePrefix| orderBy:'referenceCodeName'" ng-selected="vm.getLenderDetails.state == statePrefix.referenceCodeName">{{statePrefix.referenceCodeName}}</option>
+                                                        </select>
+                                                        
+														<div ng-if="vm.errorState" class="color-red"><span ng-bind="vm.errorStateText"></span></div>
+                                                    </div>
+                                               
+                                                </div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+												  <div class="form-group">
+													 
+												  <div><label  class="control-label"><i class="fa fa-asterisk requiredField"></i>ZIP:</label></div>
+                                                        <input type="text" title="zip" id="zip" class="form-control" ng-model="vm.getLenderDetails.zip" placeholder="ZIP"  maxlength="5"/>
+															<div ng-if="vm.errorZip" class="color-red"><span ng-bind="vm.errorZipText"></span></div>
+															<div ng-if="vm.errorZipCODEMessage" class="color-red"><span ng-bind="vm.errorZipCODEMessageText"></span></div>
+                                                    </div>
+                                              
+												</div>
+												
+											  </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+											  <button  id="addBtn" ng-click="vm.saveBtn()"  class=" center-block btn btn-default background-red" style="margin-top:20px">
+             Add
+            </button>
+												
+											  </div>
+                                            											
+											
+                                        </div>
+                                    </div>
+                                </div>
+                              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		              <div class="tablecontainer table-responsive m-top20" >
+		                  <table  border="1" datatable="ng" class="table table-hover table-bordered" id="example" >
+		                      <thead>
+		                          <tr>
+								  
+		                             
+       	                                <th>TIN #</th>
+ <th> Lender Name </th>
+ <th>Street Address</th>
+ <th>  City </th>
+ <th> State</th>
+ <th> ZIP</th>
+ <th> Action</th>
+ 
+		                              
+		                          </tr>
+		                      </thead>
+		                      <tbody>
+		                         <tr ng-repeat="addressLimit in vm.tableLenderDetails|orderBy:'id':true">
+		                   
+		                         
+		                              <td><span  ng-bind="addressLimit.taxIdNumber"></span>
+									
+									  </td>
+		                              <td>
+                         							                              <span  ng-bind="addressLimit.lenderName"></span>
+
+                         					 
+		                              </td>
+									  <td>
+                         							                             	<span ng-hide="addressLimit.enableInputFiled" ng-bind="addressLimit.streetName"></span>
+											<input type="text" ng-hide="!addressLimit.enableInputFiled"  name="addressLimitstaddress{{$index}}" ng-model="addressLimit.streetName" id="{{$index}}addressLimistaddress" class="width-120" />
+                         					 
+ 
+		                              </td>
+									  <td>
+                         				<span ng-hide="addressLimit.enableInputFiled" ng-bind="addressLimit.cityName"></span>
+											<input type="text" ng-hide="!addressLimit.enableInputFiled"  name="addressLimitcity{{$index}}" ng-model="addressLimit.cityName" id="{{$index}}addressLimitcity" class="width-120" />
+                         					 
+                         					 
+		                              </td>
+									
+									  <td>
+                         				<span ng-hide="addressLimit.enableInputFiled" ng-bind="addressLimit.state"></span>
+										
+											<select class="width-120" ng-hide="!addressLimit.enableInputFiled" ng-model="addressLimit.state" title="state">
+                                                            <option value="">Select State</option>
+                                                            <option value="{{statePrefix.referenceCodeName}}" ng-repeat="statePrefix in statePrefix| orderBy:'referenceCodeName'" ng-selected="addressLimit.state == statePrefix.referenceCodeName">{{statePrefix.referenceCodeName}}</option>
+                                                        </select>
+
+                         					 
+		                              </td>
+									  <td>
+                         				
+											<span ng-hide="addressLimit.enableInputFiled" ng-bind="addressLimit.zip"></span>
+											<input type="text" ng-hide="!addressLimit.enableInputFiled"  name="addressLimitzip{{$index}}" ng-model="addressLimit.zip" id="{{$index}}addressLimitzip" class="width-120" maxlength="5"/>
+		                              		
+                         					 
+		                              </td>
+									      <td>
+		                              	<button type="button" ng-hide="addressLimit.enableInputFiled" ng-click="vm.editAllData(addressLimit,$index)" 
+		                              										class="btn btn-success background-gold custom-width">Edit</button>
+		                              										
+		                             	<button type="button" ng-hide="!addressLimit.enableInputFiled" style="margin-left:-12px; padding:4px 7px;" ng-click="vm.editIndividual(addressLimit)" 
+		                              										class="btn btn-success background-gold custom-width pull-left"><i
+                                                                            class="fa fa-check"></i></button>
+		                              	<button type="button" ng-hide="!addressLimit.enableInputFiled" ng-click="vm.reset(addressLimit)"  style="margin-right: -6px;
+    padding: 4px 7px;"
+		                              										class="btn btn-success background-gold custom-width pull-right"><i
+                                                                            class="fa fa-ban"></i></button>
+		                              </td>                       
+		                          </tr>
+								 
+		                      </tbody>
+		                  </table>
+		      
+
+				   </div>
+				 
+    <br />
+   	              </div>			      
+		          
+			
+                            </div>
+                     
+		</div>
+        </div>
+        <div class="clearfix"></div>
+              
+        
+</section>

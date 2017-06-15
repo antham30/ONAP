@@ -1,0 +1,367 @@
+html {
+    font-size:100.1%;
+}
+body {
+    color: #222;
+    background: #fff;
+}
+a {
+    color:#0066CC;
+    text-decoration:none;
+}
+a:focus, a:hover {
+    color:#0066CC;
+    text-decoration:underline;
+}
+p {
+    line-height: 130%;
+    margin-bottom: 15px;
+}
+
+
+input.ng-dirty.ng-invalid, select.ng-dirty.ng-invalid {
+    border: 1px solid #a94442;
+}
+.ng-pristine .ng-invalid-required {
+    box-shadow: none;
+}
+
+input[type="text"], input[type="password"], select, textarea {
+    border: 1px solid #ddd;
+    padding: 7px 10px;
+    transition: .5s all linear;
+    line-height: normal;
+    border-radius: 0;
+    -webkit-appearance: none;  // remove shadow in iOS
+}
+
+select {
+	-webkit-appearance: menulist;
+}
+input[type="text"]:focus, input[type="password"]:focus {
+    box-shadow: 0 0 3px #33589E;   
+    outline: 0;
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+    box-shadow: 0 0 3px #a94442;    
+}
+
+label {
+    font-weight: normal;
+}
+label.required {
+    font-weight: bold;
+}
+label.required:after {
+    content: '*';
+    padding-left: 5px;
+    color: red;
+}
+ul.required {
+    list-style-type: disc;
+    padding: 5px;
+
+}
+
+label input[type="radio"] {
+    margin-right: 5px;
+}
+
+/* GENERAL TAG
+------------------------------------------------------------------ */
+#wrapper {
+    margin:0px auto;
+    width:100%;
+    margin-bottom: 15px;
+}
+.clear {
+    clear: both;
+}
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
+header {
+    color: #000;
+    height: 90px;
+    line-height: 90px;
+    background: #fff;
+}
+header .logo {
+
+}
+header .nav, header .nav a {
+    color: #33589E;
+}
+header .nav a span {
+    color: #fff;
+}
+header .nav a:hover span {
+    text-decoration: none !important;
+}
+header .nav ul li {
+    float: left;
+    margin: 0 20px;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #555;
+}
+
+.navbar-default .navbar-nav > .disabled > a, .navbar-default .navbar-nav > .disabled > a:hover, .navbar-default .navbar-nav > .disabled > a:focus {
+    background-color: transparent;
+    color: #666;
+}
+
+#content {
+
+}
+.breadcrumb {
+    margin: 0;
+}
+.header-page {
+    position: relative;
+    padding: 60px 0;
+}
+.title-page {    
+    font-size: 24pt;
+    float: left;
+}
+.header-page .toolbar {
+    float: right;
+}
+.header-page .toolbar ul li {
+    float: left;
+    margin-left: 10px;
+    line-height: 32px;  
+}
+.header-page .toolbar ul li a {
+    background: #f5f5f5;
+    display: block;    
+    padding: 0 10px;
+    text-decoration: none;
+    border-radius: 3px;
+    color: #000;
+    transition: all .2s ease-in;
+}
+.header-page .toolbar ul li a:hover {
+    background: #33589E;
+    color: #fff;
+}
+.toolbar .toolbar ul li a:active {
+    background: #f5f5f5;
+    color: #000;
+}
+.frm {
+
+}
+.frm .box, .frm .bradio {
+    margin-bottom: 20px;
+}
+.frm .box label, .frm .bradio label.head {
+    display: block;
+    margin-bottom: 5px;
+}
+.frm .box input[type="text"],
+.frm .box input[type="password"],
+.frm .box select,
+.frm .box textarea
+{
+    width: 100%;
+    box-shadow: none;
+}
+
+.frm .box input[type="checkbox"]
+{
+    box-shadow: none;
+}
+
+
+.frm .bradio label {
+    margin-right: 20px;
+    margin-bottom: 7px;
+}
+.frm .bradio label.head {
+    margin-right: 0;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #eee;
+}
+.frm .bradio label:last-child {
+    margin-right: 0px;
+}
+.frm input.error {
+    color: #a94442;
+    border: 1px solid #a94442;
+}
+.frm .error {
+    color: #a94442;
+}
+.grid {
+    border:none 1px #666;
+    padding:1px;
+    width:99%;
+    border-collapse:collapse;
+}
+.grid tr.odd td { background: #ffffff; }
+.grid tr.even td { background: #f2f2f2; }
+.grid tr:hover td { background: #e2ecff; }
+.grid tbody { border:solid 1px #ddd; }
+.grid th {
+    background:#eee;
+    border:solid 1px #ddd !important;
+    padding: 4px 5px !important;
+    color: #313131;
+    font-weight:bold;
+    text-decoration: none;
+    text-align: center;
+}
+.grid th a { color: #313131; }
+.grid td {
+    padding: 3px 5px;
+    border:solid 1px #ddd !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+footer {
+    padding: 5px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    font-size: 10px;
+    font-family: monospace;
+    color: rgba(0,0,0,.5);
+    background: rgba(0,0,0,.05);
+}
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+/* The starting CSS styles for the enter animation */
+.view-animate:nth-of-type(2) {
+    display: none;
+}
+.view-animate.ng-enter  {
+  transition: all .5s ease;
+  opacity:0;
+}
+/* The finishing CSS styles for the enter animation */
+.view-animate.ng-enter.ng-enter-active {
+  opacity:1;
+}
+/* now the element will fade out before it is removed from the DOM */
+.view-animate.ng-leave {
+  -webkit-transition: all .4s ease;
+  transition: all .4s ease;
+  opacity:1;
+}
+.view-animate.ng-leave.ng-leave-active {
+  opacity:0.2;
+}
+
+#landing-page {
+    
+}
+#landing-page .header-site {
+    background: url("../images/logo.png") no-repeat left center;
+    height: 100px;
+    border-bottom: 1px solid #eee;
+}
+#landing-page .title-page {
+    float: none;
+    padding: 60px 0;
+}
+#landing-page .patient-id {
+    background: #f5f5f5;
+    padding: 30px;
+    border-radius: 3px;
+    box-shadow: 0px 3px 2px #eee inset;
+    margin-bottom: 15px;
+}
+#landing-page .receive-copy {
+    background: #f5f5f5;
+    padding: 30px;
+    border-radius: 3px;
+}
+#landing-page .receive-copy h4 {
+    margin-bottom: 20px;
+}
+#landing-page .receive-copy .btn {
+    margin-bottom: 0;
+}
+.submit-link {
+    margin: 15px 0;
+}
+
+/*MODAL*/
+.modal-dialog .modal-title {
+    text-transform: uppercase;
+}
+.modal-dialog .modal-body {
+    min-height: 200px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+.modal-dialog .btn {
+    border: none;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    background: #33589E;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    width: auto;
+    display: inline;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: .2s all linear;
+}
+.modal-dialog .btn:hover {    
+    background: #000;
+    color: #fff;
+}
+.st-sort-ascent:before{
+    content: '\25B2';
+}
+
+.st-sort-descent:before{
+    content: '\25BC';
+}
+
+// OVERRIDE USPTO's max width for containers to fit within our layout.
+
+.container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 8px;
+    padding-right: 8px;
+    max-width: 1000px;
+}
+@media (min-width: 768px) {
+    .container {
+        width: 736px
+    }
+}
+@media (min-width: 992px) {
+    .container {
+        width: 956px
+    }
+}
+@media (min-width: 1200px) {
+    .container {
+        width: 1000px;
+    }
+}
+.container-fluid {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 8px;
+    padding-right: 8px
+}
+
+.btn-info {
+	background-color: #135baf;
+}

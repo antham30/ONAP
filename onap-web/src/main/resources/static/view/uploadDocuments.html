@@ -1,0 +1,288 @@
+<section id="content">
+	<form id="all_uploaded_files" name="all_uploaded_files"
+		ng-submit="vm.submitUploadedFiles()">
+		<div class="container">
+			<case-details case-number="vm.docData.caseNumber"></case-details>
+			<h1 class="page_header">Case Binder Intake</h1>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<strong>Required Documents</strong>
+				</div>
+				<div class="panel-body">
+					<table class="table table-sortable table-bordered table-striped"
+						id="fileUploads1">
+						<thead>
+							<tr role="row">
+								<th class="sortable background-gold" scope="col">Category</th>
+								<th class="sortable background-gold" scope="col">Documents</th>
+								<th width="40%" class="sortable background-gold" scope="col">Upload</th>
+								<th class="sortable background-gold" scope="col">Filename</th>
+								<th class="sortable background-gold" scope="col">Last Date
+									Uploaded</th>
+								<th class="sortable background-gold" scope="col">View</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="doc in vm.requiredCategories">
+								<td id="categoryName{{$index}}_{{doc.referenceCodeValue}}">{{doc.referenceCodeDescription}}</td>
+								<td id="documents{{$index}}_{{doc.referenceCodeValue}}">
+									<ul class="documentTypeList">
+										<li ng-repeat="type in doc.documentTypes">{{type.referenceCodeDescription}}</li>
+									</ul>
+								</td>
+								<td id="upload{{$index}}_{{doc.referenceCodeValue}}">
+									<form name="uploadForm{{$index}}_{{doc.referenceCodeValue}}"
+										id="uploadForm{{$index}}">
+										<label
+											for="{{vm.fileUploadName}}_{{doc.referenceCodeValue}}_{{$index}}">Upload
+											file</label> <input type="file" ng-disabled="vm.loanIsDisabled()"
+											class="upload_file"
+											id="{{vm.fileUploadName}}_{{doc.referenceCodeValue}}_{{$index}}"
+											name="{{vm.fileUploadName}}_{{doc.referenceCodeValue}}_{{$index}}" />
+										<input type="button" ng-disabled="vm.loanIsDisabled()"
+											ng-click="vm.uploadFile($index, doc.referenceCodeValue, doc.uploadedDocument.documentId)"
+											value="Upload" class="btn background-red upload_btn" />
+									</form>
+								</td>
+								<td id="filename{{$index}}_{{doc.referenceCodeValue}}">{{doc.uploadedDocument
+									? doc.uploadedDocument.documentName : ''}}</td>
+								<td id="lastDateUpdated{{$index}}_{{doc.referenceCodeValue}}">{{doc.uploadedDocument
+									? (doc.uploadedDocument.createDt | date : 'MM/dd/yyyy') : ''}}</td>
+								<td id="view{{$index}}_{{doc.referenceCodeValue}}"><input
+									ng-if="doc.uploadedDocument" type="button"
+									class="btn background-red" value="View"
+									ng-click="vm.openDocument(doc.uploadedDocument.documentId, doc.uploadedDocument.documentName)" /></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<strong>Optional Documents</strong>
+				</div>
+				<div class="panel-body">
+					<table class="table table-sortable table-bordered table-striped"
+						id="fileUploads2">
+						<thead>
+							<tr role="row">
+								<th class="sortable background-gold" scope="col">Category</th>
+								<th class="sortable background-gold" scope="col">Documents</th>
+								<th width="40%" class="sortable background-gold" scope="col">Upload</th>
+								<th class="sortable background-gold" scope="col">Filename</th>
+								<th class="sortable background-gold" scope="col">Last Date
+									Uploaded</th>
+								<th class="sortable background-gold" scope="col">View</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="doc in vm.nonRequiredCategories">
+								<td id="categoryName{{$index}}_{{doc.referenceCodeValue}}">{{doc.referenceCodeDescription}}</td>
+								<td id="documents{{$index}}_{{doc.referenceCodeValue}}">
+									<ul class="documentTypeList">
+										<li ng-repeat="type in doc.documentTypes">{{type.referenceCodeDescription}}</li>
+									</ul>
+								</td>
+								<td id="upload{{$index}}_{{doc.referenceCodeValue}}"><label
+									for="{{vm.fileUploadName}}_{{doc.referenceCodeValue}}_{{$index}}">Upload
+										file</label>
+									<form name="uploadForm{{$index}}_{{doc.referenceCodeValue}}"
+										id="uploadForm{{$index}}">
+										<label
+											for="{{vm.fileUploadName}}_{{doc.referenceCodeValue}}_{{$index}}"></label>
+										<input type="file" ng-disabled="vm.loanIsDisabled()"
+											class="upload_file"
+											id="{{vm.fileUploadName}}_{{doc.referenceCodeValue}}_{{$index}}"
+											name="{{vm.fileUploadName}}_{{doc.referenceCodeValue}}_{{$index}}" />
+										<input type="button" ng-disabled="vm.loanIsDisabled()"
+											ng-click="vm.uploadFile($index, doc.referenceCodeValue)"
+											value="Upload" class="btn background-red upload_btn" />
+									</form></td>
+								<td id="filename{{$index}}_{{doc.referenceCodeValue}}">{{doc.uploadedDocument
+									? doc.uploadedDocument.documentName : ''}}</td>
+								<td id="lastDateUpdated{{$index}}_{{doc.referenceCodeValue}}">{{doc.uploadedDocument
+									? (doc.uploadedDocument.createDt | date : 'MM/dd/yyyy') : ''}}</td>
+								<td id="view{{$index}}_{{doc.referenceCodeValue}}"><input
+									ng-if="doc.uploadedDocument" type="button"
+									class="btn background-red" value="View"
+									ng-click="vm.openDocument(doc.documentId, doc.documentName)" /></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div>
+				<div ng-if="vm.loanIsSuspended()">
+					<div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<strong>Resubmitted Documents</strong>
+							</div>
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-md-4 col-lg-4">
+										<label for="category_select">Category</label> <select
+											ng-model="vm.selectedCategory" name="category_select"
+											id="category_select">
+											<option value="">Select Category</option>
+											<option ng-repeat="cat in vm.allCategories"
+												ng-value="cat.referenceCodeValue">{{cat.referenceCodeName}}</option>
+										</select>
+									</div>
+									<div class="col-md-4 col-lg-4">
+										<label>Document Type</label> <select
+											ng-model="vm.selectedDocumentType" name="documentType_select"
+											id="documentType_select">
+											<option value="">Select Document Type</option>
+											<option ng-if="vm.selectedCategory"
+												value="{{doc.referenceCodeValue}}"
+												ng-repeat="doc in (vm.allCategories | filter: {'referenceCodeValue' : vm.selectedCategory})[0].documentTypes">
+												{{doc.referenceCodeDescription}}</option>
+										</select>
+									</div>
+									<div class="col-md-4 col-lg-4">
+										<form name="uploadForm_additionalDocs"
+											id="uploadForm_additionalDocs">
+											<label for="mainAdditionalUpload">Upload</label> <input
+												type="file" id="mainAdditionalUpload"
+												name="mainAdditionalUpload" /> <input type="submit"
+												ng-click="vm.doUploadAdditionalFile(vm.selectedCategory, vm.selectedDocumentType)"
+												value="Upload" class="btn background-red upload_btn" />
+										</form>
+									</div>
+								</div>
+								<div class="m-top25">
+									<table
+										class="table table-sortable table-bordered table-striped"
+										id="fileUploads3">
+										<thead>
+											<tr role="row">
+												<th class="sortable background-gold" scope="col">Category</th>
+												<th class="sortable background-gold" scope="col">Document
+													Type</th>
+												<th class="sortable background-gold" scope="col">Filename</th>
+												<th class="sortable background-gold" scope="col">Last
+													Date Uploaded</th>
+												<th class="sortable background-gold" scope="col">View</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat="doc in vm.resubmittedCategories">
+												<td id="categoryName2{{$index}}_{{doc.referenceCodeValue}}">{{doc.referenceCodeDescription}}</td>
+												<td id="documents2{{$index}}_{{doc.referenceCodeValue}}">
+													{{(doc.documentTypes | filter : {referenceCodeValue :
+													doc.uploadedDocument.documentType})}}
+												</td>
+												<td id="filename2{{$index}}_{{doc.referenceCodeValue}}">{{doc.uploadedDocument
+													? doc.uploadedDocument.documentName : ''}}</td>
+												<td
+													id="lastDateUpdated2{{$index}}_{{doc.referenceCodeValue}}">{{doc.uploadedDocument
+													? (doc.uploadedDocument.createDt | date : 'MM/dd/yyyy') :
+													''}}</td>
+												<td id="view2{{$index}}_{{doc.referenceCodeValue}}"><input
+													ng-if="doc.uploadedDocument" type="button"
+													class="btn background-red" value="View"
+													ng-click="vm.openDocument(doc.uploadedDocument.documentId, doc.uploadedDocument.documentName)" /></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<strong>Closing Dates</strong>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-4 col-lg-4">
+									<label for="prjctdClsngDt">Funds Expiration Date</label>
+									<div>{{vm.dates.fndsExprtnDt}}</div>
+								</div>
+								<div class="col-md-4 col-lg-4">
+									<label for="prjctdClsngDt"><i
+										class="fa fa-asterisk requiredField"></i>Projected Closing
+										Date</label> <input type="text" id="prjctdClsngDt"
+										name="prjctdClsngDt" class="form-control"
+										title="Projected Closing Date"
+										ng-model="vm.dates.prjctdClsngDt" />
+									<div class="alert alert-danger" id="showPrjctdClsngDtNull"
+										ng-show="vm.showPrjctdClsngDtNull">This field is
+										required</div>
+								</div>
+								<div class="col-md-4 col-lg-4">
+									<label for="actlClsngDt"><i
+										class="fa fa-asterisk requiredField"></i>Actual Closing Date</label> <input
+										type="text" id="actlClsngDt" name="actlClsngDt"
+										class="form-control" title="Actual Closing Date"
+										ng-model="vm.dates.actlClsngDt" />
+									<div class="alert alert-danger" id="showActlClsngDtNull"
+										ng-show="vm.showActlClsngDtNull">This field is
+										required</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-lg-offset-3 col-lg-6 col-lg-offset-3 m-btm20">
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+				<input type="button" ng-click="vm.cancelSubmit()"
+					class="btn btn-block pull-left align-noBtn" value="Cancel" />
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+				<input type="button" ng-click="vm.submitDocuments()"
+					ng-show="!vm.loanIsSuspended()" value="Submit"
+					class="btn btn-block background-red pull-right align-yesBtn"
+					ng-disabled="!vm.validateDocumentList() || vm.loanIsDisabled()" />
+				<input type="button" ng-click="vm.submitDocuments()"
+					ng-show="vm.loanIsSuspended()" value="Resubmit"
+					class="btn btn-block background-red pull-right align-yesBtn"
+					ng-disabled="vm.loanIsDisabled() || vm.resubmittedCategories.length == 0" />
+			</div>
+		</div>
+	</form>
+</section>
+
+<div class="modal fade rollIn" id="resubmitCatExistsModal" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header background-red">
+				<button type="button" class="close close-login" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title align-center color-fff font_family_fft">Are
+					you sure?</h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="text-center m-btm20">
+						<div class="f-size18 m-btm20">{{vm.resubmitDocMessage}}</div>
+						<div
+							class="col-lg-6 col-md-6 col-sm-6 col-lg-offset-3 col-md-offset-3 col-sm-offset-3">
+							<div
+								class="col-lg-5 col-md-5 col-sm-5 col-lg-offset-1 col-md-offset-1 col-sm-offset-1">
+								<button
+									class="btn btn-block pull-left align-yesBtn background-gold"
+									data-dismiss="modal"
+									ng-click="vm.uploadAdditionalFile(vm.selectedCategory, vm.selectedDocumentType)">Yes</button>
+							</div>
+							<div
+								class="col-lg-5 col-md-5 col-sm-5 col-lg-offset-1 col-md-offset-1 col-sm-offset-1">
+								<button
+									class="btn btn-block pull-right align-noBtn background-gold"
+									data-dismiss="modal">No</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

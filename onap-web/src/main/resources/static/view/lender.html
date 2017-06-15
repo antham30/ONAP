@@ -1,0 +1,169 @@
+<!--main content starts-->
+<div class="container">
+	<div class="row ">
+		   <div class="col-lg-offset-1 col-lg-10 col-lg-offset-1 col-md-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+			<div class="m-top60">
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs" role="tablist" id="registrationTabs">
+					<li role="presentation" class="active"><a href="#lender" aria-controls="home" role="tab" data-toggle="tab">Lender</a></li>
+					<li role="presentation" class="disabled disabledTab"><a href="#borrower" aria-controls="profile" role="tab" data-toggle="tab">Borrower</a></li>
+					<li role="presentation" class="disabled disabledTab"><a href="#property" aria-controls="messages" role="tab" data-toggle="tab">Property</a></li>
+					<li role="presentation" class="disabled disabledTab"><a href="#loan" aria-controls="settings" role="tab" data-toggle="tab">Loan</a></li>
+				</ul>
+
+				<!-- Tab panes -->
+				<div class="tab-content border-tab">
+					<div role="tabpanel" class="tab-pane active" id="lender">
+						<h1 class="m-top40 f-size30 text-capitalize text-center color-theme"> Case registration </h1>
+						<div class="row">
+					<div class="m-top60">
+							  <div class=" col-lg-10  col-md-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+								<div class="form-horizontal">
+									<div class="row">
+										<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+											<div class="form-group">
+												<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+													<label for="lendername" class="control-label pull-right">Lender Name:</label>
+												</div>
+												<div class="col-lg-6 col-md-6 col-sm-8 col-xs-8">
+													<!-- input type="text" id="lendername" class="form-control" name="lendername" size=20 ng-model="ls.lendername" placeholder="Lender Name" readonly/-->
+													<input type="text" id="lendername" class="form-control" name="lendername" size=20 ng-model="ls.lndrNm" title="lender name" placeholder="Lender Name" readonly/>
+
+												</div>
+											</div>
+											<div class="form-group">
+												<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+													<label for="contact" class="control-label pull-right">Contact:</label>
+												</div>
+												<div class="col-lg-6 col-md-6 col-sm-8 col-xs-8">
+													<!-- input type="text" name="contact" id="contact" class="form-control" ng-model="ls.contact" placeholder="Contact" readonly/-->
+													<input type="text" name="contact" title="contact" id="contact" class="form-control" phone-input ng-model="ls.prsn.frstNm" placeholder="Contact" readonly/>
+												</div>
+											</div>
+											<div class="form-group">
+												<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+													<label for="email" class="control-label pull-right">Email:</label>
+												</div>
+												<div class="col-lg-6 col-md-6 col-sm-8 col-xs-8">
+													<!-- input type="text" name="email" id="email" class="form-control" ng-model="ls.email" placeholder="Email" readonly/-->
+													<input type="text" name="email" title="email" id="email" class="form-control" ng-model="ls.lndrEml" placeholder="Email" readonly/>
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+											<div class="form-group">
+												<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+													<label for="tin" class="control-label pull-right">TIN:</label>
+												</div>
+												<div class="col-lg-6 col-md-6 col-sm-8 col-xs-8">
+													<!-- input type="text" name="tin" id="tinno" class="form-control" ng-model="ls.tin" placeholder="TIN" readonly /-->
+													<input type="text" name="tin" title="tin" id="tinno" class="form-control tinmasking" ng-model="ls.taxIdntfctnNbr" placeholder="TIN" readonly />
+												</div>
+											</div>
+											<div class="form-group">
+												<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+													<label for="phone" class="control-label pull-right">Phone:</label>
+												</div>
+												<div class="col-lg-6 col-md-6 col-sm-8 col-xs-8">
+													<!-- input type="text" name="phone" id="phone" class="form-control" ng-model="ls.phone" placeholder="Phone Number" readonly/-->
+													<input type="text" name="phone" title="phone" id="phone" class="form-control phone_with_ddd" ng-model="ls.lndrPhnNbr" placeholder="Phone Number" readonly/>
+												</div>
+											</div>
+											<div class="form-group">
+												<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+													<label for="fax" class="control-label pull-right">Fax:</label>
+												</div>
+												<div class="col-lg-6 col-md-6 col-sm-8 col-xs-8">
+													<!-- input type="text" name="fax" id="fax" class="form-control" ng-model="ls.fax" placeholder="Fax Number" readonly/-->
+													<input type="text" name="fax" title="fax" id="fax" class="form-control phone_with_ddd" ng-model="ls.lndrFaxNbr" placeholder="Fax Number" readonly/>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- broker box-->
+							<div class="clearfix"></div>
+							<div class="row">
+
+								<!--<form method="post"  ng-submit="getLenderInformation()"  novalidate angular-validator>-->
+								<div>
+									<div class="  col-lg-10 col-md-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12 ">
+										<div class="lender-content1">
+											<div class="login-header background-red">
+												<h4 class="modal-title">Broker Information</h4>
+											</div>
+											<div class="lender-body form-horizontal">
+												<div class="row">
+													<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+														<div class="form-group">
+															<div class="col-lg-4 col-md-4 col-sm-4 col-xs-5">
+																<label  class="control-label pull-right">Sponsoring a Broker?</label>
+															</div>
+															<!--   ng-init="lender.sponsore='no'" -->
+															<div class="col-lg-6 col-md-6 col-sm-8 col-xs-7" >
+																<input type="radio" ng-model="lender.sponsore" title="yes" value="Y" ng-change="checkingSponser(sponsore)"><label>Yes</label>
+																<input type="radio" ng-model="lender.sponsore" title="no" value="N" ng-change="checkingSponser(sponsore)"><label>No</label>
+															</div>
+														</div>
+														<div class="form-group">
+															<div class="col-lg-4 col-md-4 col-sm-4 col-xs-5 ">
+																<label for="brokername" class="control-label pull-right">Name:</label>
+															</div>
+															<div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
+															<!--	<input type="text" name="brokername" id="brokername" class="form-control" ng-model="lender.sponsorName" placeholder="Name"/>-->
+																 <select class="form-control"
+                                                                       ng-model="lender.sponsorName"  title="sponser name"
+                                                                        id="brokername" ng-change="getTin(lender.sponsorName)">
+                                                                    <option value="" disabled>Select Broker Name
+                                                                    
+                                                                    </option>
+                                                                    <option value="{{brokerName1.lenderName}}"
+                                                                            ng-repeat="brokerName1 in brokerName1|orderBy:'lenderName'"
+                                                                            ng-selected="lender.sponsorName == brokerName1.lenderName">
+                                                                        {{brokerName1.lenderName}}
+                                                                    </option>
+                                                                </select>
+																<div ng-show="errorlenderName" class="color-red">{{errorLenderNameText}}</div>
+															</div>
+														</div>
+														<div class="form-group">
+															<div class="col-lg-4 col-md-4 col-sm-4 col-xs-5 ">
+																<label  class="control-label pull-right">TIN</label>
+															</div>
+															<div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
+																<input type="text" class='tinmasking width100pr' title="tin number" id="tin" class="form-control"  ng-model="lender.tinname" placeholder="XX-XXXXXXX"/>
+																<div ng-show="errorlenderTin" class="color-red">{{errorlenderTintEXT}}</div>
+																<div ng-show="errorlenderTinNumber" class="color-red">{{errorlenderTinNumberText}}</div>
+
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-offset-1 col-lg-10 col-lg-offset-1 col-md-offset-2 col-md-8 col-md-offset-2 col-sm-offset-1 col-sm-10 col-sm-offset-1 col-xs-offset-1 col-xs-10 col-xs-offset-1">
+										<div class="pull-right m-tb20">
+											<a  href="ff" aria-controls="profile" role="tab" data-toggle="tab"
+												class="btn btn-success lender-btn-next background-red"
+												ng-click="lenderNextButton()">Next</a>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- broker box ends-->
+</div>
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--main content ends-->

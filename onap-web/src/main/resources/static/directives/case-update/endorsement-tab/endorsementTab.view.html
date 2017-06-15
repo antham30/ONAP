@@ -1,0 +1,490 @@
+
+<div class="panel panel-default m-top25">
+	<div class="panel-heading">
+		<strong>Endorsement Review</strong>
+	</div>
+	<div class="panel-body">
+		<div class="col-md-4">
+			<select name="endorsementType" id="endorsementType" ng-model="vm.data.rvwTypeCd">
+				<option value="STRD">Standard</option>
+				<option value="TECH">Technical</option>
+			</select>
+		</div>
+		<div class="col-md-4">
+			<strong>Date Last Updated:</strong> <div><span>{{vm.data.lastReviewDt | date}}</span></div>
+		</div>
+		<div class="col-md-4">
+			<strong>Last Updated By:</strong> <div><span>{{vm.data.lastupdtdBy}}</span></div>
+		</div>
+	</div>
+</div>
+
+
+<div class="panel panel-default m-top25">
+	<div class="panel-heading">
+		<strong>Documents</strong>
+	</div>
+	<div class="panel-body">
+		<table class="table table-responsive display table-bordered"
+			id="documentCategoriesTbl">
+			<thead>
+				<tr>
+					<td class="background-gold" style="vertical-align: middle"><b>Category</b></td>
+					<th class="background-gold">Documents</th>
+					<th class="background-gold">Helpful Hints</th>
+					<th class="background-gold">Content Review</th>
+				</tr>
+			</thead>
+			<tbody ng-repeat="category in vm.documentCategories">
+				<tr
+					ng-repeat="doc in category.documents | filter: {'docUpldRsnCd' : 'INI'}">
+					<td align="center" rowspan="{{category.documents.length}}"
+						ng-hide="$index>0" style="vertical-align: middle">
+						<div>
+							<strong>{{category.categoryName}}</strong>
+						</div>
+						<button type="button"
+							class="btn background-red view_category_btn m-top25"
+							ng-click="vm.openDocument(category.documentId, category.documentName, true)">
+							View</button>
+					</td>
+					<td>{{doc.docTypeName}}</td>
+					<td>{{doc.hlpflHnts}}</td>
+					<td align="center">
+					<i data-toggle="tooltip" data-placement="top" title="Acceptable" ng-click="doc.cntntRvwCd = 'Y'" 
+					   ng-class="{'glyphicon glyphicon-check review-icon': true,
+					   				'color-green': doc.cntntRvwCd.trim() == 'Y' || doc.cntntRvwCd == null,
+					   				'color-ccc' : doc.cntntRvwCd && doc.cntntRvwCd.trim() != 'Y'}" style="cursor: pointer;"></i>
+					<i data-toggle="tooltip" data-placement="top" title="Not Acceptable" ng-click="doc.cntntRvwCd = 'N'" 
+					   ng-class="{'glyphicon glyphicon-remove review-icon' : true,
+					   				'color-red' : doc.cntntRvwCd.trim() == 'N' || doc.cntntRvwCd == null,
+					   				'color-ccc' : doc.cntntRvwCd && doc.cntntRvwCd.trim() != 'N'}" style="cursor: pointer;"></i>
+					<strong data-toggle="tooltip" data-placement="top" title="Not Applicable"
+							ng-click="doc.cntntRvwCd = 'N/A'" 
+							ng-class="{'color-themblack review-icon' : doc.cntntRvwCd.trim() == 'N/A' || doc.cntntRvwCd == null,
+										'color-ccc' : doc.cntntRvwCd && doc.cntntRvwCd.trim() != 'N/A'}" style="cursor: pointer;">N/A</strong>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<div class="panel panel-default m-top25">
+	<div class="panel-heading">
+		<strong>Resubmitted Documents</strong>
+	</div>
+	<div class="panel-body">
+		<table class="table table-responsive display table-bordered"
+			id="documentCategoriesTbl">
+			<thead>
+				<tr>
+					<td class="background-gold" style="vertical-align: middle"><b>Category</b></td>
+					<th class="background-gold">Documents</th>
+					<th class="background-gold">Helpful Hints</th>
+					<th class="background-gold">Content Review</th>
+				</tr>
+			</thead>
+			<tbody ng-repeat="category in vm.documentCategories">
+				<tr
+					ng-repeat="doc in category.documents | filter: {'docUpldRsnCd' : 'UPL'}">
+					<td align="center" rowspan="{{category.documents.length}}"
+						ng-hide="$index>0" style="vertical-align: middle">
+						<div>
+							<strong>{{category.categoryName}}</strong>
+						</div>
+						<button type="button"
+							class="btn background-red view_category_btn m-top25"
+							ng-click="vm.openDocument(category.documentId, category.documentName)">
+							View</button>
+					</td>
+					<td>{{doc.docTypeName}}</td>
+					<td>{{doc.hlpflHnts}}</td>
+					<td align="center">
+					<i ng-if="doc.cntntRvwCd.trim() == 'Y' || doc.cntntRvwCd.trim() == 'N'"
+						ng-class="{'glyphicon': true, 'glyphicon-check color-green': doc.cntntRvwCd.trim() == 'Y', 'glyphicon-remove color-red': doc.cntntRvwCd.trim() == 'N'}"></i>
+						<strong ng-if="doc.cntntRvwCd.trim() == 'N/A'">N/A</strong>
+					<span ng-if="!doc.cntntRvwCd">
+					<i ng-click="vm.setDocReviewStatus(doc, 'Y')" class="glyphicon glyphicon-check select-review-status color-green"></i>
+					<i ng-click="vm.setDocReviewStatus(doc, 'N')" class="glyphicon glyphicon-remove select-review-status color-red"></i>
+					<span ng-click="vm.setDocReviewStatus(doc, 'N/A')"  class="select-review-status">N/A</span>
+					</span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<strong>Closing</strong>
+	</div>
+	<div class="panel-body">
+		<div class="form-horizontal">
+			<div class="row">
+				<div class="col-lg-6 col-md-6">
+					<!-- Start field -->
+					<div class="col-lg-12 col-md-12">
+						<div class="form-group">
+							<label for="projectedClosingDate">Projected Closing Date:</label>
+							{{vm.loanTabData.prjctdClsngDt}}
+						</div>
+					</div>
+					<!-- End field -->
+					<!-- Start field -->
+					<div class="col-lg-12 col-md-12">
+						<div class="form-group">
+							<label for="closingDate"><i
+								class="fa fa-asterisk requiredField"></i>Actual Closing Date:</label> <input
+								type="text" id="closingDate" name="closingDate"
+								class="form-control" title="Closing Date" 
+								ng-pattern="/^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$/" 
+								ng-model="vm.data.actlClsngDt" /> <br>
+							<div class="alert alert-danger" id="closingDateErrorShow"
+								ng-show="vm.closingDateErrorShow">This field is required</div>
+							<div class="alert alert-danger" id="firstPaymentDateErrorShow"
+								ng-show="vm.showClosingDateError">A valid date is required.</div>
+						</div>
+					</div>
+					<!-- End field -->
+					<!-- Start field -->
+					<div class="col-lg-12 col-md-12">
+						<div class="form-group">
+							<label for="maturityDate"><i
+								class="fa fa-asterisk requiredField"></i>Maturity Date:</label> <input
+								type="text" id="maturityDate" name="maturityDate"
+								class="form-control" title="Maturity Date"
+								ng-model="vm.data.mtrtyDt" /> <br>
+							<div class="alert alert-danger" id="maturityDateErrorShow"
+								ng-show="vm.maturityDateErrorShow">This field is required</div>
+							<div class="alert alert-danger" id="maturityDateErrorShow"
+								ng-show="vm.showMaturityDateError">A valid date is required.</div>
+						</div>
+					</div>
+					<!-- End field -->
+					<!-- Start field -->
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<div class="form-group">
+							<label for="firstPaymentDate"><i
+								class="fa fa-asterisk requiredField"></i>First Payment Date:</label>
+							<div>
+							<div>
+								<input type="text" id="firstPaymentDate" name="firstPaymentDate"
+									class="form-control" title="First Payment Date"
+									ng-model="vm.data.frstPymntDt" />
+								</div>
+							</div>
+							<br>
+							<div class="alert alert-danger" id="firstPaymentDateErrorShow"
+								ng-show="vm.firstPaymentDateErrorShow">This field is
+								required</div>
+							<div class="alert alert-danger" id="firstPaymentDateError"
+								ng-show="vm.showFirstPaymentDateError">A valid date is required.</div>
+						</div>
+					</div>
+					<!-- End field -->
+				</div>
+				<div class="col-lg-6 col-md-6">
+					<!-- Start field -->
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<div class="form-group">
+							<label for="lgFeeAmountPaid"><i
+								class="fa fa-asterisk requiredField"></i>LG Fee Paid Amount:</label> <input
+								type="text" id="lgFeeAmountPaid" name="lgFeeAmountPaid"
+								class="form-control currency" title="LG Fee Paid Amount" 
+								ng-model="vm.data.trsryLgFeeAmt" /> <br>
+							<div class="alert alert-danger" id="lgFeeAmountPaidErrorShow"
+								ng-show="vm.lgFeeAmountPaidErrorShow">This field is
+								required</div>
+						</div>
+					</div>
+					<!-- End field -->
+					<!-- Start field -->
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<div class="form-group">
+							<label for="lgFeePaidDate"><i
+								class="fa fa-asterisk requiredField"></i>LG Fee Paid Date:</label> <input
+								type="text" id="lgFeePaidDate" name="lgFeePaidDate"
+								class="form-control" title="LG Fee Paid Date"
+								ng-model="vm.data.trsryLgFeeDt" /> <br>
+							<div class="alert alert-danger" id="lgFeePaidDateErrorShow"
+								ng-show="vm.lgFeePaidDateErrorShow">This field is required</div>
+							<div class="alert alert-danger" id="lgFeePaidDateErrorShow"
+								ng-show="vm.showLgFeeDateError">A valid date is required.</div>
+						</div>
+					</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="form-group">
+						<label for="lgFeeAmountDue">LG Fee Amount Due:</label>
+						<div>
+							{{vm.data.loanGrnteeDue | currency}}
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="form-group">
+						<label for="lgFeeAmountDue">Funds Reserved:</label>
+						<div>
+							{{vm.data.fundsRsvAmout | currency}}
+						</div>
+					</div>
+				</div>
+				</div>
+				<!-- End field -->
+			</div>
+		</div>
+	</div>
+</div>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<strong>LG Certificate</strong>
+	</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-lg-6 col-md-6">
+				<div
+					class="col-lg-12 col-md-12 col-sm-12 col-xs-12 loan-field-container">
+					<div class="form-group">
+						<label for="loanClosedBy1">Loan Closed By:</label> <span
+							ng-repeat="option in vm.closedByOptions"> <input
+							type="radio" name="closedBy{{$index}}"
+							ng-value="option.referenceCodeValue" 
+							ng-disabled="option.referenceCodeValue == 'BRKR' && !vm.data.brkrAddr"
+							ng-model="vm.data.loanClsdByCd" id="closedBy{{$index}}" />
+							{{option.referenceCodeDescription}}
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6 col-md-6">
+				<div
+					class="col-lg-12 col-md-12 col-sm-12 col-xs-12 loan-field-container">
+					<div class="form-group">
+						<label for="loanClosedBy1">Issue LG Certificate in the
+							Name of:</label> <input type="text" ng-readonly="true"
+							ng-model="vm.data.lndrNm" ng-if="vm.data.loanClsdByCd == 'SPSR'" />
+							<input type="text" ng-readonly="true"
+							ng-model="vm.data.brkrNm" ng-if="vm.data.loanClsdByCd == 'BRKR'" />
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6 col-md-6">
+				<div
+					class="col-lg-12 col-md-12 col-sm-12 col-xs-12 loan-field-container">
+					<div class="form-group">
+						<label for="addressForLgCert"><i
+									class="fa fa-asterisk requiredField"></i>Address for LG Certificate:</label>
+						<select ng-if="vm.data.loanClsdByCd == 'SPSR'" id="addressForLgCert" name="addressForLgCert" ng-model="vm.data.selectedAddr" 
+							ng-options="addr as (addr.addrStrNm + ',' + ' ' + addr.cityNm + ',' + ' ' + addr.stCd + ' ' + (addr.zip4PlusCd || addr.zip5Cd)) for addr in vm.data.lndrAddr track by addr.addrId">
+						</select>
+						<select ng-if="vm.data.loanClsdByCd == 'BRKR'" id="addressForLgCert" name="addressForLgCert" ng-model="vm.data.selectedAddr" 
+							ng-options="addr as (addr.addrStrNm + ',' + ' ' + addr.cityNm + ',' + ' ' + addr.stCd + ' ' + (addr.zip4PlusCd || addr.zip5Cd)) for addr in vm.data.brkrAddr track by addr.addrId">
+						</select>
+								<div ng-show="vm.showAddressError" class="color-red">Address for LG Certificate is required.</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6 col-md-6">
+				<div
+					class="col-lg-12 col-md-12 col-sm-12 col-xs-12 loan-field-container">
+					<div class="form-group">
+						<label for="comments">Endorsement Review Comments:</label>
+						<textarea id="comments" rows="8" cols="40" name="comments" ng-model="vm.comments"></textarea>
+						<div>
+							<button class="btn background-red"
+								ng-click="vm.addComment(vm.comments)">Add Comment</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6 col-md-6">
+				<div
+					class="col-lg-10 col-md-10 col-sm-10 col-xs-10 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 loan-field-container">
+					<strong>Comments</strong><br>
+			<textarea ng-readonly="true" ng-disabled="true" rows="10" cols="120">{{vm.pageComments}}</textarea>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-lg-11 col-lg-offset-1 col-md-11 col-sm-12 col-xs-12" style="margin-top: 15px; margin-bottom: 15px;">
+		<div class="pull-right m-top25">
+			<!-- <button data-toggle="modal" data-target="#escalateModal"
+				class="btn m-right30 background-red" id="escalateBtn">Escalate</button> -->
+			<a href class="btn btn-success m-right30 background-red"
+				data-toggle="modal" data-target="#suspendModal"
+				class="btn m-right30 background-red" id="suspendBtn">Suspend</a>
+			<button ng-click="vm.doSubmissionConfirmation(true)" ng-disabled="vm.disableEndorse" 
+				class="btn m-right30 background-red">Endorse</button>
+		</div>
+		<div class="pull-left m-top25">
+		<button type="button" class="btn pull-left m-right30 background-red"
+			ng-click="vm.doSubmissionConfirmation(false)">Save</button>
+		<button type="button" class="btn pull-left m-right30 background-red">Cancel</button>
+		</div>
+	</div>
+</div>
+<!-- Endorsement modal -->
+<div class="modal fade rollIn" id="escalateModal" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header background-red">
+				<button type="button" class="close close-login" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title align-center color-fff font_family_fft">Escalate</h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12 col-lg-12">
+						<div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
+							<label for="escalationComments">Please enter your
+								comments below:</label>
+							<textarea id="escalationComments" class="col-md-12 col-lg-12"
+								ng-model="vm.escalationComments"></textarea>
+							<button data-dismiss="modal" ng-click="vm.escalateCase()"
+								class="btn btn-block background-red align-center"
+								id="escalationSubmit">Submit</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- End Escalate modal -->
+<!-- Suspend modal -->
+<div class="modal fade rollIn" id="suspendModal" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header background-red">
+				<button type="button" class="close close-login" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title align-center color-fff font_family_fft">
+					Suspend</h4>
+			</div>
+
+			<div class="modal-body">
+				<div class="text-center m-btm20">
+					<div class="f-size18 m-btm20 ">
+						<div class="col-lg-12  col-md-12 col-sm-12 col-xs-12">
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								<label class="control-label f-size14"><i
+									class="fa fa-asterisk requiredField"></i>Reason for suspending
+									the case:</label>
+							</div>
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								<select name="suspenddrop" id="suspendDropdown"
+									title="Reason for suspension" ng-model="vm.suspensionRsn"
+									class="form-control">
+									<option value="" selected>Select Reason for suspending
+										the case</option>
+									<option ng-repeat="reason in vm.suspensionReasons"
+										value="{{reason.referenceCodeValue}}"
+										ng-selected="vm.suspensionRsn === reason.referenceCodeValue">{{reason.referenceCodeName}}
+									</option>
+								</select>
+								<div ng-show="vm.showSuspendError" class="color-red">Reason
+									for suspending the case is required</div>
+							</div>
+						</div>
+
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+							<button data-dismiss="modal"
+								class="btn btn-danger btn-block background-gold center-block m-top20"
+								ng-click="vm.suspendCase()">Submit</button>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End Suspend modal -->
+<!-- Save confirmation modal -->
+<div class="modal fade rollIn" id="binderComplete" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content cart-on-main">
+                        <div class="modal-header address-head background-red">
+                            <button type="button" class="close close-login" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title align-center color-fff font_family_fft"> Completion</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="text-center m-btm20">
+                                    <div class="f-size18 m-btm20">Is the case binder complete?</div>
+                                    <div class="col-lg-offset-3 col-lg-6 col-lg-offset-3 m-btm20">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                            <button class="btn btn-danger btn-block pull-left align-yesBtn background-gold" ng-click="vm.saveEndorsementReview(vm.data)" data-dismiss="modal">Yes</button></div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                            <button class="btn btn-danger btn-block pull-right align-noBtn background-gold" data-dismiss="modal">No</button></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<!-- End Save confirmation modal -->
+
+<!-- Endorse confirmation modal -->
+<div class="modal fade rollIn" id="binderComplete2" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content cart-on-main">
+                        <div class="modal-header address-head background-red">
+                            <button type="button" class="close close-login" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title align-center color-fff font_family_fft"> Case Binder Complete</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="text-center m-btm20">
+                                    <div class="f-size18 m-btm20">Is the case binder complete?</div>
+                                    <div class="col-lg-offset-3 col-lg-6 col-lg-offset-3 m-btm20">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                            <button class="btn btn-danger btn-block pull-left align-yesBtn background-gold" ng-click="vm.endorseCase(vm.data)" data-dismiss="modal">Yes</button></div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                            <button class="btn btn-danger btn-block pull-right align-noBtn background-gold" data-dismiss="modal">No</button></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<!-- End Endorse confirmation modal -->
+<!-- Cancel modal -->
+										<div class="modal fade rollIn" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content cart-on-main">
+                        <div class="modal-header address-head background-red">
+                            <button type="button" class="close close-login" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title align-center color-fff font_family_fft"> Case Binder Complete</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="text-center m-btm20">
+                                    <div class="f-size18 m-btm20">Are you sure you want to discard unsaved changes?</div>
+                                    <div class="col-lg-offset-3 col-lg-6 col-lg-offset-3 m-btm20">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                            <button class="btn btn-danger btn-block pull-left align-yesBtn background-gold" data-dismiss="modal" ng-click="vm.backToDashboard()">Yes</button></div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                            <button class="btn btn-danger btn-block pull-right align-noBtn background-gold" data-dismiss="modal">No</button></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<!-- End cancel modal -->

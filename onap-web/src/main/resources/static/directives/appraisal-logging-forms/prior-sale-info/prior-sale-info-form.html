@@ -1,0 +1,26 @@
+<form name="physicalCharacteristicForm" required>
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group m-top20">
+		<div class="row">
+			<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+				<div class="form-group">
+					<label class="form-group" for="priorSale">Was prior sale/transfer of this property within the past 3 years?</label>
+					<select class="form-control"
+							title="priorSale"
+							id="priorSale"
+							ng-model="data.editable.priorSaleCode">
+							<option value="">Select Prior Sale</option>
+							<option ng-repeat="option in vm.priorSaleOptions" value="{{option.referenceCodeValue}}">{{option.referenceCodeName}}</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<br>
+		<div class="col-lg-11 col-lg-offset-1 col-md-12 col-sm-12 col-xs-12">
+			<div class="pull-right m-top25">
+				<button id="savePriorSale" ng-disabled="vm.hasAllEmptyFields()" class="btn m-right30 background-red" 
+					ng-click="vm.savePriorSalesFormData()">Save</button>
+				<a class="btn" ng-click="vm.resetFormData()">Cancel</a>
+			</div>
+		</div>
+	</div>
+</form>

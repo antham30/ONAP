@@ -1,0 +1,73 @@
+<!--
+  This is the exemplar view.  Please follow this for proper coding guidance.
+
+  * This view has dependent javascript in the main.js file.  there are two bindings on loanSearchView scoped items.
+  -->
+
+<section id="content">
+    <div class="container" style="padding:25px;">
+        <form role="form" ng-submit="vm.searchLoans()">
+            <div class="form-group col-sm-offset-4">
+                <div id="loanIdDiv">
+                    <label for="caseId" class="control-label">Search By Case #</label>
+                    <input type="text" style="float:none; margin-right:10px; width:200px;" 
+                    	   placeholder="###-######" ng-model="searchloanId" 
+                    	   class="form-control form-control-width-md ng-pristine ng-valid" id="caseId" autofocus>
+                    <br>
+                </div>
+                <p>
+                    <input type="submit" id="loanSearchBtn" style="max-width:100px;" type="submit" class="btn background-red" value="Search">
+                </p>
+                <p>
+        </form>
+
+        <div class="clear"></div>
+        </div>
+        <div class="clearfix"></div>
+        <div ng-controller="LoanSearchController" ng-if="vm.loan">
+            <div style="padding: 10px;" class="col-sm-12" ng-show="vm.searchComplete && vm.loan.caseNumber">
+                <table class="table table-sortable table-bordered table-striped" role="grid" id="resultsTable">
+                    <thead>
+                        <tr role="row">
+                            <th class="sortable" aria-sort="ascending" role="columnheader" scope="col">Case Number</th>
+                            <th class="sortable" aria-sort="none" role="columnheader" scope="col">Date Registered</th>
+                            <th class="sortable" aria-sort="none" role="columnheader" scope="col">Case Expires</th>
+                            <th class="sortable" aria-sort="none" role="columnheader" scope="col">Case Status</th>
+                            <th class="sortable" aria-sort="none" role="columnheader" scope="col">Loan Purpose</th>
+                            <th class="sortable" aria-sort="none" role="columnheader" scope="col">Primary Borrower</th>
+                            <th class="sortable" aria-sort="none" role="columnheader" scope="col">Base Mortgage</th>
+                            <th class="sortable" aria-sort="none" role="columnheader" scope="col">LG Fee</th>
+                            <th class="sortable" aria-sort="none" role="columnheader" scope="col" 
+                            	ng-if="vm.showAppraisalBtn && vm.requiresAppraisalLogging(vm.loan)">Action</th>
+                             <th class="sortable" aria-sort="none" role="columnheader" scope="col" 
+                            	ng-if="vm.showUploadDocsBtn">Action</th>
+                            <th class="sortable" aria-sort="none" role="columnheader" scope="col" 
+                            	ng-if="vm.showAdjustFundsReservedBtn">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background-color: #fff">
+                            <td id="caseNumber"><a title="Case Review" href ng-click="vm.openCaseReview(vm.loan.caseId, vm.loan.caseNumber)" target="#caseReview">{{vm.loan.caseNumber}}</a>
+                            </td>
+                            <td id="dateRegistered">{{vm.loan.dateRegistered}}</td>
+                            <td id="dateExpires">{{vm.loan.dateExpires}}</td>
+                            <td id="caseStatus">{{vm.loan.caseStatus}}</td>
+                            <td id="loanPurpose">{{vm.loan.loanPurpose}}</td>
+                            <td id="primaryBorrower">{{vm.loan.primaryBorrowerFirstName}} {{vm.loan.primaryBorrowerMiddleInitial}} {{vm.loan.primaryBorrowerLastName}}</td>
+                          	<td id="baseMortgage">{{vm.loan.baseMortgage | currency}}</td>
+                        	<td id="loanGuaranteeFee">{{vm.loan.loanGuaranteeFee | currency}}</td>
+                        	<td id="action" ng-if="vm.showAppraisalBtn && vm.requiresAppraisalLogging(vm.loan)">
+                        	   <a class="btn background-red" id="appraisalLoggingBtn" href ng-click="vm.openAppraisalLogging(vm.loan.caseId, vm.loan.caseNumber)">Appraisal Logging</a>
+                        	</td>
+                        	<td id="action2" ng-if="vm.showUploadDocsBtn">
+                        	   <a class="btn background-red" id="uploadDocumentsBtn" href ng-click="vm.openUploadDocuments(vm.loan.caseId, vm.loan.caseNumber)">Submit Case for Endorsement</a>
+                        	</td>
+                        	<td id="action3" ng-if="vm.showAdjustFundsReservedBtn">
+                        	   <a class="btn background-red" id="adjustFundsReservedBtn" href ng-click="vm.openCaseReview(vm.loan.caseId, vm.loan.caseNumber, 'afr-title')">Adjust Funds Reserved</a>
+                        	</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</section>

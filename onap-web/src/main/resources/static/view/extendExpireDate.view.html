@@ -1,0 +1,196 @@
+<!--
+  This is the exemplar view.  Please follow this for proper coding guidance.
+
+  * This view has dependent javascript in the main.js file.  there are two bindings on loanSearchView scoped items.
+  -->
+
+<section id="content">
+    <div class="container" style="padding:25px;">
+        <form role="form" ng-submit="vm.searchLoans()">
+            <div class="form-group col-sm-offset-4">
+                <div >
+                    <label for="caseExtend" class="control-label">Search By Case #</label>
+                    <input type="text" style="float:none; margin-right:10px; width:200px;" 
+                    	   placeholder="###-######" ng-model="searchloanId"  name="extendacase"
+                    	   class="form-control form-control-width-md ng-pristine ng-valid" id="caseExtend" autofocus>
+                    <br>
+                    
+                </div>
+                <p>
+                    <input type="submit" id="extendExpireBtn" style="max-width:100px;" type="submit" class="btn background-red" value="Search">
+                </p>
+                <p>
+        </form>
+
+        <div class="clear"></div>
+        </div>
+        <div class="clearfix"></div>
+		
+        <div ng-if="vm.loan">
+            <div  class="table-responsive" ng-show="vm.searchComplete== true" >
+			
+<table class="table table-bordered table-hover ">
+  <thead>
+    <tr>
+      <th class=" text-center v-align" >Case Number</th>
+                            <th class=" text-center v-align"   >Primary Borrower</th>
+                            <th class=" text-center v-align"   >Case Status</th>
+                            <th class=" text-center v-align"   >Loan Purpose</th>
+                            <th class=" text-center v-align"   >Case Registered </th>
+                            <th class=" text-center v-align"   >Case Expires</th>
+                            <th class=" text-center v-align"   >Funds Reserved </th>
+                            <th class=" text-center v-align"   >Funds Expire </th>
+                            <th class=" text-center v-align"   >Base Mortgage</th>
+                            <th class=" text-center v-align"   >Mortgage w/Fee</th>
+                           
+                            <th class=" text-center v-align"    
+                            	>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+       <td id="caseNumber"><span ng-bind="vm.loan.caseNumber"></span>
+                            </td>
+                            <td >{{vm.loan.borrowerName}}</td>
+                            <td ><span ng-bind="vm.loan.caseStatus"></span></td>
+                            <td ><span ng-bind="vm.loan.loanPurpose"></span></td>
+                            
+							<td ><span ng-bind="vm.loan.caseAssignmentDate"></span></td>
+							
+                             <td>
+							<span ng-show="vm.showInputFieldCase" >{{vm.loan.caseExpirationDate}}</span>
+		                              		<input type="text" ng-show="!vm.showInputFieldCase" name="funds" ng-model="vm.loan.caseExpirationDate" id="fundsExpire" ng-change="vm.changingInsertedvalue()"  ng-click="fundsDatePick()" class="width-100" />
+							</td> 
+							
+							<td ><span ng-bind="vm.loan.fundRsrvdDate"></span></td>
+							<td><span ng-show="vm.showInputFieldFunds" ng-bind="vm.loan.fundExpirationDate"></span>
+		                              		<input type="text" ng-show="!vm.showInputFieldFunds" name="funds" ng-model="vm.loan.fundExpirationDate" id="caseExpire" ng-click="caseDatePick()" 
+											ng-change="vm.changingInsertedvalue()" class="width-100" />
+							</td>
+                           <td >$<span ng-bind="vm.loan.loanAmount"></span></td>
+						   <td >$<span ng-bind="vm.loan.loanGuaranteeFee"></span></td>
+                           
+                        	<td><button ng-show="vm.showEdit" type="button" ng-click="vm.editButton()" class="btn btn-success lender-btn-next background-red"> Edit</button>
+							<button ng-show="!vm.showEdit" data-toggle="modal" data-target="#clearData"
+                                                     class="btn btn-success lender-btn-next background-red" >Save</button></td>
+                        	
+                       
+    </tr>
+    
+  </tbody>
+</table>
+			
+			 <!--  Search results are cached.
+                <button class="btn btn-info" style="max-width:140px;margin-left:10px;" id="cacheReload" ng-click="vm.refreshCache();">Refresh</button> -->
+            </div>
+												<div class="col-lg-12"  id="goTonotes">
+<h1 class="f-size text-capitalize report-fsize color-theme"> Notes </h1>
+													<table class="table m-top20" style="border: none">
+
+														<tbody>
+															<tr>
+																<td style="border: none">
+																	<div class="noteText">
+																		<div
+																			ng-repeat="noteDetails in vm.displayNoteDetails | orderBy:'noteID':true">
+																			<div class="f-bold">
+																				{{noteDetails.showNotesDetails}}</div>
+																			<div style="word-break: break-all">{{noteDetails.loanNoteTxt}}</div>
+																			<br>
+																		</div>
+																	</div>
+																</td>
+
+															</tr>
+														</tbody>
+													</table>
+
+
+													
+													<form ng-if="vm.showNotesDataTable">
+														<table class="table " style="border: none">
+
+															<tbody>
+
+																<tr>
+
+																	<td style="border: none">
+																	<textarea id="notesArea" rows="3" class="margin-lr20"
+																			maxlength="255" cols="10" style="width: 100%"
+																			ng-model="vm.loan.notes"
+																			placeholder="Enter Notes here.." />
+																		<div ng-show="vm.errorNotesMsg" class="color-red margin-lr20">Notes
+																			is required</div></td>
+
+
+																</tr>
+															</tbody>
+														</table>
+														<div id="saveBtn" class="form-group">
+
+															<input type="button"
+																class="btn btn-primary background-red" style="margin-left:30px"
+																ng-click="vm.addNotes()" value="Save">
+
+														</div>
+													</form>
+												</div>       
+ 	   </div>
+        <div class="modal fade rollIn" id="clearData" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content cancel-on-main" style="width:73%">
+                        <div class="modal-header background-red">
+                            <button type="button" class="close close-login" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title align-center color-fff font_family_fft"> </h4>
+                        </div>
+                        
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="text-center m-btm20 hideText">
+                                    <div class="f-size18 m-btm20 hideText">Did you remember to record a reason for the extension in the 'Notes' section?</div>
+                                    
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 hideText">
+                                            <button class="btn btn-danger btn-block pull-right align-yesBtn background-gold" data-toggle="modal" data-target="#confrmationPopUp">Yes</button></div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 hideText">
+                                            <button class="btn btn-danger btn-block pull-left align-noBtn background-gold" ng-click="vm.showNotes()" >No</button></div>
+                                    </div>
+							
+						   </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+	<!-- confrmationPopUp for submiting strts -->	
+	<div class="modal fade rollIn" id="confrmationPopUp" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content cancel-on-main" style="width:73%">
+                        <div class="modal-header background-red">
+                            <button type="button" class="close close-login" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title align-center color-fff font_family_fft"> </h4>
+                        </div>
+                        
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="text-center m-btm20 hideText">
+                                   
+                                     <div class="f-size18 m-btm20 hideText">Are you sure you want to extend the {{vm.insertedFieldName}} to {{vm.insertedFieldValue}}?</div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 hideText">
+                                            <button class="btn btn-danger btn-block pull-right align-yesBtn background-gold" ng-click="vm.submitAllFields()">Yes</button></div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 hideText">
+                                            <button class="btn btn-danger btn-block pull-left align-noBtn background-gold"  ng-click="vm.backToEdit()">No</button></div>
+                                    </div>
+							
+						   </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+		
+	<!-- confrmationPopUp for submiting ends-->
+			</section>

@@ -1,0 +1,345 @@
+<!--main content starts-->
+<div class="container">
+    <div class="row">
+      	<div class="col-lg-12 col-md-12  col-sm-12 col-xs-12">
+			<div class="">
+				<div class="">
+
+          		<!-- List of Subsidies -->
+		          <div class="panel panel-default" id="dgWritr">
+		                <!-- Default panel contents -->
+		              <div class="panel-heading"><span class="lead">Manage DG Underwriters</span></div>
+		               <div class="panel-body m-top20">
+					    <div class="form-group">
+                           <div class="form-group">
+                                 <div class=" col-lg-12  col-md-12  col-sm-12 col-xs-12">
+                                    <div class="form-horizontal">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+											   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                               <div class="form-group">
+                                                  
+												  <div> <label class="control-label"><i
+                                                                            class="fa fa-asterisk requiredField"></i> Lending Institution:</label>
+                                                   </div>
+                                                        <select class="form-control" ng-model="vm.editDg.lendingInstitute"  ng-change="getTin(vm.editDg.lendingInstitute)" id="lendingInstitute" title=" Lending Institution ">
+                                                            <option value="">Select  Lending Institution </option>
+                                                            <option ng-repeat="getAllLendingInstitutions in vm.getAllLendingInstitutions|orderBy:'lendingInstitution'" value="{{getAllLendingInstitutions.lendingInstitution}}"  ng-selected="vm.editDg.lendingInstitute == getAllLendingInstitutions.lendingInstitution">{{getAllLendingInstitutions.lendingInstitution}}</option>
+                                                        </select>
+													
+                                                           <div ng-show="errorlendingInstitute" class="color-red">  <span ng-bind="errorlendingInstituteText"></span>  </div>
+                                                    </div>
+                                                </div>
+                                               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+												 <div class="form-group">
+													 
+												  <div><label  class="control-label">TIN:</label></div>
+                                                        <input type="text" title="Tin" id="tinmasking" class="form-control" ng-model="vm.editDg.tinMasking" " placeholder="TIN" readonly />
+                                                    </div>
+                                               
+                                                </div>
+												</div>
+												
+												  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+												  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                               <div class="form-group">
+                                                    
+												  <div>
+                                                        <label class="control-label"><i
+                                                                            class="fa fa-asterisk requiredField"></i> DG Underwriter Name:</label>
+                                                       </div>
+										<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+													   <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 padding0">
+													   <input type="text" title="fname" id="fname" class="form-control" ng-model="vm.editDg.fname"  placeholder="First Name"  />
+													      <div ng-if="errorFName" class="color-red"> <span ng-bind="errorFnameText"></span> </div>
+                                                    </div>
+													<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+													   <input type="text" title="mi" id="mi" class="form-control"  ng-model="vm.editDg.mi" placeholder="MI"  />
+													    <div ng-if="errorMii" class="color-red"> <span ng-bind="errorMiText"></span> </div>
+                                                    </div>
+													<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 padding0">
+													   <input type="text" title="lname" id="lname" class="form-control" ng-model="vm.editDg.lname" placeholder="Last Name"  />
+													   <div ng-if="errorLName" class="color-red"> <span ng-bind="errorLnameText"></span> </div>
+													
+                                                    </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+												  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                               <div class="form-group">
+                                                   
+												  <div>
+                                                      
+                                                        <label  class="control-label"><i
+                                                                            class="fa fa-asterisk requiredField"></i> DG Approval Date:</label>
+                                                    </div>
+                                                    
+														
+														 <input type="text" title=" DG Approved" id="dgapproved" ng-click="vm.dgApproved()"  class="form-control" ng-model="vm.editDg.dgApproved" placeholder=" DG Approval Date" readonly />
+														    <div ng-if="errordgApproved" class="color-red"> <span ng-bind="errordgApprovedText"></span> </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+												 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+											 <!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+											<div class="">
+                                                 
+												  <div>
+                                                      
+                                                        <label  class="control-label">DG Number:</label>
+                                                    </div>
+                                                   
+                                                        <input type="text" title="DG Number" id="DG_number"  class="form-control" ng-model="vm.editDg.dgNumber" placeholder="DG Number"  readonly/>
+														  <div ng-if="errordgNumber"class="color-red"> <span ng-bind="errordgNumberText"></span> </div>
+                                                    </div>
+                                                </div>-->
+                                              
+                                          
+											 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+											   <div class="form-group">
+                                                    
+                                                
+															
+												  <div>	<label  class="control-label"> DG Trainee: </label>
+															</div>
+															<!--   ng-init="lender.sponsore='no'" -->
+														 <input type="checkbox" name="vehicle" ng-model="vm.editDg.dgTrainer" id="dgTrnr" ng-true-value="Y" ng-false-value="N"> Yes
+ 
+																
+																  <div ng-if="errordgTrainer" class="color-red"> <span ng-bind="errordgTrainerText"></span> </div>
+															</div>
+											
+                                            </div>
+											 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+											<div class="form-group">
+                                                 
+												  <div>	
+                                                        <label class="control-label "><i
+                                                                            class="fa fa-asterisk requiredField"></i> Status:</label>
+                                                    </div>
+                                                   <select id="status" class="form-control"  title="Status">
+  <option value="ACTV">Active </option>
+</select>
+                                                       
+                                                        <div ng-if="errorstatus" class="color-red"> <span ng-bind="errorstatusText"></span> </div>
+                                                    </div>
+                                                </div>
+											</div>
+											   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+											   
+												 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+												<div class="">
+                                                   
+												  <div>	
+                                                        <label  class="control-label"><i
+                                                                            class="fa fa-asterisk requiredField"></i> Underwriter Phone:</label>
+                                                    </div>
+                                                    
+                                                        <input type="text" title="Underwriter Phone"  id="phone_with_ddd"  class="form-control" ng-model="vm.editDg.underwriterPhone" placeholder=" Underwriter Phone"  />
+														    <div ng-if="errorunderwriterPhone" class="color-red"> <span ng-bind="errorunderwriterPhoneText"></span> </div>
+														    
+														   <div ng-if="errorunderwriterPhoneVald" class="color-red"> <span ng-bind="errorunderwriterPhoneValidText"></span> </div>  
+                                                    </div>
+                                                </div>
+ <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+												<div class="">
+                                                   
+												  <div>	
+                                                        <label  class="control-label"> <i
+                                                                            class="fa fa-asterisk requiredField"></i>Underwriter Email:</label>
+                                                    </div>
+                                                   
+                                                        <input type="text" title="Underwriter Email" id="underwriter_email"  class="form-control" ng-model="vm.editDg.underwriterEmail" placeholder=" Underwriter Email" ng-change="vm.emailValidation(vm.editDg.underwriterEmail)"  />
+                                                    <div ng-if="errorEmail" class="f-size12 color-red">{{errorEmailsText}} </div>
+                                                    <div ng-if="errorEmailsValid" class="f-size12 color-red">{{errorEmailsValidText}} </div>
+                                                 
+													</div>
+                                                </div>
+																							
+											</div>
+												<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+												
+												<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+											
+												<div class="">
+                                                    
+                                                  
+												  <div>	
+                                                        <label  class="control-label" style="visibility:hidden"> Underwriter Email:</label>
+                                                    </div>
+												 <button  id="btnExportData" ng-click="vm.saveBtn()" title="Add" class="btn btn-default background-red" style="margin-top:-6px">
+             Add
+            </button>
+			</div>
+			</div>
+			</div>
+			
+                                        </div>
+                                    </div>
+                                </div>
+                             
+                            </div>
+                        </div>
+
+
+					   
+					   
+					   
+					   
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-top20">
+<hr>
+						 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+						 <button  id="showallstates" class="btn btn-default excelCss  m-btm30" tabindex="14" ng-click="vm.getAllStates()">
+              Show All DG Underwriters
+            </button>
+						 </div>
+						  <div class="col-lg-6 col-md-6 col-sm-7 col-xs-12">
+						 
+		 <select name="allLendingInstitute" id="allLendingInstitute"  title="All Lending institutions" tabindex="15"
+																ng-model="vm.allLendingInstitute" class="form-control" ng-change="vm.getAllLendingInstitutionsNamesOnly(vm.allLendingInstitute)">
+															 <option value="">Select Lending institution</option>
+                                                            <option ng-repeat="getAllLendingInstitutions in vm.getAllLendingInstitutions|orderBy:'lendingInstitution'" value="{{getAllLendingInstitutions.lendingInstitution}}"  ng-selected="vm.allLendingInstitute == getAllLendingInstitutions.lendingInstitution">{{getAllLendingInstitutions.lendingInstitution}}</option>
+															</select>
+		</div>
+						
+						  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+						
+						 </div>
+						  
+					</div>
+			 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		              <div class="tablecontainer table-responsive" >
+		                  <table  border="1"  class="table table-hover table-bordered" id="example" datatable="ng">
+		                      <thead>
+		                          <tr>
+		                              <th>Lending Institution</th>
+       	                                <th>TIN</th>
+ <th> DG Underwriter Name </th>
+ <th>  DG Approval Date</th>
+ <th>  DG Number </th>
+ <th> DG Trainee</th>
+ <th> Status</th>
+ <th>  Underwriter Phone </th>
+ <th>  Underwriter Email </th>
+ <th> Date Added</th>
+ <th ng-if="vm.isOLGAdmin"> Action</th>
+ 
+		                              
+		                          </tr>
+		                      </thead>
+		                      <tbody>
+		                         <tr ng-repeat="dgUnderwrtrs in vm.getAllDgDetails|orderBy:'underWriterId':true" >
+		                         
+		                              <td><span  ng-bind="dgUnderwrtrs.lenderName"></span>
+									 
+									  </td>
+		                              <td>
+                         					<span  ng-bind="dgUnderwrtrs.taxIndentificationNumber"></span>
+                         					 
+		                              </td>
+									  <td>
+                         					<div  ng-hide="dgUnderwrtrs.enableInputFiled" ><span  ng-bind="dgUnderwrtrs.dgUnderWriterFirstName"></span> <span ng-bind="dgUnderwrtrs.dgUnderWriterMiddleName"></span> <span  ng-bind="dgUnderwrtrs.dgUnderWriterLastName"></span></div>
+											<input type="text" ng-hide="!dgUnderwrtrs.enableInputFiled"  name="name{{$index}}" ng-model="dgUnderwrtrs.dgUnderWriterFirstName" title="First Name" id="{{$index}}dgUnderWriterFirstName" style="margin-bottom:5px" class="width-120" maxlength="40"/>
+											<input type="text" ng-hide="!dgUnderwrtrs.enableInputFiled"  name="name{{$index}}" ng-model="dgUnderwrtrs.dgUnderWriterMiddleName"  title="Middle Name" id="{{$index}}dgUnderWriterMiddleName" class="width-120" style="margin-bottom:5px" style="width:90px" maxlength="40"/>
+											<input type="text" ng-hide="!dgUnderwrtrs.enableInputFiled"  name="name{{$index}}" ng-model="dgUnderwrtrs.dgUnderWriterLastName" title="Last Name" id="{{$index}}dgUnderWriterLastName" class="width-120" maxlength="40"/>
+		                              		
+                         					 
+		                              </td>
+									  <td>
+                         					<span  ng-bind="dgUnderwrtrs.dgApprovedDate"></span>
+                         					 
+		                              </td>
+									  <td>
+                         					<span  ng-bind="dgUnderwrtrs.dgUnderWriterNUmber"></span>
+                         					 
+		                              </td>
+									  <td>
+                         					<span  ng-hide="dgUnderwrtrs.enableInputFiled" ng-bind="dgUnderwrtrs.dgTrainerNumber"></span>
+											 <input type="checkbox" ng-hide="!dgUnderwrtrs.enableInputFiled"  ng-model="dgUnderwrtrs.dgTrainerNumber" id="dgTrnr" ng-true-value="Y" ng-false-value="N"><span ng-hide="!dgUnderwrtrs.enableInputFiled">Yes</span> 
+ 
+											
+                         					 
+		                              </td>
+									  <td>
+                         					<span  ng-bind="dgUnderwrtrs.dgUnderWriterStatus"></span>
+                         					 
+		                              </td>
+									  <td>
+                         					<span ng-hide="dgUnderwrtrs.enableInputFiled"  ng-bind="dgUnderwrtrs.workPhoneNumber"></span>
+											 <input type="text" title="Underwriter Phone" ng-hide="!dgUnderwrtrs.enableInputFiled"  id="{{$index}}phone_with_ddd" ng-click="phnValid($index)" class="width-120" ng-model="dgUnderwrtrs.workPhoneNumber"  />
+                         					 
+		                              </td>
+									  <td>
+                         					<span ng-hide="dgUnderwrtrs.enableInputFiled" ng-bind="dgUnderwrtrs.personEmail"></span>
+											<input type="text" ng-hide="!dgUnderwrtrs.enableInputFiled"  name="personEmail{{$index}}" ng-model="dgUnderwrtrs.personEmail" title="Email" id="{{$index}}personEmail" class="width-120" />
+                         					 
+                         					 
+		                              </td>
+		                               <td>
+                         					<span  ng-bind="dgUnderwrtrs.createdDate"></span>
+                         					 
+		                              </td>
+									       <td ng-if="vm.isOLGAdmin">
+		                              	<button type="button" ng-hide="dgUnderwrtrs.enableInputFiled" ng-click="vm.editAllData(dgUnderwrtrs,$index)" title="Edit"
+		                              										class="btn btn-success background-gold custom-width">Edit</button>
+		                              										
+		                             	<button type="button" ng-hide="!dgUnderwrtrs.enableInputFiled" style="margin-left:-12px; padding:6px 5px;" ng-click="vm.editIndividual(dgUnderwrtrs)"  title="Add"
+		                              										class="btn btn-success background-gold custom-width pull-left"><i
+                                                                            class="fa fa-check"></i></button>
+		                              	<button type="button" ng-hide="!dgUnderwrtrs.enableInputFiled" ng-click="vm.reset(dgUnderwrtrs)"  style="margin-right: -8px; 
+    padding:6px 5px;"
+		                              										title="Cancel" class="btn btn-success background-gold custom-width pull-right"><i
+                                                                            class="fa fa-ban"></i></button>
+		                              </td>                                              
+		                          </tr>
+		                      </tbody>
+		                  </table>
+		                  
+		                  
+		           
+
+				   </div>
+				 
+    <br />
+   	              </div>			      
+		              </div>			      
+										
+				</div>
+				</div>	
+  <div class="modal fade rollIn" id="alertBox1" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content cancel-on-main" style="width:112%">
+                        <div class="modal-header background-red">
+                            <button type="button" class="close close-login" data-dismiss="modal">&times;</button>
+                           
+                        </div>
+                        
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="text-center m-btm20 ">
+                                    <div class="f-size18 m-btm20 ">{{vm.messages}}
+</div>									
+                                    <!--<div class="f-size18 m-btm20 "> 
+									(first,mi,lname) combination is already  associated with (name of the lendingInstitute B) Do you still want to proceed?
+									</div>-->
+                                    
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                            <button class="btn btn-danger btn-block pull-right align-yesBtn background-gold" ng-click="vm.submitCancelBtnOLGAdmin()" ng-if="!vm.editBtn">Yes</button>
+											<button class="btn btn-danger btn-block pull-right align-yesBtn background-gold" ng-click="vm.submitCancelBtnOLGAdmin1()" ng-if="vm.editBtn">Yes</button></div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+                                            <button class="btn btn-danger btn-block pull-left align-noBtn background-gold"  data-dismiss="modal">No</button></div>
+                                    </div>
+							
+					   </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+				
+			</div>
+		</div>
+	</div>
+</div>

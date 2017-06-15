@@ -1,0 +1,197 @@
+<!--main content starts-->
+<div class="container">
+    <div class="row">
+       <div class="col-lg-offset-1 col-lg-10 col-lg-offset-1 col-md-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+            <div class=" m-top60">
+
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist" id="registrationTabs">
+                    <li role="presentation" class="disabled disabledTab"><a class="arrow_box" href="#lender" aria-controls="home" role="tab" data-toggle="tab">Lender</a></li>
+                    <li role="presentation" class="disabled disabledTab"><a class="arrow_box" href="#borrower" aria-controls="profile" role="tab" data-toggle="tab">Borrower</a></li>
+                    <li role="presentation" class="disabled disabledTab"><a class="arrow_box" href="#property" aria-controls="messages" role="tab" data-toggle="tab">Property</a></li>
+                    <li role="presentation" class="active"><a href="#loan" class="arrow_box" aria-controls="settings" role="tab" data-toggle="tab">Loan</a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content border-tab">
+                    <div role="tabpanel" class="tab-pane active" id="loan">
+                        <h1 class="m-top40 f-size30 text-capitalize text-center color-theme"> Case registration </h1>
+                        <div class=" row">
+                            <div class="m-top60">
+                                 <div class=" col-lg-10  col-md-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+                                    <div class="form-horizontal">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="form-group">
+                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5">
+                                                        <label class="control-label pull-right"><i class="fa fa-asterisk requiredField"></i>Type of Loan:</label>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
+                                                        <select class="form-control" ng-model="loan.loanType" ng-change="getLoanPurpose(loan.loanType)" title="loantype">
+                                                            <option value="" disabled>Select Loan Type</option>
+                                                            <option ng-repeat="loanType in loanType|orderBy:'referenceCodeName'" value="{{loanType.referenceCodeValue}}"  ng-selected="loan.loanType == loanType.referenceCodeValue">{{loanType.referenceCodeName}}</option>
+                                                        </select>
+                                                        <div ng-show="errorLoanType" class="color-red">{{errorLoanTypeRequiredText}}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5">
+                                                        <label class="control-label pull-right"><i class="fa fa-asterisk requiredField"></i>Purpose of Loan:</label>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
+                                                        <select class="form-control" ng-model="loan.loanPurpose" title="loanpurpose" ng-change="showStatusPrior(loan.loanPurpose);setConstructionCode(loan.loanPurpose)">
+                                                            <option value="">Select Loan Purpose</option>
+                                                            <option value="{{loanPurpose.referenceCodeValue}}" ng-repeat="loanPurpose in loanPurpose|orderBy:'referenceCodeName'" ng-selected="loan.loanPurpose == loanPurpose.referenceCodeValue">{{loanPurpose.referenceCodeName}}</option>
+                                                        </select>
+
+                                                        <div ng-show="errorLoanPurpose" class="color-red">{{errorLoanPurposeText}}</div>
+                                                    </div>
+													
+                                                </div>
+												  <div class="form-group">
+                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5">
+                                                        <label class="control-label pull-right">Construction Code </label>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
+                                                        <select class="form-control" ng-model="loan.construction"  title="construction">
+                                                            <option value="" disabled>Select Construction Code </option>
+                                                            <option ng-repeat="loanConstruction in construction|orderBy:'referenceCodeName'" value="{{loanConstruction.referenceCodeValue}}"  ng-selected="loan.construction == loanConstruction.referenceCodeValue">{{loanConstruction.referenceCodeName}}</option>
+                                                        </select>
+
+                                                       
+                                                    </div>
+													
+                                                </div>
+                                                <div class="form-group" ng-show="showPriorCase" id='hideprior'>
+                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5">
+                                                        <label  class="control-label pull-right">Prior Case Number:</label>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
+                                                        <input type="text" title="casenum" id="casenum" class="form-control" ng-model="loan.priorCaseNumber" placeholder="Prior Case Number" required />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5">
+                                                        <label class="control-label pull-right">Status of Prior Case:</label>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
+                                                        <select class="form-control" ng-model="loan.priorCaseStatus" title="status" id="priorCaseStatus">
+                                                            <option value="" disabled>Select Status of Prior Case</option>
+                                                            <option value="PO">Paid - off</option>
+                                                            <option value="WPO">Will be Paid - off</option>
+                                                            <option value="PS">Pending Sale</option>
+                                                        </select>
+                                                        <div ng-show="errorLoanPriorCase" class="color-red">{{errorLoanPriorCaseText}}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5">
+                                                        <label  class="control-label pull-right">Underwriter:</label>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
+                                                       <select class="form-control" ng-model="loan.underWriter" title="loan underWriter" ng-click="getUnderWrtr()">
+                                                            <option value="" disabled>Select  Underwriter </option>
+                                                            <option value="{{underWriter.personId}}" ng-repeat="underWriter in underWriter" ng-selected="loan.underWriter == underWriter.personId">{{underWriter.personName}}</option>
+                                                          
+														
+															</select>
+                                                    </div>
+												<!-- <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
+														<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padding0">
+															 <input type="text" id="underwriterfname" title="underwriter first name" class="form-control" placeholder="First Name" ng-model="loan.underWriterFname" maxlength="40"/>
+														</div>	
+														<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 loanOfficerdiv">
+														 <input type="text" id="underwriterlname" title="underwriter lname" class="form-control" placeholder="Last Name" ng-model="loan.underWriterLname" maxlength="40"/>
+														</div>
+                                                    </div>-->
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5">
+                                                        <label class="control-label pull-right"><i class="fa fa-asterisk requiredField"></i> Base Mortgage Amount($):</label>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
+                                                       <!-- <input type="text" title="amount" maxlength="10" id="baseMortgageAmount" class="form-control number" ng-model="loan.baseMortgageAmount" ng-blur="totalAmount()" placeholder="Base Mortgage Amount"/>-->
+													    <input type="text" title="amount" maxlength="15" id="baseMortgageAmount" class="form-control number dollarsign" ng-model="loan.baseMortgageAmount" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$"  data-type="currency" placeholder="Base Mortgage Amount" ng-blur="totalAmount()">
+                                                        <div ng-show="errorLoanBaseAmount" class="color-red">{{errorLoanBaseAmountText}}</div>
+<!--
+                                                        <div ng-show="errorMaxLoanBaseAmount" class="color-red">{{errorMaxLoanBaseAmount}}</div>-->
+ <div ng-show="errorMaxLoanBaseAmount" class="color-red">Base Mortgage Amount value cannot exceed {{baseMortgageMaxAmount | currency}}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5">
+                                                        <label class="control-label pull-right"><i class="fa fa-asterisk requiredField"></i> Loan Term:</label>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5">
+                                                        <input type="text"  title="numbrbox" id="numberbox"  maxlength="3"  class="form-control" ng-change="validateMonth(loan.loanTerm)" ng-model="loan.loanTerm" placeholder="Loan term" />
+                                                        <div ng-show="errorLoanTerm" class="color-red">{{errorLoanTermText}}</div>
+                                                        <div ng-show="errorLoanMonthExceed" class="color-red">{{errorLoanTypeText}}</div>
+
+                                                    </div>
+                                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                                        <label class="control-label pull-left">Months</label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5">
+                                                        <label  class="control-label pull-right">Loan Guarantee Fee($):</label>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
+                                                        <input type="text"  maxlength="10" id="loanGuaranteeFee" title="fee"
+                                                               class="form-control" ng-model="loan.loanGuaranteeFee" value="{{loan.loanGuaranteeFee | number :2}}"  placeholder="Loan Guarantee Fee" data-type="currency" format="currency" readonly/>
+                                                        <div ng-show="errorLoanGarenteeFee" class="color-red">{{errorLoanGarenteeFeeText}}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5">
+                                                        <label  class="control-label pull-right">Loan Amount with Fee($):</label>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
+                                                        <input
+                                                                type="text"  id="loanAmountWithFee" title="totalamount"
+                                                                class="form-control" ng-model="loan.loanAmountWithFee" format="currency"  placeholder="Loan Amount with Fee" data-type="currency" readonly/>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-offset-2 col-lg-8 col-lg-offset-2 col-md-offset-1 col-md-10 col-md-offset-1 col-sm-offset-1 col-sm-10 col-sm-offset-1 col-xs-offset-1 col-xs-10 col-xs-offset-1">
+                                        <div class="pull-right m-tb20 mright10">
+
+                                            <a href="dfdf" class="btn btn-success lender-btn-next background-red"
+                                                    aria-controls="settings" role="tab" data-toggle="tab" ng-click="previousButtonLoan()">Prev</a>
+                                          
+                                            <a href="sdsdd"
+                                                 class="btn btn-success lender-btn-next background-red" ng-click="submitLoanDetails(e)">Submit</a>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- co-borrowers ends-->
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- co-borrowers ends-->
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+        </div>
+
+    </div>
+</div>
+</div>
+</div>
+
+<!--main content ends-->

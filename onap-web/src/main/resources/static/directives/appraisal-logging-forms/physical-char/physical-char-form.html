@@ -1,0 +1,103 @@
+<form name="physicalCharacteristicForm" required>
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group m-top20">
+		<div class="row">
+			<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+				<label class="control-label" for="foundation">Foundation:</label>
+				<select class="form-control"
+						title="foundation"
+						id="foundation"
+						ng-model="data.editable.fndtnTypeCd">
+						<option value="">Select Foundation</option>
+						<option ng-repeat="option in vm.foundationOptions" value="{{option.referenceCodeValue}}">{{option.referenceCodeName}}</option>
+				</select>
+			</div>
+			<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
+			</div>
+			<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
+				 <div class="form-group">
+					<label class="control-label" for="rooms">Rooms:</label>
+		            <input type="text" title="rooms" id="rooms" name="rooms" class="form-control" ng-model="data.editable.nbrOfRoom" />
+	             </div>
+			</div>
+			<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
+				 <div class="form-group">
+					<label class="control-label" for="bedrooms">Bedrooms:</label>
+		            <input type="text" title="bedrooms" id="bedrooms" name="bedrooms" class="form-control" ng-model="data.editable.nbrOfBdrm"/>
+	             </div>
+			</div>
+			<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
+				 <div class="form-group">
+					<label class="control-label" for="bathrooms">Bathrooms:</label>
+		            <input type="text" title="bathrooms" id="bathrooms" name="bathrooms" class="form-control" ng-model="data.editable.nbrOfBthrm"/>
+	             </div>
+			</div>
+		</div>
+		<br><br>
+		<div class="row">
+			<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
+				<div class="form-group">
+					<label class="control-label" for="livingArea">Living Area:</label>
+		           	<input type="text" title="Living Area" id="livingArea" name="livingArea" class="form-control inputBeforeTextPhysicalChar inputTextRightAlign" ng-model="data.editable.lvingArea" />
+	           		<span class="textAfterInput physicalChar">sq. ft.</span>
+	           	</div>
+			</div>
+			<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
+				<div class="form-group">
+					<label class="control-label" for="centralAir" id="centralAir">Central Air:</label>
+					<div class="form-group">
+						<input type="radio" ng-model="data.editable.cntrlAirInd" 
+						name="centralAir" id="centralAirYes" aria-labelledby="centralAir" 
+						class="site-area-form-field" ng-checked="true" value="y"> <label for="centralAirYes">Yes</label>
+						<input type="radio" ng-model="data.editable.cntrlAirInd" 
+					   	name="centralAir" id="centralAirNo"  aria-labelledby="centralAir" 
+					   	class="site-area-form-field" ng-checked="false" value="n"> <label for="centralAirNo">No</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group col-lg-4 col-md-6">
+				<label class="control-label" for="carStorage">Car Storage:</label>
+				<select class="form-control"
+						title="carStorage"
+						id="carStorage"
+						ng-model="data.editable.carStrgCd">
+						<option value="">Select Storage</option>
+						<option ng-repeat="option in vm.carStorageOptions" value="{{option.referenceCodeValue}}">{{option.referenceCodeName}}</option>
+				</select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+				<div class="form-group">
+					<label class="form-group" for="waterSource">Water Source</label>
+					<select class="form-control"
+							title="waterSource"
+							id="waterSource"
+							ng-model="data.editable.watrSrcCd">
+							<option value="">Select Water Source</option>
+							<option ng-repeat="option in vm.waterSourceOptions" value="{{option.referenceCodeValue}}">{{option.referenceCodeName}}</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+				<div class="form-group">
+					<label class="form-group" for="septicSource">Septic Source</label>
+					<select class="form-control"
+							title="septicSource"
+							id="septicSource"
+							ng-model="data.editable.sptcSrcCd">
+							<option value="">Select Septic Source</option>
+							<option ng-repeat="option in vm.septicSourceOptions" value="{{option.referenceCodeValue}}">{{option.referenceCodeName}}</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<br>
+		<div class="col-lg-11 col-lg-offset-1 col-md-12 col-sm-12 col-xs-12">
+			<div class="pull-right m-top25">
+				<button id="savePhysicalChar" ng-disabled="vm.hasAllEmptyFields()" type="submit" class="btn m-right30 background-red" 
+					ng-click="vm.savePhysicalCharFormData()">Save</button>
+				<a class="btn" ng-click="vm.resetFormData()">Cancel</a>
+			</div>
+		</div>
+	</div>
+</form>

@@ -1,0 +1,22 @@
+{
+  "caseNumber": "022-102632",
+  "caseStatusCode": "CA",
+  "caseNumberRequestDate": "03/23/2015",
+  "caseStatusDate": "03/23/2015",
+  "underwritingTypeCode": "Direct Guarantee (DG)",
+  "loanPurposeCode": "AEH",
+  "firstName": "Joe",
+  "middleInitial": "C",
+  "lastName": "Blow",
+  "suffix": "Jr.",
+  "ssn": "123-45-6789",
+  "personBirthDate": "",
+  "borrowerTypeCode": "PRI",
+  "tribalAffiliationCode": "CHER",
+  "street": "1234 Main Street",
+  "lot": "3F",
+  "blkPlot": "asf",
+  "city": "Vienna",
+  "stateCode": "VA",
+  "zipCode": "22222"
+}

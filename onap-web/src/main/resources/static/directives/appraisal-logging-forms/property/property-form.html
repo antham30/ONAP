@@ -1,0 +1,142 @@
+<div class="row m-top20">
+	<div class="col-md-12 col-xs-12 col-lg-12">
+		<div id="property_top_data" class="row">
+			<div class="box col-lg-4 col-md-6 col-sm-12 col-xs-12"
+				id="address_container">
+				<strong>Address</strong>
+				<address id="address" ng-if="address">
+					<span>{{address.addrStrNm}},
+						{{address.cityNm}},
+						{{address.stCd}}
+						{{address.zipPlus4Cd ||
+						address.zip5Cd}}<br>County: {{address.cntyNm}}</span>
+				</address>
+			</div>
+			<div class="box col-lg-4 col-md-6 col-sm-12 col-xs-12">
+				<strong>Construction Code</strong> <span id="constructionCode">{{constrnCd}}</span>
+			</div>
+		</div>
+	</div>
+	<div class="row m-top30" id="property-form">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<form name="propertyForm" ng-submit="vm.savePropertyData()" novalidate>
+				<ng-form name="propertyFields" id="propertyFields">
+				<div class="form-horizontal">
+					<div class="row m-top20">
+						<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label class="control-label" for="monthCompleted">Month</label>
+								<label id="yearCompletedLabel" for="yearCompleted">/ Year Completed</label>
+								<div class="form-group monthyearCompleted">
+									<select id="monthCompleted" name="monthCompleted"  
+										ng-model="data.editable.prprtMonth" class="property-form-field">
+										<option value="" disabled>Select Month</option>
+										<option ng-repeat="month in vm.months" value="{{month.value}}">{{month.display}}</option>
+									</select> <span class="monthYearSeparator">/</span> <input type="text"
+										id="yearCompleted"
+										class="form-control col-md-5 pull-right property-form-field"
+										placeholder="YYYY" title="Year Completed" 
+										name="yearCompleted" ng-model="data.editable.prprtYear"
+										ng-pattern="/^[0-9]{4}$/" />
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label class="control-label" for="remainingEconomicLife">Remaining Economic Life</label>
+								<div class="form-group">
+									<input type="text" id="remainingEconomicLife"
+										class="form-control inputBeforeText property-form-field" 
+										title="Remaining Economic Life" 
+										ng-model="data.editable.remnEcnmcLife" /> <span
+										class="textAfterInput">years</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label class="control-label" for="effectiveAge">Effective Age</label>
+								<div class="form-group">
+									<input type="text" id="effectiveAge" ng-model="data.editable.effcAge"
+										ng-pattern="/^[0-9]{1,2}$/"
+										class="form-control inputBeforeText property-form-field"
+										title="Effective Age" /> <span class="textAfterInput">years</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label class="control-label" for="landType">Land Type</label> <select
+									id="landType" name="landType" ng-model="data.editable.landType"
+									class="property-form-field">
+									<option value="" disabled>Select Land Type</option>
+									<option ng-repeat="type in vm.landTypes" ng-selected="data.editable.landType === type.referenceCodeName" 
+										value="{{type.referenceCodeName}}">{{type.referenceCodeName}}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="row m-top20">
+						<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label class="control-label" for="appraisalMethods">Appraisal Method</label> <select
+									id="appraisalMethods" name="appraisalMethods"
+									ng-model="data.editable.aprslMethod" class="property-form-field">
+									<option value="" disabled>Select Appraisal Method</option>
+									<option ng-repeat="method in vm.appraisalMethods" ng-selected="data.editable.aprslMethod === method.referenceCodeName" 
+										value="{{method.referenceCodeName}}">{{method.referenceCodeName}}</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label class="control-label" for="appraisalReceivedDate">Appraisal Received Date</label>
+								<div class="form-group">
+									<input type="text" id="appraisalReceivedDate"
+										name="appraisalReceivedDate"
+										class="form-control property-form-field"
+										title="Appraisal Received Date"
+										ng-model="data.editable.aprslRecvDt"
+										ng-pattern="/^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$/" />
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label class="control-label" for="dateOfContract">Date of Contract</label>
+								<div class="form-group">
+									<input type="text" id="dateOfContract"
+										class="form-control property-form-field"
+										title="Date of Contract" name="dateOfContract"
+										ng-model="data.editable.contractDt"
+										ng-pattern="/^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$/" />
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label class="control-label" for="contractPrice">Contract Price</label>
+								<div class="form-group">
+									<span class="textBeforeInput">$</span><input type="text"
+										id="contractPrice" name="contractPrice"
+										class="form-control money inputAfterText property-form-field"
+										title="Contract Price" ng-model="data.editable.contractPrice"> <span
+										class="pull-right textAfterInput">.00</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div
+						class="col-lg-11 col-lg-offset-1 col-md-12 col-sm-12 col-xs-12">
+						<div class="pull-right m-top25">
+							<button ng-disabled="vm.hasAllEmptyFields()"
+								class="btn m-right30 background-red" type="submit">Save</button>
+							<a class="btn" ng-click="vm.resetFormData()">Cancel</a>
+						</div>
+					</div>
+				</div>
+				</ng-form>
+			</form>
+		</div>
+	</div>
+</div>

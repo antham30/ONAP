@@ -1,0 +1,41 @@
+					<div class="m-top60 row">
+						<div ng-show="vm.documentList.length < 1" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<b>There are no documents associated with this case.</b>
+						</div>
+						<div ng-show="vm.documentList.length" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="row">
+								<div class="col-lg-1 col-md-6 col-sm-12 col-xs-12">
+								</div>
+								<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
+									<b>Date Created</b>
+								</div>
+								<div class="col-lg-5 col-md-6 col-sm-12 col-xs-12">
+									<b>Document Name</b>
+								</div>
+								<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
+									<b>Document Type</b>
+								</div>
+								<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
+									
+								</div>
+							</div>
+							<div class="row m-top10" ng-repeat="doc in vm.documentList track by $index">
+								<div class="col-lg-1 col-md-6 col-sm-12 col-xs-12">
+									<b>{{ $index + 1 }}.</b>
+								</div>
+								<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
+									{{ doc.createDt }}
+								</div>
+								<div class="col-lg-5 col-md-6 col-sm-12 col-xs-12">
+									{{ doc.documentName }}
+								</div>
+								<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
+									{{ doc.binderTypeCode }}
+								</div>
+								<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
+									<a href class="btn btn-success m-right30 lender-btn-next background-red"
+									ng-click="vm.showDocPDF(doc)">View</a>
+								</div>
+							</div>
+						</div>
+					</div>

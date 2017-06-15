@@ -1,0 +1,88 @@
+<!--main content starts-->
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12 col-md-12  col-sm-12 col-xs-12">
+			<case-details case-number="caseNumber"></case-details>
+			<div class="caseReview">
+
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs" role="tablist">
+					<li role="presentation" class="active"><a href
+						aria-controls="home" role="tab" data-toggle="tab"
+						data-target="#lender">Lender</a></li>
+					<li role="presentation" class=""><a href
+						aria-controls="profile" role="tab" data-toggle="tab"
+						data-target="#borrower">Borrower</a></li>
+					<li role="presentation" class=""><a href
+						aria-controls="messages" role="tab" data-toggle="tab"
+						data-target="#property">Property</a></li>
+					<li role="presentation" class=""><a href
+						aria-controls="settings" role="tab" data-toggle="tab"
+						data-target="#loan">Loan</a></li>
+					<li role="presentation" class=""><a href role="tab"
+						data-toggle="tab" data-target="#documents">System Generated
+							Documents</a></li>
+					<li ng-if="$root.role == 'OLG Endorser' || $root.role == 'OLG Supervisor'" role="presentation" class=""><a href role="tab"
+						data-toggle="tab" data-target="#endorsementReview">Endorsement
+							Review</a></li>
+				</ul>
+				<!-- Tab panes -->
+				<div class="tab-content">
+					<div role="tabpanel" class="tab-pane active" id="lender">
+						<lender-tab></lender-tab>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="borrower">
+						<borrower-tab></borrower-tab>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="property">
+						<property-tab></property-tab>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="loan">
+						<loan-tab></loan-tab>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="documents">
+						<documents-tab></documents-tab>
+					</div>
+					<div ng-if="$root.role == 'OLG Endorser' || $root.role == 'OLG Supervisor'" role="tabpanel" class="tab-pane" id="endorsementReview">
+						<endorsement-tab></endorsement-tab>
+					</div>
+				</div>
+				<!-- ends tab panes-->
+				<div class="modal fade rollIn" id="clearData" role="dialog">
+					<div class="modal-dialog">
+
+						<!-- Modal content-->
+						<div class="modal-content cart-on-main">
+							<div class="modal-header address-head background-red">
+								<button type="button" class="close close-login"
+									data-dismiss="modal">&times;</button>
+								<h4 class="modal-title align-center color-fff font_family_fft">
+									Remove</h4>
+							</div>
+							<div class="modal-body">
+								<div class="row">
+									<div class="text-center m-btm20">
+										<div class="f-size18 m-btm20">Are you sure you want to
+											discard unsaved changes?</div>
+										<div class="col-lg-offset-3 col-lg-6 col-lg-offset-3 m-btm20">
+											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+												<button
+													class="btn btn-danger btn-block pull-left align-yesBtn background-gold"
+													ng-click="clearAllFields()">Yes</button>
+											</div>
+											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+												<button
+													class="btn btn-danger btn-block pull-right align-noBtn background-gold"
+													data-dismiss="modal">No</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

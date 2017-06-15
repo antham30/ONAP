@@ -1,0 +1,157 @@
+<!--main content starts-->
+<div class="container">
+    <div class="row">
+      	<div class="col-lg-12 col-md-12  col-sm-12 col-xs-12">
+			<div class="caseReview">
+				<div class="">
+
+          		<!-- List of Subsidies -->
+		          <div class="panel panel-default">
+		                <!-- Default panel contents -->
+		              <div class="panel-heading"><span class="lead">Manage Mortgage Limits</span></div>
+		               <div class="panel-body m-top20">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+						 <button  id="showallstates" class="btn btn-default excelCss  m-btm30" ng-click="vm.getAllStates()">
+               Show All States
+            </button>
+						 </div>
+						  <div class="col-lg-6 col-md-6 col-sm-7 col-xs-12">
+						   <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12" style="padding:7px 0px"> <label class="control-label pull-right f-size14"> Select a state to show:</label></div>
+        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
+		 <select name="allStates" id="allStates"  title="All States"
+																ng-model="vm.onlyStateNames" ng-change="vm.getOnlyStatesNames()"  class="form-control" >
+															 <option value="" >All States</option>
+                                                            <option value="{{stateNames.referenceCodeValue}}" ng-repeat="stateNames in vm.stateNames | orderBy:'referenceCodeName'" ng-selected="vm.onlyStateNames == stateNames.referenceCodeName">{{stateNames.referenceCodeName}}</option>
+															</select>
+		</div>
+						 </div>
+						  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+						 <button  id="btnExportData" ng-click="exportData()" class="btn btn-default excelCss  m-btm30" >
+              <span class="glyphicon glyphicon-share "></span> Export to Excel
+            </button>
+						 </div>
+						   <div class="col-lg-2 col-md-2 col-sm-1 col-xs-12">
+						 
+						 </div>
+					</div>
+			 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		              <div class="tablecontainer table-responsive" >
+		                  <table  border="1"  class="table table-hover table-bordered" id="example" datatable= "ng">
+		                      <thead>
+		                          <tr>
+		                              <th>State</th>
+       	                              <th>County</th>
+		                              <th>Single</th>
+		                              <th>Duplex</th>
+		                              <th>Triplex</th>
+		                              <th>Quadplex</th>
+		                              <th>Action</th>
+		                              
+		                          </tr>
+		                      </thead>
+		                      <tbody>
+		                         <tr ng-repeat="mortageLimit in vm.getAllMortageDetails ">
+		                         
+		                              <td><span  ng-bind="mortageLimit.id.stCd"></span>
+									 
+									  </td>
+		                              <td>
+                         					<span  ng-bind="mortageLimit.id.cntyNm"></span>
+                         					 
+		                              </td>
+		                             		                              <td>
+		                              		<span ng-hide="mortageLimit.enableInputFiled">$</span><span ng-hide="mortageLimit.enableInputFiled" ng-bind="mortageLimit.unit1 | number"></span>
+											<input type="text" ng-hide="!mortageLimit.enableInputFiled" format="number" name="mortageLimitUnit1{{$index}}" ng-model="mortageLimit.unit1" id="{{$index}}mortageLimitUnit1" ng-click="mortageLimitUnit1($index)"  class="width-120" />
+		                              		
+		                              </td>
+		                              <td>
+		                              		<span ng-hide="mortageLimit.enableInputFiled">$</span><span ng-hide="mortageLimit.enableInputFiled" ng-bind="mortageLimit.unit2 | number"></span>
+											<input type="text" ng-hide="!mortageLimit.enableInputFiled" format="number" name="mortageLimitUnit2{{$index}}" ng-model="mortageLimit.unit2" id="{{$index}}mortageLimitUnit2" ng-click="mortageLimitUnit2($index)"  class="width-120" />
+		                              		
+		                              </td>
+		                              <td>
+		                              		<span ng-hide="mortageLimit.enableInputFiled">$</span><span ng-hide="mortageLimit.enableInputFiled" ng-bind="mortageLimit.unit3 | number"></span>
+											<input type="text" ng-hide="!mortageLimit.enableInputFiled"  format="number" name="mortageLimitUnit3{{$index}}" ng-model="mortageLimit.unit3" id="{{$index}}mortageLimitUnit3" ng-click="mortageLimitUnit3($index)"  class="width-120" />
+		                              		
+		                              </td>
+		                              <td>
+		                              		<span ng-hide="mortageLimit.enableInputFiled">$</span><span ng-hide="mortageLimit.enableInputFiled" ng-bind="mortageLimit.unit4 | number"></span>
+											<input type="text" ng-hide="!mortageLimit.enableInputFiled" format="number" name="mortageLimitUnit3{{$index}}" ng-model="mortageLimit.unit4" id="{{$index}}mortageLimitUnit4" ng-click="mortageLimitUnit4($index)"  class="width-120" />
+		                              		
+		                              </td>
+		                                <td>
+		                              	<button type="button" ng-hide="mortageLimit.enableInputFiled" ng-click="vm.editAllData(mortageLimit,$index)" 
+		                              										class="btn btn-success background-gold custom-width">Edit</button>
+		                              										
+		                              	<button type="button" ng-hide="!mortageLimit.enableInputFiled" style="margin-left:-8px; padding:5px 9px;" ng-click="vm.submit(mortageLimit)" 
+		                              										class="btn btn-success background-gold custom-width pull-left"><i
+                                                                            class="fa fa-check"></i></button>
+		                              	<button type="button" ng-hide="!mortageLimit.enableInputFiled" ng-click="vm.reset(mortageLimit)"  style="margin-right: -10px;
+    padding: 5px 9px;"
+		                              										class="btn btn-success background-gold custom-width pull-right"><i
+                                                                            class="fa fa-ban"></i></button>
+		                              </td>
+		                              
+		                          </tr>
+		                      </tbody>
+		                  </table>
+		                  
+		                  
+		           
+
+				   </div>
+				 
+    <br />
+    <div id="exportable" style="display:none">
+    <table width="100%" border="1">
+        <thead>
+            <tr>
+		                             <th>State</th>
+       	                              <th>County</th>
+		                              <th>Single</th>
+		                              <th>Duplex</th>
+		                              <th>Triplex</th>
+		                              <th>Quadplex</th>
+		                              
+		                          </tr>
+        </thead>
+        <tbody>
+           <tr ng-repeat="mortageLimit in vm.getAllMortageDetails | orderBy : myValueFunction">
+		                         
+		                              <td><span ng-bind="mortageLimit.id.stCd"></span></td>
+		                              <td>
+                         					<span  ng-bind="mortageLimit.id.cntyNm"></span>
+                         					 
+		                              </td>
+		                             		                              <td>
+		                              		$<span  ng-bind="mortageLimit.unit1 | number"></span>
+		                              		
+		                              </td>
+		                              <td>
+		                              		$<span ng-bind="mortageLimit.unit2 | number"></span>
+		                              		
+		                              </td>
+		                              <td>
+		                              		$<span  ng-bind="mortageLimit.unit3 | number"></span>
+		                              		
+		                              </td>
+		                              <td>
+		                              		$<span  ng-bind="mortageLimit.unit4 | number"></span>
+		                              		
+		                              </td>
+		                              
+		                              
+		                          </tr>
+        </tbody>
+    </table>
+    </div>
+		              </div>			      
+		              </div>			      
+										
+				</div>
+				</div>						
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,183 @@
+                        <div class="m-top60 row">
+                            <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+						   <div class="form-horizontal">
+									<div class="row">
+							             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  m-top20">
+										<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+
+                                                <div class="form-group">
+                                                    <i class="fa fa-asterisk requiredField"></i>
+                                                        			<label for="lendername" class="control-label">Lender/Sponsor</label>
+													<input type="text" id="lendername" class="form-control" name="lendername" size=20 ng-model="lender.lndrName" title="lender name" placeholder="Lender/Sponsor" readonly/>
+														<div ng-if="errorlenderName" class="color-red">{{errorLenderNameText}}</div>
+                                                   
+                                                   
+                                                </div>
+
+                                            </div>
+                                          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+										  
+                                                <div class="form-group">
+												<i class="fa fa-asterisk requiredField"></i>
+                                                       	<label for="tinanme" class="control-label">TIN</label>
+													<!-- input type="text" name="tin" id="tinno" class="form-control" ng-model="ls.tin" placeholder="TIN" readonly /-->
+													<input type="text" name="tinname" title="tin" id="tinno" class="tinmasking width100pr" ng-model="lender.lndrTin" placeholder="xx-xxxxxxx" readonly />
+                                                   <div ng-if="errorlenderTin" class="color-red">{{errorlenderTinText}}</div>
+																<div ng-if="errorlenderTinNumber" class="color-red">{{errorlenderTinNumberText}}</div>
+
+                                                  
+                                                   
+                                                </div>
+
+                                            </div>
+                                            
+                                           <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+                                                <div class="form-group">
+                                                 
+                                                   
+                                                </div>
+
+                                            </div>
+											
+                                        </div>
+								<!-- 2nd row-->
+								      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  m-top20">
+										<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+
+                                                <div class="form-group">
+                                                    
+                                                          <label for="phone" class="control-label">Broker</label>
+													
+													 <select class="form-control"
+                                                                       ng-model="lender.loanBrokerId"  title="sponser name"
+                                                                        id="brokername" ng-change="getTin(lender.loanBrokerId); originatorName = getSponsorName(lender.loanBrokerId) || lender.lndrName">
+                                                                    <option value="" >Select Broker Name
+                                                                    
+                                                                    </option>
+                                                                    <option value="{{brokerName1.lenderId}}"
+                                                                            ng-repeat="brokerName1 in brokerName1|orderBy:'lenderName'"
+                                                                            ng-selected="lender.loanBrokerId == brokerName1.lenderId">
+                                                                        {{brokerName1.lenderName}}
+                                                                    </option>
+                                                                </select>
+																<div ng-if="errorlenderName" class="color-red">{{errorlenderNameText}}</div>
+                                                   
+                                                </div>
+
+                                            </div>
+                                          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+                                                <div class="form-group">
+                                                   
+                                                     	<label for="tin" class="control-label">TIN</label>
+													
+													<input type="text" class='tinmasking width100pr' title="tin number" id="tin" class="form-control"  ng-model="lender.tinname" placeholder="xx-xxxxxxx" readonly/>
+																<div ng-if="errorlenderTin" class="color-red">{{errorlenderTinText}}</div>
+																<div ng-if="errorlenderTinNumber" class="color-red">{{errorlenderTinNumberText}}</div>
+
+                                                   
+                                                </div>
+
+                                            </div>
+                                            
+                                          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+                                                <div class="form-group">
+                                                 
+                                                      
+                                                </div>
+
+                                            </div>
+											
+                                        </div>
+								<!-- 2nd row ends-->
+								<!-- 3nd row-->
+								      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  m-top20">
+										<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+<div class="form-group">
+                                                 <label>Loan Originator</label>
+												<input type="text" class='width100pr' title="Loan Originator" id="loan_originator" class="form-control"  ng-model="originatorName" ng-readonly="true" readonly />
+                                                </div>
+
+                                               
+                                            </div>
+                                          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+                                          
+                                            </div>
+                                            
+                                          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+                                           
+                                            </div>
+											
+                                        </div>
+								<!-- 3nd row ends-->
+								<!-- 4th row-->
+								      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  m-top20">
+										<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+										<div class="form-group">
+										<i class="fa fa-asterisk requiredField"></i>
+										<label  class="control-label"> Loan Officer</label>
+														<input type="text" class='width100pr' title="Loan Officer" id="loan_officer" class="form-control" ng-model="lender.loanOfcrName" />    
+                                                   <div ng-if="errorloanOfficer" class="color-red">{{errorloanOfficerText}}</div>
+                                                </div>
+                                            </div>
+                                          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+                                                <div class="form-group">
+                                                  <i class="fa fa-asterisk requiredField"></i>
+                                                           <label  class="control-label">Underwriter</label>
+														    <select class="form-control" ng-model="lender.undrWriterId" title="loan underWriter" ng-click="getUnderWrtr()">>
+                                                            <option value="" >Select  Underwriter </option>
+                                                            <option value="{{underWriter.personId}}" ng-repeat="underWriter in underWriter" ng-selected="lender.undrWriterId == underWriter.personId">{{underWriter.personName}}</option>
+                                                          
+														
+															</select> 
+                                                        
+<div ng-if="errorunderWriter" class="color-red">{{errorunderWriterText}}</div>
+                                                    </div>
+                                            </div>
+                                            
+                                          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+                                           
+                                            </div>
+											
+                                        </div>
+								<!-- 4th row ends-->
+								   <!-- 2nd row-->
+								      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  m-top20">
+										<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+
+                                               
+
+                                            </div>
+                                          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+                                               
+
+                                            </div>
+                                            
+                                          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+                                                
+                                            </div>
+											
+                                        </div>
+								<!-- 4nd row ends-->
+								<div   class="col-lg-11 col-lg-offset-1 col-md-12 col-sm-12 col-xs-12">
+										   <div class="pull-right m-top25">
+
+
+                                       <a  aria-controls="profile" role="tab" data-toggle="tab"
+												class="btn btn-success m-right30 lender-btn-next background-red"
+												ng-click="lenderSaveButton()">Save</a>
+												
+											  <button data-toggle="modal" data-target="#clearData"
+                                                     class="btn btn-success lender-btn-next background-red" ng-click="cancelButton()">Cancel</button> 
+
+                                    </div>
+                                </div>
+
+								</div>
+								 <div class="clearfix"></div>
+                            <div class="">
+                                
+                            </div>
+
+                        </div>
+										</div>
+										</div>

@@ -1,0 +1,73 @@
+loan
+caseNumber	loan.onap_case_nbr
+caseStatusCode	loan.case_stat_cd
+caseNumberRequestDate	????????
+caseStatusDate	????????
+underwritingTypeCode	loan.undrwrtng_type_cd
+loanPurposeCode	loan.loan_prps_cd
+
+prsn
+firstName	prsn.frst_nm		// unsure how to connect person with loan
+middleInitial	prsn.mdl_nm
+lastName	prsn.last_nm
+suffix	prsn.nm_sfx_cd
+ssn	prsn.prsn_ssn
+personBirthDate	prsn.prsn_dob_dt
+
+loan_borrwr
+borrowerTypeCode	loan_borrwr.borrwr_type_cd
+
+borrwr
+tribalAffiliationCode	borrwr.trbl_afltn_cd	loan.loan_id = loan_borrwr.loan_id, loan_borrwr.borrwr_id = borrwr.borrwr_id
+
+addr
+street	addr.addr_str_nm	loan.prprty_id = prprty.prprty_id, prprty.prmr_addr_id = addr.addr_id	// street number embedded
+lot	????????
+blkPlot	????????
+city	addr.city_nm
+stateCode	addr.st_cd
+zipCode	addr.zip_5_cd
+
+
+loan
+prsn
+loan_borrwr
+borrwr
+prprty
+addr
+doc
+bndr
+
+
+caseInformation	{
+	caseNumber	loan.onap_case_nbr
+	caseStatusCode	loan.case_stat_cd
+	caseNumberRequestDate	loan.onap_case_nbr_asgnmt_dt
+	caseStatusDate	"03/23/2015"
+	underwritingTypeCode	loan.undrwrtng_type_cd
+	loanPurposeCode	loan.loan_prps_cd
+	}
+borrowerInformation	{
+	person	{
+	firstName	prsn.frst_nm
+	middleInitial	prsn.mdl_nm
+	lastName	prsn.last_nm
+	suffix	prsn.nm_sfx_cd
+	ssn	prsn.prsn_ssn
+	personBirthDate	prsn.prsn_dob_dt
+	}
+	borrowerTypeCode	loan_borrwr.borrwr_type_cd	loan.loan_id=loan_borrwr.loan_id
+	tribalAffiliationCode	"CHER"
+	propertyInformation	loan.prprty_id = prprty.prprtr_id
+	street	addr.addr_str_nm	loan.prprty_id = prprty.prprty_id, prprty.prmr_addr_id = addr.addr_id
+	lot	"3F"
+	blkPlot	"asf"
+	city	addr.city_nm
+	stateCode	addr.st_cd
+	zipCode addr.zip_5_cd
+	}
+	document	{
+	documentId	doc.doc_id	loan.loan_id = bndr.loan_id, bndr.bndr_id = doc.bndr_id
+	}
+	}
+}

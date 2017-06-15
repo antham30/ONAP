@@ -1,0 +1,116 @@
+#menu_container {
+  background: #ffd769;
+  background: -moz-linear-gradient(top, #ffd769 0%, #efb401 100%);
+  background: -webkit-linear-gradient(top, #ffd769 0%,#efb401 100%);
+  background: linear-gradient(to bottom, #ffd769 0%,#efb401 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffd769', endColorstr='#efb401',GradientType=0 );
+  width: 96%;
+  margin: 20px auto;
+  clear: both;
+  position: relative;
+  font-size: 13px;
+  border: 1px solid #DBB64F;
+  display: table;
+  height: 45px;
+}
+
+#top_links {
+	width: 96%;
+	margin: 8px auto;
+	padding: 5px;
+	font-size: 12px;
+	text-align: right;
+}
+
+#top_links ul {
+	float: right;
+}
+
+#top_links li {
+	list-style: none;
+	text-align: center;
+	display: inline-block;
+	border-right: 1px solid #ccc;
+	padding: 0 10px;
+}
+
+#top_links li:last-child {
+	border-right: none;
+	padding-right: 0;
+}
+
+#menu {
+  display: table-row;
+}
+
+#menu a {
+  display: block;
+  width: 100%;
+  text-decoration: none;
+}
+
+
+span.glyphicon {
+	display: inline-block;
+	padding-top: 3px;
+	padding-right: 6px;
+}
+
+
+#menu li ul li a.active {
+	background: #eee;
+}
+
+#menu li ul li a:hover {
+	text-decoration: underline;
+}
+
+#menu > li > a:hover, #menu li.open > a, #menu > li > a.active {
+  color: #fff;
+  text-shadow: 0 1px 1px #3F0000;
+  background: #ad2e26; /* Old browsers */
+  background: -moz-linear-gradient(top,  #ad2e26 0%, #8c1e1e 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  #ad2e26 0%,#8c1e1e 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  #ad2e26 0%,#8c1e1e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ad2e26', endColorstr='#8c1e1e',GradientType=0 ); /* IE6-9 */
+}
+
+#menu > li > a {
+  color: #382400;
+  height: inherit;
+  padding: 15px 12px 0 12px;
+  text-shadow: none;
+  text-align: center;
+}
+
+#menu .dropdown-menu a {
+  text-shadow: none;
+}
+
+#menu > li {
+  position: relative;
+  list-style: none;
+  color: #fff;
+  text-shadow: none;
+  text-align: center;
+  color: #382400;
+  height: 45px;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  border-right: 1px solid rgba(255,255,255,0.3);
+  border-left: 1px solid rgba(0,0,0,0.15);
+}
+
+#menu > li:first-child {
+	border-left: none;
+}
+
+#menu > li:last-child {
+	border-right: none;
+}
+
+.disabled {
+	cursor: not-allowed;
+}
+

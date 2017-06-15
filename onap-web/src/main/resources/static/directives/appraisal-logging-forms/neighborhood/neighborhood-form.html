@@ -1,0 +1,55 @@
+<form name="neighborhoodForm" required>
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group m-top20">
+		<div class="row">
+			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+				<div class="form-group col-lg-4 col-md-6">
+					<label class="control-label" for="location">Location:</label>
+					<select class="form-control"
+							title="price"
+							id="location"
+							ng-model="data.editable.locationCode">
+							<option value="">Select Location</option>
+							<option ng-repeat="option in vm.locationOptions" value="{{option.referenceCodeValue}}">{{option.referenceCodeName}}</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+				 <div class="form-group">
+				 	<label class="control-label" for="price">Predominant Neighborhood Price:</label>
+					 <span class="textBeforeInput">$</span>
+		             <input type="text" title="price" id="price" name="price" class="form-control money inputAfterText neighborhoodPrice" ng-model="data.editable.predominantNeighborhoodPrice" />
+		             <span class="textAfterInputForNeighborhoodPrice">.00</span>
+	             </div>
+			</div>
+		</div>
+		<br><br>
+		<div class="row">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<b>Percent Land Use</b><br>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="form-group col-lg-2 col-md-12 col-sm-12 col-xs-12">
+				 	<label class="control-label" for="oneUnit">One-Unit:</label>
+	             	<input type="text" min="1" max="100" title="oneUnit" id="oneUnit" name="oneUnit" class="form-control percent inputBeforeText inputTextRightAlign" ng-model="data.editable.landUseOneUnit" prevent-typing-greater/>
+	             	<span class="pull-right textAfterInput">%</span>
+	            </div>
+	            <div class="form-group col-lg-2 col-md-12 col-sm-12 col-xs-12">
+				 	<label class="control-label" for="twoToFourUnit">2-4 Unit:</label>
+	             	<input type="text" min="1" max="100" title="twoToFourUnit" id="twoToFourUnit" name="twoToFourUnit" class="form-control percent inputBeforeText inputTextRightAlign" ng-model="data.editable.landUseTwoToFourUnits" prevent-typing-greater/>
+	             	<span class="pull-right textAfterInput">%</span>
+	            </div>
+			</div>		
+		</div>
+		<br>
+		
+		<div class="col-lg-11 col-lg-offset-1 col-md-12 col-sm-12 col-xs-12">
+			<div class="pull-right m-top25">
+				<button id="saveNeighborhoodData" ng-disabled="vm.hasAllEmptyFields()" type="submit" class="btn m-right30 background-red" 
+					ng-click="vm.saveNeighborhoodData()">Save</button>
+				<a class="btn" ng-click="vm.resetFormData()">Cancel</a>
+			</div>
+		</div>
+	</div>
+</form>

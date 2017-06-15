@@ -1,0 +1,83 @@
+<!--main content starts-->
+<div class="container">
+    <div class="row">
+      	<div class="col-lg-12 col-md-12  col-sm-12 col-xs-12">
+			<div class="">
+				
+
+          		<!-- List of Subsidies -->
+		          <div class="panel panel-default" id="dgWritr">
+		                <!-- Default panel contents -->
+		              <div class="panel-heading"><span class="lead">Upload LG Fees Paid</span></div>
+		               <div class="panel-body m-top20">
+					  
+                           <div class="form-group">
+                                 <div class=" col-lg-12  col-md-12  col-sm-12 col-xs-12">
+                                    <div class="form-horizontal">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+											     <div class="col-lg-offset-1 col-lg-10 col-lg-offset-1 col-md-12 col-sm-12 col-xs-12">
+                                             <div class="form-group">
+                                                
+											  <div class="col-lg-offset-1 col-lg-2 col-md-2 col-sm-3 col-xs-12"> 
+												  <label class="control-label pull-right" style="margin-top:-3px"><i
+                                                                            class="fa fa-asterisk requiredField"></i> File Upload:</label>
+                                                   </div>
+												   <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
+                                                        <input type = "file" file-model = "uploadingFile" id='uploadingFile' name="uploadingFile" style="border:1px solid #ddd"/>
+													
+                                                           <div ng-show="errorlendingInstitute" class="color-red">  <span ng-bind="errorlendingInstituteText"></span>  </div>
+                                                    </div>
+													<div class="col-lg-2 col-md-2 col-sm-3 col-xs-12"> 
+												    <button class="btn btn-default background-red" ng-click = "uploadFile()">Submit</button>
+                                                   </div>
+												   
+										
+                                                </div>
+                                               
+												</div>
+												
+												<div class="upload_border upload" ng-if="vm.showData">
+												<div class="f-size18 line-ht">Total number of transactions successfully processed: {{vm.allDetails.successfulTransactionsProcessed}}</div>
+<div class="f-size18 line-ht"> Total number of errors encountered: {{vm.allDetails.errorsEncountered}}</div>
+<div class="f-size18 line-ht" ng-if="vm.allDetails.alreadyLGFeePaidCaseNumbers" ng-repeat="payCase in vm.allDetails.alreadyLGFeePaidCaseNumbers">The LG Fee for Pay.Gov Case Number {{payCase}} has already been paid.  Investigate if this is a duplicate payment.</div>
+ 
+ 
+<div class="f-size18 line-ht">List of Pay.gov Cases that were not found in ONAP-LOS:<span ng-if="!vm.allDetails.payGovCasesNotFound">0 </span>
+<table class="table table-bordered table-upload" ng-if="vm.allDetails.payGovCasesNotFound">
+  <thead class="thead-inverse">
+    <tr>
+      <th>Case #</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat = "case_no in vm.allDetails.payGovCasesNotFound">
+      <td  scope="row">{{case_no}}</td>
+     
+    </tr>
+   
+  </tbody>
+</table>
+
+        </div>
+      
+
+												</div>
+											
+                                        </div>
+										
+										
+                                    </div>
+                                </div>
+                             
+                            </div>
+                        </div>
+				   
+				
+				
+			</div>
+		</div>
+	</div>
+</div>
+</div>

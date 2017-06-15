@@ -1,0 +1,187 @@
+<!--main content starts-->
+<div class="container">
+	<div class="row m-top60">
+		<div class=" col-lg-12  col-md-12 col-sm-12 col-xs-12">
+		<h1 class="f-size text-capitalize report-fsize color-theme"> Cohort Report </h1>
+			<div class="m-top40">
+			
+				 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+										         <label  class="control-label"><i
+                                                                            class="fa fa-asterisk requiredField"></i>
+                                                                        Start Date</label>
+                                                                    <input type="text" title="start date"
+                                                                           class="form-control"
+                                                                           data-toggle="tooltip" data-placement="bottom"
+                                                                           ng-calendar ng-model="cohort.sdob"
+                                                                           id="strtDateOne"
+                                                                           placeholder="Start Date" readonly/>
+
+                                                                    <div ng-show="errorStrtDate"
+                                                                         class="color-red fontsize-12">Start Date is
+                                                                        required
+                                                                    </div>
+																	<div ng-show="strtdateError"
+                                                                         class="color-red fontsize-12"> Start Date should be less than end date
+                                                                    </div>
+										   </div>
+										    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+										         <label  class="control-label"><i
+                                                                            class="fa fa-asterisk requiredField"></i>
+                                                                        End Date</label>
+                                                                    <input type="text" title="end date"
+                                                                           class="form-control"
+                                                                           data-toggle="tooltip" data-placement="bottom"
+                                                                           ng-calendar ng-model="cohort.edob"
+                                                                           id="strtDattwo"
+                                                                           placeholder="End Date" readonly/>
+
+                                                                    <div ng-show="errorendDate"
+                                                                         class="color-red fontsize-12">End Date is
+                                                                        required
+                                                                    </div>
+																	<div ng-show="enddateError"
+                                                                         class="color-red fontsize-12"> End Date should be greater than start date
+                                                                    </div>
+										   </div>
+										    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+										        <button type="submit"
+                                                class="btn btn-success  m-top25"
+                                                ng-click="saveCohort($index)" style="margin-right:15px"> Submit
+                                        </button>
+										   </div>
+										   
+										   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 displayContent">
+											<button  id="btnExport" ng-click="exportData()" class="btn btn-default excelCss  m-top30" >
+              <span class="glyphicon glyphicon-share "></span> Export to Excel
+            </button>
+			 <br />
+  <br />
+			<div class="table-responsive"  id="table_wrapper">
+			<table border="1"  id="example" datatable="ng"   class="table table-responsive display table-bordered" cellspacing="0"  bordercolor="#222">
+        <thead>
+            <tr>
+            		<th class="text-center v-align">Status</th>
+					<th class="text-center v-align">Case #</th>
+					<th class="text-center v-align">Region</th>
+					<th class="text-center v-align">Land</th>
+					
+					<th class="text-center v-align">Issued Date</th>
+					<th nowrap="nowrap" class="text-center v-align">Issued Amount</th>
+					<th class="text-center v-align">Firm Funds</th>
+					<th nowrap="nowrap" class="text-center v-align">Firm Date</th>
+					<th class="text-center v-align">Cohort #</th>
+					<th class="text-center v-align">Cohort Year</th>
+					<th class="text-center v-align">Cohort Mod Year</th>
+					<th class="text-center v-align">LG Cert Funds</th>
+					<th class="text-center v-align">Subsidy Rate</th>
+					<th class="text-center v-align"> Mod Sub</th>
+					<th class="text-center v-align">LG Cert Date</th>
+					<th class="text-center v-align">Cancel Funds</th>
+					<th class="text-center v-align">Cancel Date</th>
+					<th class="text-center v-align">LG Fee Paid</th>
+					<th class="text-center v-align">LG Fee Date</th>
+					<th class="text-center v-align">DG/NDG</th>
+			 </tr>
+        </thead>
+        
+        <tbody>
+
+            <tr ng-repeat="cohortdata in seconde">
+            	<td> <span ng-bind="cohortdata.status"> <span></td>
+              <td> {{cohortdata.onapCaseNumber}}</td>
+                
+				<td>	{{cohortdata.reg}}</td>
+<td>{{cohortdata.land}}</td>
+
+<td nowrap="nowrap">{{cohortdata.issuedDate}}</td>
+<td class="text-right">${{cohortdata.issuedAmount}}</td>
+<td class="text-right">${{cohortdata.firmFunds}}</td>
+<td>{{cohortdata.firmDate}}</td>
+<td>{{cohortdata.cohortNumber}}</td>
+<td>{{cohortdata.cohortYear}}</td>
+<td>{{cohortdata.cohortModYear}}</td>
+<td>${{cohortdata.lgCertFunds}}</td>
+<td>{{cohortdata.sbsdyRate}}</td>
+<td><span ng-bind="cohortdata.subMod"></span></td>
+<td nowrap="nowrap">{{cohortdata.lgCertDate}}</td>
+<td class="text-right">${{cohortdata.cancelFunds}}</td>
+<td>{{cohortdata.cancelDate}}</td>
+
+<td class="text-right">${{cohortdata.lgFeePaid}}</td>
+<td>{{cohortdata.lgFeeDate}}</td>
+<td>DG</td>
+            </tr>
+           
+        </tbody>
+    </table>
+	</div>
+	 <div id="exportable" style="display:none">
+			<table border="1">
+        <thead>
+            <tr>
+            		<th class="text-center v-align">Status</th>
+					<th class="text-center v-align">Case #</th>
+					<th class="text-center v-align">Region</th>
+					<th class="text-center v-align">Land</th>
+					
+					<th class="text-center v-align">Issued Date</th>
+					<th nowrap="nowrap" class="text-center v-align">Issued Amount</th>
+					<th class="text-center v-align">Firm Funds</th>
+					<th nowrap="nowrap" class="text-center v-align">Firm Date</th>
+					<th class="text-center v-align">Cohort #</th>
+					<th class="text-center v-align">Cohort Year</th>
+					<th class="text-center v-align">Cohort Mod Year</th>
+					<th class="text-center v-align">LG Cert Funds</th>
+					<th class="text-center v-align">Subsidy Rate</th>
+					<th class="text-center v-align"> Mod Sub</th>
+					<th class="text-center v-align">LG Cert Date</th>
+					<th class="text-center v-align">Cancel Funds</th>
+					<th class="text-center v-align">Cancel Date</th>
+					<th class="text-center v-align">LG Fee Paid</th>
+					<th class="text-center v-align">LG Fee Date</th>
+					<th class="text-center v-align">DG/NDG</th>
+			 </tr>
+        </thead>
+        
+        <tbody>
+
+            <tr ng-repeat="cohortdata in seconde">
+            	<td> <span ng-bind="cohortdata.status"> <span></td>
+              <td> {{cohortdata.onapCaseNumber}}</td>
+                
+				<td>	{{cohortdata.reg}}</td>
+<td>{{cohortdata.land}}</td>
+
+<td nowrap="nowrap">{{cohortdata.issuedDate}}</td>
+<td class="text-right">${{cohortdata.issuedAmount}}</td>
+<td class="text-right">${{cohortdata.firmFunds}}</td>
+<td>{{cohortdata.firmDate}}</td>
+<td>{{cohortdata.cohortNumber}}</td>
+<td>{{cohortdata.cohortYear}}</td>
+<td>{{cohortdata.cohortModYear}}</td>
+<td>${{cohortdata.lgCertFunds}}</td>
+<td>{{cohortdata.sbsdyRate}}</td>
+<td><span ng-bind="cohortdata.subMod"></span></td>
+<td nowrap="nowrap">{{cohortdata.lgCertDate}}</td>
+<td class="text-right">${{cohortdata.cancelFunds}}</td>
+<td>{{cohortdata.cancelDate}}</td>
+
+<td class="text-right">${{cohortdata.lgFeePaid}}</td>
+<td>{{cohortdata.lgFeeDate}}</td>
+<td>DG</td>
+            </tr>
+           
+        </tbody>
+        </table>
+	
+	</div>
+		
+											</div>
+										  				
+				<!-- Tab panes -->
+				</div>
+		</div>
+	</div>
+</div>
+
+<!--main content ends-->

@@ -1,0 +1,724 @@
+<div class="m-top60 row">
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+		<div class="form-horizontal">
+			<div class="row">
+				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+					<!-- Start field -->
+					<div class="row m-top10 loan-field-container">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label for="loanType"><i
+									class="fa fa-asterisk requiredField"></i>Loan Type:</label> <select
+									name="loanType" id="loanType"
+									ng-model="csdc.loanData.editable.loanTypeCd"
+									ng-change="csdc.checkToShowExceededBaseLoanAmountError(); csdc.updateLoanPurposes(true); csdc.updateConstructionCode()">
+									<option value="">Select Loan Type</option>
+									<option
+										ng-repeat="type in csdc.loanTypes|orderBy:'referenceCodeName'"
+										value="{{type.referenceCodeValue}}"
+										ng-selected="csdc.loanData.editable.loanTypeCd === type.referenceCodeValue">
+										{{type.referenceCodeName}}</option>
+								</select>
+								<div ng-show="csdc.loanTypeCd" class="color-red">{{csdc.loanTypeCdErrorText}}</div>
+							</div>
+						</div>
+					</div>
+					<!-- End field -->
+					<!-- Start field -->
+					<div class="row m-top10 loan-field-container">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label for="applicationReceivedBy"><i
+									class="fa fa-asterisk requiredField"></i>Application Received
+									By:</label> <select name="applicationReceivedBy"
+									id="applicationReceivedBy"
+									ng-model="csdc.loanData.editable.appicationRcvdCode">
+									<option value="">Select Application Received By</option>
+									<option ng-repeat="rec in csdc.applicationReceived"
+										value="{{rec.referenceCodeValue}}"
+										ng-selected="csdc.loanData.editable.appicationRcvdCode === rec.referenceCodeValue">
+										{{rec.referenceCodeName}}</option>
+								</select>
+								<div ng-show="csdc.appicationRcvdCode" class="color-red">{{csdc.appicationRcvdCodeErrorText}}</div>
+							</div>
+						</div>
+					</div>
+					<!-- End field -->
+					<!-- Start field -->
+					<div class="row m-top10 loan-field-container">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label for="salePriceAmt"><i
+									class="fa fa-asterisk requiredField"
+									ng-if="csdc.requireSalesPrice()"></i>Sales Price:</label> <input
+									type="text" id="salePriceAmt" name="salePriceAmt"
+									class="form-control currency" title="Sales Price"
+									ng-model="csdc.loanData.editable.salePriceAmt"
+									ng-blur="csdc.checkToShowExceededBaseLoanAmountError()"
+									ng-change="csdc.calculateLoanPurpose(); csdc.calculateMIP();"
+									ng-readonly="!csdc.requireSalesPrice()" />
+								<div ng-show="csdc.salePriceAmt" class="color-red">{{csdc.salePriceAmtErrorText}}</div>
+							</div>
+						</div>
+					</div>
+					<!-- End field -->
+					<!-- Start field -->
+					<div class="row m-top10 loan-field-container">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label for="aprsdAmt"><i
+									class="fa fa-asterisk requiredField"
+									ng-if="csdc.requireAppraisedValue()"></i>Appraised Value:</label> <input
+									type="text" id="aprsdAmt" name="aprsdAmt"
+									class="form-control currency" title="Appraised Value"
+									ng-model="csdc.loanData.editable.aprsdAmt"
+									ng-blur="csdc.checkToShowExceededBaseLoanAmountError()"
+									ng-change="csdc.calculateLoanPurpose(); csdc.calculateMIP();"
+									ng-readonly="!csdc.requireAppraisedValue()" />
+								<div ng-show="csdc.aprsdAmt" class="color-red">{{csdc.aprsdAmtErrorText}}</div>
+							</div>
+						</div>
+					</div>
+					<!-- End field -->
+					<!-- Start field -->
+					<div class="row m-top10 loan-field-container">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label for="orgnlPrncplBlncAmt"><i
+									class="fa fa-asterisk requiredField"
+									ng-show="csdc.showsStrOrgn && csdc.enablePrincipalBalance()"></i>Original
+									Principal Balance:</label> <input type="text" id="orgnlPrncplBlncAmt"
+									name="orgnlPrncplBlncAmt" class="form-control currency"
+									title="Original Principal Balance"
+									ng-model="csdc.loanData.editable.orgnlPrncplBlncAmt"
+									ng-change="csdc.calculateLoanPurpose(); csdc.calculateMIP()"
+									ng-readonly="!csdc.enablePrincipalBalance()" />
+								<div ng-show="csdc.orgnlPrncplBlncAmt" class="color-red">{{csdc.orgnlPrncplBlncAmtErrorText}}</div>
+							</div>
+						</div>
+					</div>
+					<!-- End field -->
+					<!-- Start field -->
+					<div class="row m-top10 loan-field-container">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label for="mortgWthtFnclLfFeeAmt"><i
+									class="fa fa-asterisk requiredField"></i>Base Loan Amount:</label> <input
+									type="text" id="mortgWthtFnclLfFeeAmt"
+									name="mortgWthtFnclLfFeeAmt" class="form-control currency"
+									title="Base Loan Amount"
+									ng-model="csdc.loanData.editable.mortgWthtFnclLfFeeAmt"
+									ng-blur="csdc.checkToShowExceededBaseLoanAmountError()"
+									ng-change="csdc.calculateLgFee(); csdc.resetLgFinancedCash(); csdc.calculateLgFinanced(); csdc.calculateBaseMortgagePlusLgFee(); csdc.calculateLoanPurpose(); csdc.calculateMIP(); csdc.calculateReservationOfFunds();" />
+								<div class="alert alert-danger"
+									ng-show="csdc.exceededBaseLoanAmountMax() !== false && csdc.showExceededBaseLoanAmountMaxError">
+									{{csdc.exceededBaseLoanAmountMaxErrorText}}</div>
+								<div class="alert alert-danger"
+									ng-show="csdc.caseReviewBorrowerFundsData.editable.sellerContributionPercent > 6">
+									{{csdc.sellerContributionPercentErrorText}}</div>
+								<div ng-show="csdc.mortgWthtFnclLfFeeAmt" class="color-red">{{csdc.mortgWthtFnclLfFeeAmtErrorText}}</div>
+							</div>
+						</div>
+					</div>
+					<!-- End field -->
+					<!-- Start field -->
+					<div class="row m-top10 loan-field-container">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label for="mortgWithLgFeeFncdAmt">Base Loan Amount + LG
+									Fee Financed:</label> <input type="text" id="mortgWithLgFeeFncdAmt"
+									name="mortgWithLgFeeFncdAmt" class="form-control currency"
+									title="Base Loan Amount plus LG Fee Financed"
+									ng-model="csdc.loanData.editable.mortgWithLgFeeFncdAmt"
+									ng-readonly="true" />
+							</div>
+						</div>
+					</div>
+					<!-- End field -->
+					<!-- Start field -->
+					<div class="row m-top10 loan-field-container">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label for="grnteeFeePaidInCashAmt">LG Fee Paid in Cash:</label>
+								<input type="text" id="grnteeFeePaidInCashAmt"
+									name="grnteeFeePaidInCashAmt" class="form-control currency"
+									title="LG Fee Paid in Cash"
+									ng-model="csdc.loanData.editable.grnteeFeePaidInCashAmt"
+									ng-change="csdc.calculateLgFinanced(); csdc.calculateBaseMortgagePlusLgFee(); csdc.calculateReservationOfFunds()" />
+								<div ng-show="csdc.grnteeFeePaidInCashAmt" class="color-red">{{csdc.lgFeePaidInCashErrorText}}</div>
+								<div ng-show="csdc.showLgFeeMsg" class="color-red">LG Fee
+									Paid in Cash or LG Fee Financed is required</div>
+								<div ng-show="csdc.lgPaidCashError" class="color-red">{{csdc.lgFeeCombinedErrorText}}</div>
+							</div>
+						</div>
+					</div>
+					<!-- End field -->
+					<!-- Start field -->
+					<div class="row m-top10 loan-field-container">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label for="grnteeFeeFncdAmt">LG Fee Financed:</label> <input
+									type="text" id="grnteeFeeFncdAmt" name="grnteeFeeFncdAmt"
+									class="form-control currency" title="LG Fee Financed"
+									ng-model="csdc.loanData.editable.grnteeFeeFncdAmt"
+									ng-change="csdc.calculateLgCash(); csdc.calculateBaseMortgagePlusLgFee(); csdc.calculateReservationOfFunds();"
+									ng-init="csdc.calculateLgFinanced()" />
+								<div ng-show="csdc.grnteeFeeFncdAmt" class="color-red">{{csdc.grnteeFeeFncdAmtErrorText}}</div>
+								<div ng-show="csdc.showLgFeeMsg" class="color-red">LG Fee
+									Paid in Cash or LG Fee Financed is required</div>
+								<div ng-show="csdc.lgFeeFinancedError" class="color-red">{{csdc.grnteeFeePaidInCashAmtErrorText}}</div>
+							</div>
+						</div>
+					</div>
+					<!-- End field -->
+					<!-- Start field -->
+					<div class="row m-top10 loan-field-container">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label for="realEstTxsAmt"><i
+									class="fa fa-asterisk requiredField"
+									ng-show="csdc.landType == 'FEE SIMPLE'"></i> Taxes: </label> <input
+									type="text" id="realEstTxsAmt" name="realEstTxsAmt"
+									class="form-control currency" title="Taxes"
+									ng-model="csdc.loanData.editable.realEstTxsAmt" />
+								<div ng-show="csdc.realEstTxsAmt" class="color-red">{{csdc.realEstTxsAmtErrorText}}</div>
+							</div>
+						</div>
+					</div>
+					<!-- End field -->
+					<!-- Start field -->
+					<div class="row m-top10 loan-field-container">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label for="hzrdFldAmt"><i
+									class="fa fa-asterisk requiredField"
+									ng-show="csdc.landType == 'FEE SIMPLE'"></i> Hazard & Flood:</label> <input
+									type="text" id="hzrdFldAmt" name="hzrdFldAmt"
+									class="form-control currency" title="Hazard & Flood"
+									ng-model="csdc.loanData.editable.hzrdFldAmt" />
+								<div ng-show="csdc.hzrdFldAmt" class="color-red">{{csdc.hzrdFldAmtErrorText}}</div>
+							</div>
+						</div>
+					</div>
+					<!-- End field -->
+					<!-- Start field -->
+					<div class="row m-top10 loan-field-container">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label for="mortgOthrAmt">Other:</label> <input type="text"
+									id="mortgOthrAmt" name="mortgOthrAmt"
+									class="form-control currency" title="Other"
+									ng-model="csdc.loanData.editable.mortgOthrAmt" />
+							</div>
+						</div>
+					</div>
+					<!-- End field -->
+					<!-- Start field -->
+					<div class="row m-top10 loan-field-container">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label for="mortgPymntPiAmt">Mortgage Payment (PI):</label> <input
+									type="text" id="mortgPymntPiAmt" name="mortgPymntPiAmt"
+									class="form-control currency" title="Mortgage Payment(PI)"
+									ng-model="csdc.loanData.editable.mortgPymntPiAmt"
+									ng-readonly="true" />
+							</div>
+						</div>
+					</div>
+					<!-- End field -->
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+					<!-- Start field -->
+					<div class="row m-top10 loan-field-container">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label for="loanPurposeText"><i
+									class="fa fa-asterisk requiredField"></i>Loan Purpose:</label> <select
+									name="loanPurposeText" id="loanPurposeText"
+									ng-model="csdc.loanData.editable.loanPrpsCd"
+									ng-change="csdc.updateConstructionCode();csdc.showStatusPrior()">
+									<option value="">Select Loan Purpose</option>
+									<option
+										ng-repeat="purpose in csdc.loanPurposes|orderBy:'referenceCodeName'"
+										value="{{purpose.referenceCodeValue}}"
+										ng-selected="csdc.loanData.editable.loanPrpsCd === purpose.referenceCodeValue">{{purpose.referenceCodeName}}
+									</option>
+								</select>
+								<div ng-show="csdc.loanPrpsCd" class="color-red">{{csdc.loanPrpsCdErrorText}}</div>
+							</div>
+						</div>
+					</div>
+					<!-- End field -->
+					<!-- Start field -->
+					<div class="row m-top10 loan-field-container">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label for="caseExpiredDate"><i
+									class="fa fa-asterisk requiredField"></i>Case Expiration Date:</label>
+								<input type="text" id="caseExpiredDate" name="caseExpiredDate"
+									class="form-control" title="Case Expiration Date"
+									ng-model="csdc.loanData.editable.caseExprtnDt"
+									ng-readonly="true" />
+							</div>
+						</div>
+					</div>
+					<!-- End field -->
+					<!-- Start field -->
+					<div class="row m-top10 loan-field-container">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label for="mortgIntrstRt"><i
+									class="fa fa-asterisk requiredField"></i>Interest Rate:</label> <input
+									type="text" id="mortgIntrstRt" name="mortgIntrstRt"
+									class="form-control" title="Interest Rate"
+									ng-model="csdc.loanData.editable.mortgIntrstRt" />
+								<div ng-show="csdc.mortgIntrstRt" class="color-red">{{csdc.mortgIntrstRtErrorText}}</div>
+								<div ng-show="csdc.showMinIntrstRt" class="color-red">{{csdc.mortgIntrstRtMinErrorText}}</div>
+							</div>
+						</div>
+					</div>
+					<!-- End field -->
+					<!-- Start field -->
+					<div class="row m-top10 loan-field-container">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label for="loanTermNbr"><i
+									class="fa fa-asterisk requiredField"></i>Term of Loan:</label> <input
+									type="text" id="loanTermNbr" name="loanTermNbr"
+									class="form-control inputBeforeText" title="Term of Loan"
+									ng-model="csdc.loanData.editable.loanTermNbr" /> <span
+									class="textAfterInput">months</span>
+								<div ng-show="csdc.loanTermNbr" class="color-red">{{csdc.loanTermNbrErrorText}}</div>
+							</div>
+						</div>
+					</div>
+					<!-- End field -->
+					<!-- Start field -->
+					<div class="row m-top10 loan-field-container">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label for="loanToValRatioPct"><i
+									class="fa fa-asterisk requiredField"></i>Loan-to-value:</label> <input
+									type="text" id="loanToValRatioPct" name="loanToValRatioPct"
+									class="form-control" title="Loan-to-value"
+									ng-model="csdc.loanData.editable.loanToValRatioPct"
+									ng-change="csdc.calculateMIP()"
+									ng-init="csdc.calculateLoanPurpose(); csdc.calculateMIP()"
+									ng-readonly="true" />
+								<div ng-show="csdc.showLtvMaxError" class="color-red">{{csdc.ltvMaxErrorText}}</div>
+							</div>
+						</div>
+					</div>
+					<!-- End field -->
+					<!-- Start field -->
+					<div class="row m-top10 loan-field-container">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+					</div>
+					<!-- End field -->
+					<!-- Start field -->
+					<div class="row m-top10 loan-field-container">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label for="basisForMortgageCalc"><i
+									class="fa fa-asterisk requiredField"></i>Basis for Mortgage
+									Calculation:</label> <select name="basisForMortgageCalc"
+									id="basisForMortgageCalc"
+									ng-model="csdc.loanData.editable.baseMortgCalcCd">
+									<option value="">Select Basis for Mortgage Calculation</option>
+									<option ng-repeat="calculation in csdc.baseMortgageCalculation"
+										value="{{calculation.referenceCodeValue}}">{{calculation.referenceCodeName}}</option>
+								</select>
+								<div ng-show="csdc.bsamt" class="color-red">{{csdc.bsamtErrorText}}</div>
+							</div>
+						</div>
+					</div>
+					<!-- End field -->
+					<!-- Start field -->
+					<div class="row m-top10 loan-field-container">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label for="upfrntFeeRate"><i
+									class="fa fa-asterisk requiredField"></i>LG Fee Rate:</label> <input
+									type="text" id="upfrntFeeRate" name="upfrntFeeRate"
+									class="form-control" title="LG Fee Rate"
+									ng-model="csdc.loanData.editable.upfrntFeeRate"
+									ng-readonly="true" />
+							</div>
+						</div>
+					</div>
+					<!-- End field -->
+					<!-- Start field -->
+					<div class="row m-top10 loan-field-container">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label for="loanGrnteeFee"><i
+									class="fa fa-asterisk requiredField"></i>LG Fee:</label> <input
+									type="text" id="loanGrnteeFee" name="loanGrnteeFee"
+									class="form-control currency" title="LG Fee"
+									ng-model="csdc.loanData.editable.loanGrnteeFee"
+									ng-readonly="true" />
+								<div class="alert alert-danger" id="lgFeeAmountsError"
+									ng-show="csdc.lgFeeAmountsError">LG Fee Paid in Cash + LG
+									Fee Financed must equal the LG Fee Amount.</div>
+							</div>
+						</div>
+					</div>
+					<!-- End field -->
+					<!-- Start field -->
+					<div class="row m-top10 loan-field-container">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label for="anulFeeRate">Annual MIP Rate:</label> <input
+									type="text" id="anulFeeRate" name="anulFeeRate"
+									class="form-control" title="Annual MIP Rate"
+									ng-model="csdc.loanData.editable.anulFeeRate"
+									ng-readonly="true" />
+							</div>
+						</div>
+					</div>
+					<!-- End field -->
+					<!-- Start field -->
+					<div class="row m-top10 loan-field-container">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label for="anulMipAmt">Annual MIP / Monthly Payment:</label> <input
+									type="text" id="anulMipAmt" name="anulMipAmt"
+									class="form-control currency" title="Annual MIP"
+									ng-model="csdc.loanData.editable.anulMipAmt" ng-readonly="true" />
+							</div>
+						</div>
+					</div>
+					<!-- End field -->
+					<!-- Start field -->
+					<div class="row m-top10 loan-field-container">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+					</div>
+					<!-- End field -->
+					<!-- Start field -->
+					<div class="row m-top10 loan-field-container">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label for="reservationOfFunds">Reservation of Funds:</label> <input
+									type="text" id="reservationOfFunds" name="reservationOfFunds"
+									class="form-control currency" title="Reservation of Funds"
+									ng-model="csdc.loanData.editable.fndsRsrvdAmt"
+									ng-readonly="csdc.hasReservedFunds()"
+									ng-change="csdc.calculateReservationOfFundsMax()" />
+								<div
+									ng-show="csdc.loanData.editable.mortgWithLgFeeFncdAmt < csdc.loanData.editable.fndsRsrvdAmt && csdc.hasBeenSubmitted"
+									class="color-red">
+									{{csdc.mortgWithLgFeeFncdAmtErrorText}}</div>
+							</div>
+						</div>
+					</div>
+					<!-- End field -->
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+					<!-- Start field -->
+					<div class="row m-top10 loan-field-container">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label for="constructionCode">Construction Code:</label> <input
+									type="text" id="constructionCode" name="constructionCode"
+									class="form-control" title="Construction Code"
+									ng-value="csdc.findConstructionCodeName(csdc.loanData.editable.constrnCd)"
+									readonly ng-readonly="true" />
+							</div>
+						</div>
+					</div>
+					<!-- End field -->
+					<!-- Start field -->
+					<div class="row m-top10 loan-field-container">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label for="prrCaseNbr"><i
+									class="fa fa-asterisk requiredField"
+									ng-show="csdc.showStarPurpose"></i>Prior Case:</label> <input
+									type="text" id="prrCaseNbr" name="prrCaseNbr"
+									class="form-control" title="Prior Case"
+									ng-model="csdc.loanData.editable.prrCaseNbr" />
+								<div ng-show="csdc.prrCaseNbr" class="color-red">{{csdc.prrCaseNbrErrorText}}</div>
+							</div>
+						</div>
+					</div>
+					<!-- End field -->
+					<!-- Start field -->
+					<div class="row m-top10 loan-field-container">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label for="priorCaseStatus"><i
+									class="fa fa-asterisk requiredField"
+									ng-show="csdc.showStarPurpose"></i>Prior Case Status:</label> <select
+									name="priorCaseStatus" id="priorCaseStatus"
+									ng-model="csdc.loanData.editable.prrCaseStat"
+									ng-disabled="!csdc.enablePriorCaseStatus()">
+									<option value="">Select Prior Case Status</option>
+									<option ng-repeat="case in csdc.priorCaseStatuses"
+										value="{{case.referenceCodeValue}}">{{case.referenceCodeName}}</option>
+								</select>
+								<div ng-show="csdc.prrCaseStat" class="color-red">{{csdc.prrCaseStatErrorText}}</div>
+							</div>
+						</div>
+					</div>
+					<!-- End field -->
+					<!-- Start field -->
+					<div class="row m-top10 loan-field-container">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label for="projectedClosingDatePicker"><i
+									class="fa fa-asterisk requiredField"></i>Projected Closing Date</label>
+								<input type="text" title="Projected Closing Date"
+									class="form-control"
+									ng-pattern="/^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$/"
+									ng-model="csdc.loanData.editable.prjctdClsngDt"
+									id="projectedClosingDatePicker" />
+								<div ng-show="csdc.showProjectedDateError" class="color-red">
+									{{ csdc.projectedDateErrorText }}</div>
+								<div ng-show="csdc.showProjectedDateMaxError" class="color-red">
+									{{ csdc.projectedDateMaxErrorText }}</div>
+							</div>
+						</div>
+					</div>
+					<!-- End field -->
+					<!-- Start field -->
+					<div class="row m-top10 loan-field-container">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label for="actualClosingDatePicker">Actual Closing Date</label>
+								<input type="text" title="Actual Closing Date"
+									class="form-control"
+									ng-pattern="/^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$/"
+									ng-model="csdc.loanData.editable.actlClsngDt"
+									id="actualClosingDatePicker" />
+							</div>
+						</div>
+					</div>
+					<!-- End field -->
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-11 col-lg-offset-1 col-md-12 col-sm-12 col-xs-12">
+					<div class="pull-right m-top25">
+						<button data-toggle="modal"
+							data-target="#reserveFundsConfirmation"
+							class="btn btn-success m-right30 lender-btn-next background-red"
+							id="reserveFunds"
+							ng-disabled="csdc.hasReservedFunds() || csdc.loanIsDisabled()">Reserve
+							Funds</button>
+						<a href
+							class="btn btn-success m-right30 lender-btn-next background-red"
+							ng-click="csdc.saveLoanInfo()" id="saveLoan">Save</a>
+						<button data-toggle="modal" data-target="#clearLoanData"
+							class="btn btn-success lender-btn-next background-red"
+							id="cancelSaveLoan">Cancel</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- Start sub-tabs -->
+<div class="row">
+	<div class="col-md-12 col-xs-12 col-lg-12 m-top60">
+		<div class="caseReview">
+			<ul class="nav nav-tabs" role="tablist">
+				<li role="presentation" class="active"><a role="tab"
+					data-toggle="tab" aria-controls="bftcTab" href
+					ng-click="csdc.getCaseReviewBorrowerFundsData()"
+					data-target="#bftcTab">Borrower Funds to Close</a></li>
+				<li role="presentation"><a role="tab" data-toggle="tab"
+					aria-controls="aftrTab" href data-target="#aftrTab">Adjustment
+						to Funds Reserved</a></li>
+				<li role="presentation"><a role="tab" data-toggle="tab"
+					aria-controls="siteTab" href ng-click="csdc.getCaseReviewNotes()"
+					data-target="#siteTab">Site</a></li>
+			</ul>
+			<div class="tab-content">
+				<div role="tabpanel" class="tab-pane active" id="bftcTab">
+					<case-review-borrower-funds-form
+						data="csdc.caseReviewBorrowerFundsData"
+						case-number="{{csdc.caseNumber}}" case-id="{{csdc.caseId}}"
+						ng-if="csdc.caseId" loan-data="csdc.loanData.editable"></case-review-borrower-funds-form>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="aftrTab">
+					<adjust-funds-reserved-form ng-if="csdc.caseId"
+						case-id="{{csdc.caseId}}" case-number="{{csdc.caseNumber}}"
+						cohort-number="{{csdc.loanData.original.chrtNbr}}"
+						rof-amount="csdc.loanData.editable.fndsRsrvdAmt"
+						grntee-fee-fncd-amt="csdc.loanData.editable.grnteeFeeFncdAmt"
+						mortg-wtht-fncl-lf-fee-amt="csdc.loanData.editable.mortgWthtFnclLfFeeAmt"></adjust-funds-reserved-form>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="siteTab">
+					<div class="col-lg-12">
+						<table class="table " style="border: none">
+							<tbody>
+								<tr>
+									<td style="border: none">
+										<div class="noteText">
+											<div
+												ng-repeat="noteDetails in csdc.displayNoteDetails | orderBy:'noteID':true">
+												<div class="f-bold">{{noteDetails.showNotesDetails}}</div>
+												<div style="word-break: break-all">{{noteDetails.loanNoteTxt}}</div>
+												<br>
+											</div>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<form>
+							<table class="table " style="border: none">
+								<tbody>
+									<tr>
+										<td style="border: none"><textarea rows="3"
+												maxlength="255" cols="10" style="width: 100%"
+												ng-model="csdc.loan.notes" placeholder="Enter Notes here.." />
+											<div ng-show="csdc.errorNotesMsg" class="color-red">Notes
+												is required</div></td>
+									</tr>
+								</tbody>
+							</table>
+							<div class="form-group">
+								<input type="button" class="btn btn-primary addnew pull-left"
+									ng-click="csdc.addNotes()" value="Save">
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End sub-tabs -->
+</div>
+
+<div class="modal fade rollIn" id="clearLoanData" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content cart-on-main">
+			<div class="modal-header background-red">
+				<button type="button" class="close close-login" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title align-center color-fff font_family_fft">Remove</h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="text-center m-btm20">
+						<div class="f-size18 m-btm20">Are you sure you want to
+							discard unsaved changes?</div>
+						<div class="col-lg-offset-3 col-lg-6 col-lg-offset-3 m-btm20">
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+								<button
+									class="btn btn-block pull-left align-yesBtn background-gold"
+									ng-click="csdc.resetLoanData()" 
+									data-dismiss="modal">Yes</button>
+							</div>
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+								<button
+									class="btn btn-block pull-right align-noBtn background-gold"
+									data-dismiss="modal">No</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade rollIn" id="reserveFundsConfirmation"
+	role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content cart-on-main">
+			<div class="modal-header background-red">
+				<button type="button" class="close close-login" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title align-center color-fff font_family_fft">Remove</h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="text-center m-btm20">
+						<div class="f-size18 m-btm20">Are you sure you want to
+							reserve funds for {{csdc.loanData.editable.fndsRsrvdAmt |
+							currency}}?</div>
+						<div class="col-lg-offset-3 col-lg-6 col-lg-offset-3 m-btm20">
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+								<button
+									class="btn btn-block pull-left align-yesBtn background-gold"
+									ng-click="csdc.reserveFunds()" data-dismiss="modal">Yes</button>
+							</div>
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+								<button
+									class="btn btn-block pull-right align-noBtn background-gold"
+									data-dismiss="modal">No</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Underwriter confirmation modal -->
+<div class="modal fade rollIn" id="underwriterVerification"
+	role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header background-red">
+				<button type="button" class="close close-login" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title align-center color-fff font_family_fft">Remove</h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="text-center m-btm20">
+						<div class="f-size18 m-btm20">In order to reserve funds, the
+							Underwriter for this loan will need to be updated to reflect your
+							name. Would you like to assume the role as the Underwriter for
+							this loan?</div>
+						<div class="col-lg-offset-3 col-lg-6 col-lg-offset-3 m-btm20">
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+								<button
+									class="btn btn-block pull-left align-yesBtn background-gold"
+									ng-click="csdc.updateUndewriterReserve()" data-dismiss="modal">Yes</button>
+							</div>
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+								<button
+									class="btn btn-block pull-right align-noBtn background-gold"
+									data-dismiss="modal">No</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End underwriter confirmation modal -->
+
+<!-- Error message modal -->
+<div class="modal fade rollIn" id="requiredUnderwriterError"
+	role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header background-red">
+				<button type="button" class="close close-login" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title align-center color-fff font_family_fft">Remove</h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="text-center m-btm20">
+						<div class="f-size18 m-btm20">{{csdc.invalidUnderwriterErrorText}}</div>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<button
+								class="btn btn-block pull-right align-noBtn background-gold"
+								data-dismiss="modal">Ok</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

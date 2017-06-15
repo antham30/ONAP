@@ -1,0 +1,73 @@
+<div class="row m-top20">
+	<div class="col-md-12 col-xs-12 col-lg-12">
+			<form name="siteAreaForm" ng-submit="vm.saveSiteData()" novalidate>
+				<ng-form name="siteAreaFields" id="siteAreaFields">
+					<div class="form-horizontal">
+						<div class="row m-top30">
+						  <div class="panel panel-default">
+						        <div class="panel-heading">
+						            <strong>Site Area</strong>
+						        </div>
+						        <div class="panel-body">
+						<div class="row m-top10">
+							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+									<div class="form-group">
+										<label for="sqFt">Sq. Ft.</label>
+											<input type="text"
+												   id="sqFt" 
+												   name="sqFt" 
+												   class="form-control site-area-form-field" 
+												   title="Sq. Ft." name="sqFt" ng-model="data.editable.squareFeet" />
+									</div>
+							</div>
+							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+										<label for="acres">Acres</label>
+											<input type="text"
+												   id="acres" 
+												   name="acres" 
+												   class="form-control site-area-form-field" 
+												   title="Acres" name="acres" ng-model="data.editable.acres" />
+									</div>
+								</div>
+						        </div>
+						    </div>
+						<div class="row m-top30">
+							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+								<div class="form-group">
+									<label class="control-label" for="buildingType">Building Type</label>
+									<select id="buildingType" name="buildingType" ng-model="data.editable.buildingTypeCode" 
+											class="site-area-form-field">
+									<option value="">Select Building Type</option>
+									<option ng-repeat="type in vm.buildingTypes" value="{{type.referenceCodeValue}}">{{type.referenceCodeName}}</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+								<div class="form-group">
+									<label class="control-label">Manufactured Housing</label>
+									<div class="form-group">
+									<input type="radio" ng-model="data.editable.manufacturedHousing" 
+										   name="manufacturedHousingY" id="manufacturedHousingY" 
+										   class="site-area-form-field" ng-checked="false" value="Y">
+										   <label for="manufacturedHousingY">Yes</label>
+									&nbsp;&nbsp;<input type="radio" ng-model="data.editable.manufacturedHousing" 
+										   name="manufacturedHousingN" id="manufacturedHousingN" 
+										   class="site-area-form-field" ng-checked="false" value="N">
+										   <label for="manufacturedHousingN">No</label>
+									</div>
+								</div>
+							</div>
+								</div>
+						</div>
+							</div>
+						<div class="col-lg-11 col-lg-offset-1 col-md-12 col-sm-12 col-xs-12">
+						<div class="pull-right m-top25">
+							<button ng-disabled="vm.hasAllEmptyFields()" class="btn m-right30 background-red" 
+									type="submit" id="saveSiteData">Save</button>
+							<a class="btn" ng-click="vm.resetFormData()">Cancel</a>
+						</div>
+					</div>
+			</ng-form>
+			</form>
+					</div>
+	</div>

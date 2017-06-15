@@ -1,0 +1,920 @@
+<style>
+    .thumb {
+        width: 24px;
+        height: 24px;
+        float: none;
+        position: relative;
+        top: 7px;
+    }
+
+    form .progress {
+        line-height: 15px;
+    }
+
+    form .form-control {
+        font-size: inherit;
+        font-family: inherit;
+        color: #0000bb;
+    }
+
+    form .readOnlyField {
+        color: #bb7777;
+    }
+
+    .progress {
+        display: inline-block;
+        width: 100px;
+        border: 3px groove #CCC;
+    }
+
+    .progress div {
+        font-size: smaller;
+        background: orange;
+        width: 0;
+    }
+
+    .fieldColumn1 {
+        padding: 3px;
+        width: 900px;
+    }
+
+    .fieldColumn2 {
+        padding: 3px;
+        width: 450px;
+    }
+
+    .fieldColumn3 {
+        padding: 3px;
+        width: 300px;
+    }
+
+    .fieldColumn4 {
+        padding: 3px;
+        width: 225px;
+    }
+
+    .markingLeft {
+        font-size: small;
+        text-align: left;
+    }
+
+    .markingRight {
+        font-size: small;
+        text-align: right;
+    }
+
+    .title1 {
+        font-size: large;
+        text-decoration: underline;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .title2 {
+        font-size: large;
+        text-align: center;
+    }
+
+    .title3 {
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .tableBorder1 {
+        padding: 0px;
+        border: 1px solid black;
+    }
+
+    .tableBorder2 {
+        padding: 0px;
+        border: 2px solid black;
+    }
+
+    .tableBorder3 {
+        padding: 0px;
+        border: 3px solid black;
+    }
+
+    td {
+        vertical-align: top;
+        text-align: left;
+    }
+
+    .button {
+        background-color: #dddddd;
+        border: 1px solid #666666;
+        border-radius: 8px;
+        color: black;
+        padding: 7px 16px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+    }
+</style>
+<div class="container"
+     style="padding:25px;"
+     ng-controller="CaseNumberRequestFormController">
+    <form name="form" id="uploadForm">
+        <tr>
+            <td style="padding: 3px; align-content: center">
+                <div ng-if="submitted">
+                    <h3>Submitted</h3>
+                </div>
+            </td>
+        </tr>
+        <table width="1000">
+            <tr/>
+        </table>
+        <tr>
+            <td>
+                <table width="100%">
+                    <tr>
+                        <td class="fieldColumn1 title2 markingRight">
+                            HUD Office of Native American Programs: Section 184 Loan Guarantee Program
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table width="100%">
+                    <tr>
+                        <td class="fieldColumn1 title1 markingRight">Case Number Request Form</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td> </td>
+        </tr>
+        <tr>
+            <td>
+                <table width="100%">
+                    <tr>
+                        <td class="fieldColumn2">
+                            <div style="width:100%; display:table" ng-if="!readOnly">
+                                <div ng-if="!submitted">
+                                    <label class="control-label" for="nameInput">Lender Name:</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="nameInput"
+                                           ng-model="model.lender.name"/>
+                                </div>
+                                <div ng-if="readOnly">
+                                    <label class="control-label" for="nameInput">Lender Name:</label> {{model.lastName}}
+                                </div>
+                            </div>
+                        </td>
+                        <td class="fieldColumn2">
+                            <div style="width:100%; display:table" ng-if="!readOnly">
+                                <div ng-if="!submitted">
+                                    <label class="control-label" for="tinNumberInput">TIN # (No Dashes):</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="tinNumberInput"
+                                           ng-model="model.lender.tinNumber"/>
+                                </div>
+                                <div ng-if="readOnly">
+                                    <label class="control-label" for="tinNumberInput">TIN # (No Dashes):</label>
+                                    {{model.lastName}}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td> </td>
+        </tr>
+        <tr>
+            <td>
+                <table width="100%">
+                    <tr>
+                        <td class="fieldColumn2">
+                            <div style="width:100%; display:table" ng-if="!readOnly">
+                                <div ng-if="!submitted">
+                                    <label class="control-label" for="contactNameInput">Lender Contact Name:</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="contactNameInput"
+                                           ng-model="model.lender.contactName"/>
+                                </div>
+                                <div ng-if="readOnly">
+                                    <label class="control-label" for="contactNameInput">Lender Contact Name:</label>
+                                    {{model.lastName}}
+                                </div>
+                            </div>
+                        </td>
+                        <td class="fieldColumn2">
+                            <div style="width:100%; display:table" ng-if="!readOnly">
+                                <div ng-if="!submitted">
+                                    <label class="control-label" for="emailAddressInput">Email:</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="emailAddressInput"
+                                           ng-model="model.lender.emailAddress"/>
+                                </div>
+                                <div ng-if="readOnly">
+                                    <label class="control-label" for="emailAddressInput">Email:</label>
+                                    {{model.lastName}}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td> </td>
+        </tr>
+        <tr>
+            <td>
+                <table width="100%">
+                    <tr>
+                        <td class="fieldColumn2">
+                            <div style="width:100%; display:table" ng-if="!readOnly">
+                                <div ng-if="!submitted">
+                                    <label class="control-label" for="telephoneInput">Lender Telephone:</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="telephoneInput"
+                                           ng-model="model.lender.telephone"/>
+                                </div>
+                                <div ng-if="readOnly">
+                                    <label class="control-label" for="telephoneInput">Lender Telephone:</label>
+                                    {{model.lastName}}
+                                </div>
+                            </div>
+                        </td>
+                        <td class="fieldColumn2">
+                            <div style="width:100%; display:table" ng-if="!readOnly">
+                                <div ng-if="!submitted">
+                                    <label class="control-label" for="faxInput">Lender Fax:</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="faxInput"
+                                           ng-model="model.lender.fax"/>
+                                </div>
+                                <div ng-if="readOnly">
+                                    <label class="control-label" for="faxInput">Lender Fax:</label> {{model.lastName}}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td> </td>
+        </tr>
+        <tr>
+            <td>
+                <table width="100%">
+                    <tr>
+                        <td class="fieldColumn1">
+                            <div style="width:100%; display:table" ng-if="!readOnly">
+                                <div ng-if="!submitted">
+                                    <label class="control-label"
+                                           for="sponsorInput">Lender Sponsor (if applicable):</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="sponsorInput"
+                                           ng-model="model.lender.sponsor"/>
+                                </div>
+                                <div ng-if="readOnly">
+                                    <label class="control-label"
+                                           for="sponsorInput">Lender Sponsor (if applicable):</label> {{model.lastName}}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td> </td>
+        </tr>
+        <tr>
+            <td>
+                <table width="100%">
+                    <tr>
+                        <td>
+                            <table width="100%">
+                                <tr>
+                                    <td>
+                                        <label class="control-label">Please Indicate Purpose of Loan (select one):</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="fieldColumn1">
+                                        <div class="purposeOfLoan-form-group" id="purposeOfLoan-radio-group">
+                                            <table>
+                                                <tr>
+                                                    <th>Refinance:</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input type="radio"
+                                                               name="purposeOfLoan"
+                                                               value="steamlineWithAppraisal"
+                                                               ng-model="model.purposeOfLoan.purposeOfLoan">  Streamline With Appraisal</input>
+                                                        <br/>
+                                                        <input type="radio"
+                                                               name="purposeOfLoan"
+                                                               value="streamlineWithoutAppraisal"
+                                                               ng-model="model.purposeOfLoan.purposeOfLoan">  Streamline Without Appraisal</input>
+                                                        <br/>
+                                                        <input type="radio"
+                                                               name="purposeOfLoan"
+                                                               value="newLessThanOneYear"
+                                                               ng-model="model.purposeOfLoan.purposeOfLoan">  New‑Less than 1 Year</input>
+                                                        <br/>
+                                                        <input type="radio"
+                                                               name="purposeOfLoan"
+                                                               value="creditQualifyingWithCashOut"
+                                                               ng-model="model.purposeOfLoan.purposeOfLoan">  Credit Qualifying with Cash Out</input>
+                                                        <br/>
+                                                        <input type="radio"
+                                                               name="purposeOfLoan"
+                                                               value="creditQualifyingWithNoCash"
+                                                               ng-model="model.purposeOfLoan.purposeOfLoan">  Credit Qualifying with no Cash</input>
+                                                        <br/>
+                                                        <input type="radio"
+                                                               name="purposeOfLoan"
+                                                               value="creditQualifyingWithEscrow"
+                                                               ng-model="model.purposeOfLoan.purposeOfLoan">  Credit Qualifying with Escrow</input>
+                                                        <br/>
+                                                        <input type="radio"
+                                                               name="purposeOfLoan"
+                                                               value="priorCaseNumber"
+                                                               ng-model="model.purposeOfLoan.purposeOfLoan">  Prior Case Number REQUIRED for Streamline Refinances</input>
+                                                        <br/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                    <td class="fieldColumn1">
+                                        <div class="purposeOfLoan-form-group" id="purposeOfLoan-radio-group">
+                                            <table>
+                                                <tr>
+                                                    <th>Acquisition:</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input type="radio"
+                                                               name="purposeOfLoan"
+                                                               value="acquisitionOfExisting"
+                                                               ng-model="model.purposeOfLoan.purposeOfLoan">  Acquisition of Existing</input>
+                                                        <br/>
+                                                        <input type="radio"
+                                                               name="purposeOfLoan"
+                                                               value="rehabOfExisting"
+                                                               ng-model="model.purposeOfLoan.purposeOfLoan">  Acquisition/Rehab of Existing</input>
+                                                        <br/>
+                                                        <input type="radio"
+                                                               name="purposeOfLoan"
+                                                               value="lessThanOneYear"
+                                                               ng-model="model.purposeOfLoan.purposeOfLoan">  Acquisition‑Less than 1 Year</input>
+                                                        <br/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                    <td class="fieldColumn1">
+                                        <div class="purposeOfLoan-form-group" id="purposeOfLoan-radio-group">
+                                            <table>
+                                                <tr>
+                                                    <th>Construction:</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input type="radio"
+                                                               name="purposeOfLoan"
+                                                               value="singleCloseProposal"
+                                                               ng-model="model.purposeOfLoan.purposeOfLoan">  Single Close Proposal</input>
+                                                        <br/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td> </td>
+        </tr>
+        <tr>
+            <td>
+                <table width="100%">
+                    <tr>
+                        <td class="fieldColumn1">
+                            <div style="width:100%; display:table" ng-if="!readOnly">
+                                <div ng-if="!submitted">
+                                    <label class="control-label" for="priorCaseNumberInput">Prior Case Number REQUIRED for Streamline Refinances:</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="priorCaseNumberInput"
+                                           ng-model="model.purposeOfLoan.priorCaseNumber"/>
+                                </div>
+                                <div ng-if="readOnly">
+                                    <label class="control-label" for="priorCaseNumberInput">Prior Case Number REQUIRED for Streamline Refinances:</label>
+                                    {{model.lastName}}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td> </td>
+        </tr>
+        <tr>
+            <td>
+                <table width="100%">
+                    <tr>
+                        <td>
+                            <table width="100%">
+                                <tr>
+                                    <td>
+                                        <label class="control-label">Please Select One:</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="fieldColumn1">
+                                        <div class="classification-form-group" id="classification-radio-group">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <input type="radio"
+                                                               name="classification"
+                                                               value="directGuaranteeUnderwritten"
+                                                               ng-model="model.classification.classification">  Direct Guarantee Underwritten</input>
+                                                            <input type="radio"
+                                                                   name="classification"
+                                                                   value="hudUnderwritten"
+                                                                   ng-model="model.classification.classification">  HUD Underwritten</input>
+                                                           
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td> </td>
+        </tr>
+        <tr>
+            <td>
+                <table width="100%">
+                    <tr>
+                        <td class="fieldColumn3">
+                            <div style="width:100%; display:table" ng-if="!readOnly">
+                                <div ng-if="!submitted">
+                                    <label class="control-label" for="firstNameInput">Borrower: First Name:</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="firstNameInput"
+                                           ng-model="model.borrower.firstName"/>
+                                </div>
+                                <div ng-if="readOnly">
+                                    <label class="control-label" for="firstNameInput">Borrower: First Name:</label>
+                                    {{model.lastName}}
+                                </div>
+                            </div>
+                        </td>
+                        <td class="fieldColumn3">
+                            <div style="width:100%; display:table" ng-if="!readOnly">
+                                <div ng-if="!submitted">
+                                    <label class="control-label" for="middleInitialInput">M.I.:</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="middleInitialInput"
+                                           size="2"
+                                           ng-model="model.borrower.middleInitial"/>
+                                </div>
+                                <div ng-if="readOnly">
+                                    <label class="control-label" for="middleInitialInput">M.I.:</label>
+                                    {{model.lastName}}
+                                </div>
+                            </div>
+                        </td>
+                        <td class="fieldColumn3">
+                            <div style="width:100%; display:table" ng-if="!readOnly">
+                                <div ng-if="!submitted">
+                                    <label class="control-label" for="lastNameInput">Last Name:</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="lastNameInput"
+                                           ng-model="model.borrower.lastName"/>
+                                </div>
+                                <div ng-if="readOnly">
+                                    <label class="control-label" for="lastNameInput">Last Name:</label>
+                                    {{model.lastName}}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td> </td>
+        </tr>
+        <tr>
+            <td>
+                <table width="100%">
+                    <tr>
+                        <td class="fieldColumn1">
+                            <div style="width:100%; display:table" ng-if="!readOnly">
+                                <div ng-if="!submitted">
+                                    <label class="control-label" for="tribalAffiliationInput">Borrower: Tribal Affiliation:</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="tribalAffiliationInput"
+                                           ng-model="model.borrower.tribalAffiliation"/>
+                                </div>
+                                <div ng-if="readOnly">
+                                    <label class="control-label" for="tribalAffiliationInput">Borrower: Tribal Affiliation:</label>
+                                    {{model.lastName}}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td> </td>
+        </tr>
+        <tr>
+            <td>
+                <table width="100%">
+                    <tr>
+                        <td class="fieldColumn1">
+                            <div style="width:100%; display:table" ng-if="!readOnly">
+                                <div ng-if="!submitted">
+                                    <label class="control-label" for="coborrowerNameAndTribeInput">Co‑Borrower Name &amp; Tribe:</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="coborrowerNameAndTribeInput"
+                                           ng-model="model.borrower.coborrowerNameAndTribe"/>
+                                </div>
+                                <div ng-if="readOnly">
+                                    <label class="control-label" for="coborrowerNameAndTribeInput">Co‑Borrower Name &amp; Tribe:</label>
+                                    {{model.lastName}}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table width="100%">
+                    <tr>
+                        <td class="fieldColumn1">
+                            <div ng-if="!readOnly">
+                                <input type="checkbox"
+                                       class="form-control"
+                                       id="documentationCheckbox"
+                                       ng-model="model.borrower.documentation"
+                                       readOnly="false"/> <label class="control-label" for="documentationCheckbox">Documentation from borrower(s) that evidences current enrollment with a federally recognized tribe or Alaskan Native Corp</label>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td> </td>
+        </tr>
+        <tr>
+            <td>
+                <table width="100%">
+                    <tr>
+                        <td class="fieldColumn1">
+                            <div style="width:100%; display:table" ng-if="!readOnly">
+                                <div ng-if="!submitted">
+                                    <label class="control-label"
+                                           for="streetAddressInput">Property: Street Address:</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="streetAddressInput"
+                                           ng-model="model.property.streetAddress"/>
+                                </div>
+                                <div ng-if="readOnly">
+                                    <label class="control-label"
+                                           for="streetAddressInput">Property: Street Address:</label> {{model.lastName}}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table width="100%">
+                    <tr>
+                        <td class="fieldColumn4">
+                            <div style="width:100%; display:table" ng-if="!readOnly">
+                                <div ng-if="!submitted">
+                                    <label class="control-label" for="cityInput">City:</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="cityInput"
+                                           ng-model="model.property.city"/>
+                                </div>
+                                <div ng-if="readOnly">
+                                    <label class="control-label" for="cityInput">City:</label> {{model.lastName}}
+                                </div>
+                            </div>
+                        </td>
+                        <td class="fieldColumn4">
+                            <div style="width:100%; display:table" ng-if="!readOnly">
+                                <div ng-if="!submitted">
+                                    <label class="control-label" for="countyInput">County:</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="countyInput"
+                                           ng-model="model.property.county"/>
+                                </div>
+                                <div ng-if="readOnly">
+                                    <label class="control-label" for="countyInput">County:</label> {{model.lastName}}
+                                </div>
+                            </div>
+                        </td>
+                        <td class="fieldColumn4">
+                            <div style="width:100%; display:table" ng-if="!readOnly">
+                                <div ng-if="!submitted">
+                                    <label class="control-label" for="stateInput">State:</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="stateInput"
+                                           ng-model="model.property.state"/>
+                                </div>
+                                <div ng-if="readOnly">
+                                    <label class="control-label" for="stateInput">State:</label> {{model.lastName}}
+                                </div>
+                            </div>
+                        </td>
+                        <td class="fieldColumn4">
+                            <div style="width:100%; display:table" ng-if="!readOnly">
+                                <div ng-if="!submitted">
+                                    <label class="control-label" for="zipCodeInput">Zip Code:</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="zipCodeInput"
+                                           ng-model="model.property.zipCode"/>
+                                </div>
+                                <div ng-if="readOnly">
+                                    <label class="control-label" for="zipCodeInput">Zip Code:</label> {{model.lastName}}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td> </td>
+        </tr>
+        <tr>
+            <td>
+                <table width="100%">
+                    <tr>
+                        <td class="fieldColumn3">
+                            <div id="amount">
+                                <label class="control-label" for="amountNumber">Proposed Mortgage Amount:  </label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="amountNumber"
+                                       size="10"
+                                       ng-model="model.mortgage.amount"/>
+                            </div>
+                        </td>
+                        <td class="fieldColumn3">
+                            <div id="loanTerm">
+                                <label class="control-label" for="loanTermNumber">Loan Term (months):  </label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="loanTermNumber"
+                                       size="10"
+                                       ng-model="model.mortgage.loanTerm"/>
+                            </div>
+                        </td>
+                        <td class="fieldColumn3">
+                            <div id="numberOfUnits">
+                                <label class="control-label" for="numberOfUnitsNumber">Number of Units:  </label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="numberOfUnitsNumber"
+                                       size="10"
+                                       ng-model="model.mortgage.numberOfUnits"/>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td> </td>
+        </tr>
+        <tr>
+            <td>
+                <table width="100%">
+                    <tr>
+                        <td>
+                            <table width="100%">
+                                <tr>
+                                    <td>
+                                        <label class="control-label">Please Select Land Status of Property:</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="fieldColumn1">
+                                        <div class="landStatus-form-group" id="landStatus-radio-group">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <input type="radio"
+                                                               name="landStatus"
+                                                               value="freeSimple"
+                                                               ng-model="model.landStatus.landStatus">  Free Simple (If entire State Approved, No Land Status Form Required)</input>
+                                                        <br/>
+                                                        <input type="radio"
+                                                               name="landStatus"
+                                                               value="tribalTrust"
+                                                               ng-model="model.landStatus.landStatus">  Tribal Trust</input>
+                                                        <br/>
+                                                        <input type="radio"
+                                                               name="landStatus"
+                                                               value="allottedOrIndividual"
+                                                               ng-model="model.landStatus.landStatus">  Allotted or Individual</input>
+                                                        <br/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table width="100%">
+                    <tr>
+                        <td class="fieldColumn2">
+                            <div style="width:100%; display:table" ng-if="!readOnly">
+                                <div ng-if="!submitted">
+                                    <label class="control-label" for="biaReservationNumberInput">(For Tribal Trust/Allotted land only) BIA Reservation #:</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="biaReservationNumberInput"
+                                           ng-model="model.landStatus.biaReservationNumber"/>
+                                </div>
+                                <div ng-if="readOnly">
+                                    <label class="control-label" for="biaReservationNumberInput">(For Tribal Trust/Allotted land only) BIA Reservation #:</label>
+                                    {{model.lastName}}
+                                </div>
+                            </div>
+                        </td>
+                        <td class="fieldColumn2">
+                            <div style="width:100%; display:table" ng-if="!readOnly">
+                                <div ng-if="!submitted">
+                                    <label class="control-label" for="biaTrackingNumberInput">BIA Track #:</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="biaTrackingNumberInput"
+                                           ng-model="model.landStatus.biaTrackingNumber"/>
+                                </div>
+                                <div ng-if="readOnly">
+                                    <label class="control-label" for="biaTrackingNumberInput">BIA Track #:</label>
+                                    {{model.lastName}}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table width="100%">
+                    <tr>
+                        <td class="fieldColumn1">
+                            <div style="width:100%; display:table" ng-if="!readOnly">
+                                <div ng-if="!submitted">
+                                    <label class="control-label" for="nameOfTribeWithLandJurisdictionInput">Name of Tribe with Land Jurisdiction:</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="nameOfTribeWithLandJurisdictionInput"
+                                           ng-model="model.landStatus.nameOfTribeWithLandJurisdiction"/>
+                                </div>
+                                <div ng-if="readOnly">
+                                    <label class="control-label" for="nameOfTribeWithLandJurisdictionInput">Name of Tribe with Land Jurisdiction:</label>
+                                    {{model.lastName}}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table width="100%">
+                    <tr>
+                        <td class="fieldColumn2">
+                            <div id="fhaCondoIdNumber">
+                                <label class="control-label"
+                                       for="fhaCondoIdNumberNumber">Condominium FHA Condo ID #:  </label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="fhaCondoIdNumberNumber"
+                                       size="10"
+                                       ng-model="model.condominium.fhaCondoIdNumber"/>
+                            </div>
+                        </td>
+                        <td class="fieldColumn2">
+                            <div id="submissionNumber">
+                                <label class="control-label" for="submissionNumberNumber">Submission #:  </label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="submissionNumberNumber"
+                                       size="10"
+                                       ng-model="model.condominium.submissionNumber"/>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table width="100%">
+                    <tr>
+                        <td class="fieldColumn1">
+                            <div style="width:100%; display:table" ng-if="!readOnly">
+                                <div ng-if="!submitted">
+                                    <label class="control-label" for="nameInput">Condominium Name:</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="nameInput"
+                                           ng-model="model.condominium.name"/>
+                                </div>
+                                <div ng-if="readOnly">
+                                    <label class="control-label" for="nameInput">Condominium Name:</label>
+                                    {{model.lastName}}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <table width="1000">
+            <tr>
+                <td class="fieldColumn2 marking markingLeft">OMB Approval No. 2577-0200 (exp. 2017-08-31)</td>
+                <td class="fieldColumn2 marking markingRight">Form HUD-50131 (2015-12-09)</td>
+            </tr>
+        </table>
+        <div ng-if="showButtons" style="text-align: center;">
+            <button type="button"
+                    class="button"
+                    ng-click="submitForm()"
+                    id="submitButton"
+                    ng-if="!submitted">Submit
+            </button>
+             
+            <button type="button"
+                    class="button"
+                    ng-click="resetForm()"
+                    id="resetButton"
+                    ng-if="!submitted">Reset
+            </button>
+        </div>
+    </form>
+</div>

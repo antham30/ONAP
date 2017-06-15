@@ -1,0 +1,227 @@
+<!--main content starts-->
+<div class="container allTabs">
+    <div class="row m-top60">
+        <div class="col-lg-offset-1 col-lg-10 col-lg-offset-1 col-md-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+         <div class="border-finalcontent">
+
+             <div class="border-finalcontent2">
+ 					<div>
+                     <h1 class="f-size20  color-theme text-center m-tb10">HUD Office of Native American Programs: Section 184 Loan Guarantee Program</h1>
+                     </div>
+					  <div class="" ng-show="showCaseNum== false">
+							 <h3 class="m-tb20 text-center">Error occured while retrieving case number
+							 <br>
+							 <br>
+							 Problem encountered during case registration.
+							 </h3>
+							</div>
+							 <div ng-show="showCaseNum== true">
+                      <div class="f-size17 m-tb20 text-center">
+                     Case Number has been successfully assigned!
+                    <br>
+                     <br>
+                     Case Number Issuance Summary details below:
+
+                 </div>
+				 
+				
+                 <table class=" table-responsive f-size16">
+                 	<tr ng-if = "allDetails.formData.brokerId">
+                        <th> {{ offSet }}. </th>
+                        <th> Originator </th>
+                         <td>  </td>
+                        <td> : </td>
+                        <td class="text-capitalize">{{allDetails.formData.sponsorName}} </td>
+                     </tr>
+                     <tr>
+                        <th> {{ offSet + 1 }}. </th>
+                        <th> Lender / Sponsor Name </th>
+                         <td>  </td>
+                        <td> : </td>
+                        <td class="text-capitalize">{{allLenderDetails.lndrNm}} </td>
+                     </tr>
+                     <tr>
+                         <th> {{ offSet + 2 }}. </th>
+                         <th> Lender Contact Name </th>
+                           <td>  </td>
+                         <td> : </td>
+                          <td class="text-capitalize"> {{allLenderDetails.prsn.frstNm}}</td>
+                     </tr>
+                     <tr>
+                     <th> {{ offSet + 3 }}. </th>
+                     <th> Purpose of Loan </th>
+                       <td>  </td>
+                     <td> : </td>
+                     <td class="text-capitalize"> {{allDetails.formData.loanPurpose}}</td>
+                 </tr>
+                     <tr>
+                     <th> {{ offSet + 4 }}. </th>
+                    <th> Borrower Name & Tribal Affiliation &nbsp;&nbsp;</th>
+                       <td>  </td>
+                     <td> : </td>
+                   <td class="text-capitalize">{{allDetails.formData.firstName}} {{allDetails.formData.lastName}}<span class="disp-none">,</span>{{allDetails.formData.tribal}}
+                      
+                      </td>
+                 </tr>
+
+                     <tr>
+                     <th> {{ offSet + 5 }}. </th>
+                   <th> Co-Borrower Name & Tribal Affiliation </th>
+                    <td>  </td>
+                     <td> : </td>
+                       <td class="text-capitalize"> 
+                       <div ng-repeat = "coBorrower in allDetails.formData.coBorrowers">
+                       {{coBorrower.firstName}} {{coBorrower.lastName}},{{coBorrower.tribal}}
+                       </div>
+                       </td>
+                  
+                    
+                 </tr>
+
+                     <tr class="streetAdress">
+                     <th> {{ offSet + 6 }}. </th>
+                     <th> Property Street Address </th>
+                       <td>  </td>
+                     <td> : </td>
+                     <td class="text-capitalize"> {{allDetails.formData.streetAddress}}</td>
+					</tr>
+					<tr class="lotAdress">
+                     <th> {{ offSet + 6 }}. </th>
+                     <th> Property Lot Address </th>
+                       <td>  </td>
+                     <td> : </td>
+                     <td class="text-capitalize"> {{allDetails.formData.lot}}</td>
+                 </tr>
+ <tr class="addressTwo">
+                     <th></th>
+                   <th class=""> Apt/Other</th>
+                       <td>  </td>
+                     <td> : </td>
+                     <td class="text-capitalize"> {{allDetails.formData.addressTwo}}</td>
+                 </tr>
+                  <tr>
+                         <td></td>
+                         <td colspan="4">
+                         <table>
+                             <tr>
+
+                                
+                                 <td class="text-capitalize"> <div> <span class="f-bold f-size16">City :</span> <span>{{allDetails.formData.city}}</span></div> </td>
+                                 <td class="text-capitalize"> <div> <span class="f-bold f-size16">State :</span> <span>{{allDetails.formData.state}}</span></div> </td>
+				<td class="text-capitalize"> <div> <span class="f-bold f-size16">County :</span> <span>{{allDetails.formData.county}}</span></div> </td>
+                                 <td class="text-capitalize"> <div> <span class="f-bold f-size16">ZIP Code : </span> <span>{{allDetails.formData.zipCode}}</span></div> </td>
+                             </tr>
+
+                         </table>
+                         </td>
+                     </tr>
+                 
+                    <!--  <tr>
+                     <th> 10. </th>
+                     <th>  City   </th>
+                       <td>  </td>
+                     <td> : </td>
+                     <td> {{allDetails.formData.city}}
+                     </td>
+                 </tr>
+                     <tr>
+                     <th> 11. </th>
+                     <th>   State   </th>
+                       <td>  </td>
+                     <td> : </td>
+                     <td> {{allDetails.formData.state}}
+                      </td>
+                 </tr>
+                 <tr>
+                     <th> 12. </th>
+                     <th>   County   </th>
+                       <td>  </td>
+                     <td> : </td>
+                     <td> {{allDetails.formData.country}}
+                      </td>
+                 </tr>
+                   <tr>
+                     <th> 12. </th>
+                     <th>   Zip Code   </th>
+                       <td>  </td>
+                     <td> : </td>
+                     <td>{{allDetails.formData.zip}}
+                      </td>
+                 </tr>  -->
+                  <tr>
+                     <th> {{ offSet + 7 }}. </th>
+                     <th>   Base Mortgage Amount    </th>
+                       <td>  </td>
+                     <td> : </td>
+                     <td>{{allDetails.formData.baseMortgageAmount}}
+                     </td>
+                 </tr> 
+				 <tr>
+                     <th> {{ offSet + 8 }}. </th>
+                     <th>   Loan Term    </th>
+                       <td>  </td>
+                     <td> : </td>
+                     <td>{{allDetails.formData.loanTerm }}  <b>Months</b>
+                     </td>
+                 </tr> 
+				 <tr>
+                     <th> {{ offSet + 9 }}. </th>
+                     <th>  Loan Guarantee Fee </th>
+                       <td>  </td>
+                     <td> : </td>
+                     <td>${{allDetails.formData.loanGuaranteeFee}}
+                     </td>
+                 </tr> 
+				 <tr>
+                     <th> {{ offSet + 10 }}. </th>
+                     <th>  Loan Amount with Fee </th>
+                       <td>  </td>
+                     <td> : </td>
+                     <td>${{allDetails.formData.loanAmountWithFee}}
+                     </td>
+                 </tr> 
+
+				 <tr>
+                     <th> {{ offSet + 11 }}. </th>
+                     <th>  Property Rights </th>
+                       <td>  </td>
+                     <td> : </td>
+                     <td class="text-capitalize">{{allDetails.formData.landStatus}}
+                      </td>
+                 </tr>
+
+
+                 </table>
+
+  <div class="border-tb m-btm50">
+                        <div class="row">
+                        <div >
+                            <div class="col-lg-6">
+                                <h3 class="f-size18">Case Number: <span> {{priorCaseNumber}}</span></h3>
+                            </div>
+                            <div class="col-lg-6 m-top15">
+							<div class="pull-right m-right20">
+                                <div class="f-size18">Issued on: <span> {{issueddate | date:"MM/dd/yyyy"}}</span></div>
+                                <div class="f-size18">Expires on: <span> {{expireDate | date:"MM/dd/yyyy"}}</span></div>
+								</div>
+                            </div>
+							
+							</div>
+							
+                        </div>
+
+             </div>
+             </div>
+         </div>
+		 </div>
+
+
+
+				</div>
+
+            </div>
+        </div>
+   
+
+   <a ng-href="{{$root.contextPath}}/#/lender" class="btn background-red" id="another_case_button">Create another case</a>
+<!--main content ends-->

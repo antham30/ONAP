@@ -1,0 +1,433 @@
+<!--main content starts-->
+<div class="container">
+    <div class="row m-top60">
+        <div class="col-lg-offset-1 col-lg-10 col-lg-offset-1 col-md-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+            <div class="">
+
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist" id="registrationTabs">
+                    <li role="presentation" class="disabled disabledTab"><a href="#lender" aria-controls="home"
+                                                                            role="tab"
+                                                                            data-toggle="tab">Lender</a></li>
+                    <li role="presentation" class="active"><a href="#borrower" aria-controls="profile" role="tab"
+                                                              data-toggle="tab">Borrower</a></li>
+                    <li role="presentation" class="disabled disabledTab"><a href="#property" aria-controls="messages"
+                                                                            role="tab" data-toggle="tab">Property</a>
+                    </li>
+                    <li role="presentation" class="disabled disabledTab"><a href="#loan" aria-controls="settings"
+                                                                            role="tab"
+                                                                            data-toggle="tab">Loan</a></li>
+<!-- <li role="presentation" class="disabled disabledTab"><a href="#review" aria-controls="review" role="tab" data-toggle="tab">Review</a></li> -->																			
+																			</ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content border-tab">
+
+                    <div role="tabpanel" class="tab-pane active" id="borrower">
+                        <div>
+                            <h1 class="m-top40 f-size30 text-capitalize text-center color-theme"> Case
+                                registration </h1>
+
+                            <div class="m-top60 row">
+
+                                <div class=" col-lg-10  col-md-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+                                    <div class="form-horizontal">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="form-group1">
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                                        <label class="control-label"><i
+                                                                class="fa fa-asterisk requiredField"></i> Borrower Type:</label>
+                                                    </div>
+                                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                                        <select class="form-control" ng-model="priborrower.btype" title="borrowertype"
+                                                                ng-change="showPrimaryBorrower(borrowertype);getTribalBasedBtype(priborrower.btype);">
+                                                            <option value="" disabled>Select Borrower Type</option>
+                                                            <option value="{{bType.referenceCodeValue}}"
+                                                                    ng-repeat="bType in bType | orderBy:individualFirst"
+                                                                    ng-selected="priborrower.btype == bType.referenceCodeValue">
+                                                                {{bType.referenceCodeName}}
+                                                            </option>
+
+                                                        </select>
+                                                        <!--     <select class="form-control" ng-model="priborrower.btype">
+                                                            <option value="" disabled>Select Borrower Type</option>
+                                                             <option value="{{bType.referenceCodeName}}" ng-repeat="bType in bType">{{bType.referenceCodeName}</option>
+                                                             </select> -->
+                                                        <div ng-show="errorPriBorrowerType" class="color-red fontsize-12">
+													<span ng-bind="errorBtypeText"></span>
+														</div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+										<div class="clearfix"></div>
+										 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="form-group1">
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                                        <label class="control-label "><i
+                                                                class="fa fa-asterisk requiredField"></i> Tribal
+                                                            Affiliation:</label>
+                                                    </div>
+                                                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                                        
+                                                        <select class="form-control"
+                                                                ng-model="priborrower.tribal" title="tribal"
+                                                                id="tribfsdf" ng-change="getOrgan1();getTribalNameForPrinting(priborrower.tribal)">
+                                                            <option value="" disabled>Select Tribal
+                                                                Affiliation
+                                                            </option>
+                                                            <option value="{{tribalBasedBtype.referenceCodeValue}}"
+                                                                    ng-repeat="tribalBasedBtype in tribalBasedBtype | orderBy:noTribalFirst"
+                                                                    ng-selected="priborrower.tribal == tribalBasedBtype.referenceCodeValue">
+                                                                {{tribalBasedBtype.referenceCodeName}}
+                                                            </option>
+                                                        </select>
+
+                                                        <div ng-show="errorPriBorrowerTribal"
+                                                             class="color-red fontsize-12">	<span ng-bind="errorPriBorrowerTribalText"></span>
+															 
+                                                        </div>
+                                                    </div>
+                                                </div>
+											</div>
+											<div class="clearfix"></div>
+											<div class="col-lg-12">
+											  <div class="form-group1">
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                                        <label class="control-label "><i
+                                                                class="fa fa-asterisk requiredField" ng-show="showOrg" ng-init="hi()"></i>Organization:</label>
+                                                    </div>
+                                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                                       
+                                                        <input type="text" class="form-control"
+                                                               ng-model="priborrower.organisation" title="org" id="organisation" ng-show="forAllValues" ng-change="validationOrg(priborrower.organisation)"
+                                                               placeholder="Organization" maxlength="40">
+
+                                                        <input type="text" class="form-control"
+                                                               ng-model="priborrower.organisation" title="org" id="organisation1" ng-show="forTre" ng-change="validationOrg(priborrower.organisation)"
+                                                               placeholder="Organization" ng-init="hi()" readonly>
+
+                                                        <div ng-show="errorPriBorrowerOrg"
+                                                             class="color-red fontsize-12">
+															 <span ng-bind="errorOrgText"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+											</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- broker box-->
+                                <div class="clearfix"></div>
+                                <div class="row">
+                                    <div class="  col-lg-12 col-md-12 col-sm-12 col-xs-12 " ng-show="showPriBorrower">
+                                        <div class="lender-content">
+                                            <div class=" login-header background-red">
+                                                <h4 class="modal-title">Primary Borrower (Individual)</h4>
+                                            </div>
+                                            <div class="lender-body form-horizontal">
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+                                                        <div class="form-group1">
+                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                                <label for="firstname" class="control-label pull-right"><i
+                                                                        class="fa fa-asterisk requiredField"></i> First
+                                                                    Name:</label>
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                                <input type="text" id="firstname" name="firstname"
+                                                                       class="form-control"
+                                                                       ng-model="priborrower.firstname"
+                                                                       placeholder="First Name" maxlength="40"/>
+
+                                                                <div ng-show="errorPriBorrowerFname"
+                                                                     class="color-red fontsize-12">
+																	 <span ng-bind="errorFnameText"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+</div>
+                                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                        <div class="form-group1">
+                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                                <label for="mi" class="control-label pull-right">
+                                                                    MI:</label>
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                                <input type="text" id="mi" name="mi"
+                                                                       class="form-control" ng-model="priborrower.mi"
+                                                                       placeholder="MI"/>
+																	   <div ng-show="errorPriBorrowerMii"
+                                                                     class="color-red fontsize-12">
+																	 <span ng-bind="errorMiText"></span>
+                                                                </div>
+                                                            </div>
+															
+                                                        </div>
+
+</div>
+                                                    </div>
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                            <div class="form-group1">
+                                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                                    <label for="lastname" class="control-label pull-right"><i
+                                                                            class="fa fa-asterisk requiredField"></i> Last
+                                                                        Name:</label>
+                                                                </div>
+                                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                                    <input type="text" id="lastname" name="lastname"
+                                                                           class="form-control"
+                                                                           ng-model="priborrower.lastname"
+                                                                           placeholder="Last Name" maxlength="40"/>
+
+                                                                    <div ng-show="errorPriBorrowerLname"
+                                                                         class="color-red fontsize-12">
+																		 <span ng-bind="errorLnameText"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                            <div class="form-group1">
+                                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                                    <label for="ssn" class="control-label pull-right"><i
+                                                                            class="fa fa-asterisk requiredField"></i>
+                                                                        SSN:</label>
+                                                                </div>
+                                                                <!--   -->
+                                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                                    <!--<input type="text" maxlength="9" name="ssn"
+                                                                           class='social form-control width100pr'
+                                                                           valid-number="" id="ssn"
+                                                                           ng-model="priborrower.social"
+                                                                           placeholder="xxx-xx-xxxx"/>-->
+														<input type="text" maxlength="9" name="ssn"
+                                                                           class=' form-control width100pr' title="ssn"
+                                                                           valid-number=""  
+                                                                           ng-model="ssnMasking" ng-click="hideSsn()" ng-change="hideSsn()" ng-show="showDupicalte==true"
+                                                                           placeholder="xxx-xx-xxxx"/>
+                                                                    <input type="text" maxlength="9" name="ssn"
+                                                                           class='social form-control width100pr'
+                                                                           valid-number="" id="ssn" title="ssn"
+                                                                           ng-model="priborrower.social" ng-show="showDupicalte==false" ng-blur="maskingPriborrowerSsn()"
+                                                                           placeholder="xxx-xx-xxxx" focus-on-show/>
+
+                                                                    <div ng-show="errorPriBorrowerSsn"
+                                                                         class="color-red fontsize-12">
+																		 <span ng-bind="errorSsnReqText"></span>
+                                                                    </div>
+                                                                    <div ng-show="errorPriBorrowerSsnNumber1"
+                                                                         class="color-red fontsize-12">
+																		 <span ng-bind="errorSsnInvalidText"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                    </div>
+													   <div class="clearfix"></div>
+                                                    <div class="col-lg-12">
+                                                        <div class="col-lg-6 col-md-6">
+                                                            <div class="form-group1">
+                                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                                    <label  class="control-label pull-right"><i
+                                                                            class="fa fa-asterisk requiredField"></i>
+                                                                        DOB:</label>
+                                                                </div>
+                                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                                    <input type="text" title="dob"
+                                                                           class="form-control"
+                                                                           data-toggle="tooltip" data-placement="bottom"
+                                                                           ng-calendar ng-model="priborrower.dob"
+                                                                           id="DatePickerOne"
+                                                                           placeholder="Date of birth" readonly/>
+
+                                                                    <div ng-show="errorPriBorrowerDob"
+                                                                         class="color-red fontsize-12">
+																		 <span ng-bind="errorDobText"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    <div ng-show="showPriBorrower"
+                                         class=" col-lg-offset-1 col-lg-10 col-lg-offset-1 col-md-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+                                        <button type="submit"
+                                                class="btn btn-success  m-top30 pull-right m-right28 background-red"
+                                                ng-click="addNew($index,CoBorrower.socila)">Add Co-Borrowers
+                                        </button>
+                                    </div>
+
+                                    <div class="  col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                                        <div class="lender-content" ng-show="showCoBorrower">
+                                            <div class=" login-header background-red">
+                                                <h4 class="modal-title">Co-Borrowers</h4>
+                                            </div>
+                                            <div class="lender-body form-horizontal">
+									  <div class="row" ng-repeat="CoBorrower in CoBorrowerList">
+									   <div class="m-top25">
+										
+											<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+                                           <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 ">
+										     <label class="control-label"><i
+                                                                        class="fa fa-asterisk requiredField"></i> First
+                                                                    Name</label>
+                                                                <input type="text" class="form-control"
+                                                                   ng-model="CoBorrower.firstName" maxlength="40"  title="coborroerfname"
+                                                                   placeholder="First Name"/>
+
+                                                            <div id="{{$index}}firstname"
+                                                                 class="color-red fontsize-12 d-none">
+																 <span ng-bind="errorCoBorrowerFnameText"></span>
+                                                            </div>
+										   </div>
+										    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12 ">
+										   <label class="control-label">
+                                                                    MI</label>
+                                                                 <input type="text" class="form-control" id="{{$index}}mi"  title="coborroermi"
+                                                                   ng-model="CoBorrower.middleInitial" placeholder="MI"/>
+ <div id="{{$index}}mii"
+                                                                 class="color-red fontsize-12 d-none">
+																 <span ng-bind="errorCoBorrowerMiText"></span>                      
+                                                            </div>
+										   </div>
+										    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 ">
+										   <label  class="control-label"><i
+                                                                            class="fa fa-asterisk requiredField"></i> Last
+                                                                        Name</label>
+                                                                    <input type="text" class="form-control"
+                                                                   ng-model="CoBorrower.lastName" maxlength="40" title="coborroerlname"
+                                                                   placeholder="Last Name"/>
+
+                                                            <div id="{{$index}}lastname"
+                                                                 class="color-red fontsize-12 d-none">
+																 <span ng-bind="errorCoBorrowerLnameText"></span>
+                                                            </div>
+										   </div>
+										    
+										    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 ">
+										         <label  class="control-label"><i
+                                                                            class="fa fa-asterisk requiredField"></i>
+                                                                        DOB</label>
+                                                                    <div>
+                                                           <input type="text" class="form-control"
+                                                                   ng-model="CoBorrower.dob" placeholder="DOB"  title="coborroerdob"
+                                                                   id="{{$index}}datepick" ng-click="DatePick($index)" readonly/>
+
+                                                            <div id="{{$index}}dob"
+                                                                 class="color-red fontsize-12 d-none">
+																 <span ng-bind="errorCoBorrowerDobText"></span>
+                                                            </div>
+
+                                                        </div>
+										   </div>
+										   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 ">
+													<label  class="control-label"><i
+                                                                            class="fa fa-asterisk requiredField"></i>
+                                                                        SSN</label>
+																		<input type="text" class="form-control" maxlength="9" title="coborroerssn" id="{{$index}}dup-social"
+                                                                   ng-model="CoBorrower.CoBorrowerMask" placeholder="xxx-xx-xxxx" ng-show="CoBorrower.showDupicalteCoBorrower==true" ng-click="hideSsnCoBorrower($index)" ng-change="hideSsnCoBorrower($index)"
+
+                                                                    />
+																		 <input type="text" class="form-control social" maxlength="9" title="coborroerssn"
+                                                                   ng-model="CoBorrower.social" placeholder="xxx-xx-xxxx" ng-show="CoBorrower.showDupicalteCoBorrower == false" id="{{$index}}co-social" ng-blur="maskingCoborrowerSsn($index)"
+                                                                  focus-on-show/>
+
+                                                            <div id="{{$index}}ssh" class="color-red d-none">
+															<span ng-bind="errorCoBorrowerSsnReqText"></span>
+                                                            </div>
+                                                            <div id="{{$index}}sshNumber"
+                                                                 class="color-red fontsize-12 d-none">
+																 <span ng-bind="errorCoBorrowerSsnInvalidText"></span>
+                                                            </div>
+ 
+										   </div>
+										       
+															
+										   </div>
+										   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+										   <div class="" style="margin-top:11px">
+										  
+                                           <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 ">
+										     <label class="control-label"><i
+                                                                        class="fa fa-asterisk requiredField"></i> Tribal Affiliation</label>
+                                                                 <select class="form-control"
+                                                                    ng-model="CoBorrower.tribal" title="coborrowertribal">
+                                                                <option value="" disabled>Select Tribal Affiliation
+                                                                </option>
+                                                                <option value="{{tribal.referenceCodeValue}}"
+                                                                        ng-repeat="tribal in tribal | orderBy:noTribalFirstCoborr"
+                                                                        ng-selected="CoBorrower.tribal == tribal.referenceCodeValue">
+                                                                    {{tribal.referenceCodeName}}
+                                                                </option>
+                                                            </select>
+
+                                                            <div id="{{$index}}tribal"
+                                                                 class="color-red fontsize-12 d-none">
+																 <span ng-bind="errorCoBorrowerTribalText"></span>
+                                                            </div>
+										   </div>
+										    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 ">
+											 <div ng-hide="!CoBorrowerList.length" type="button"
+                                                                 class="btn btn-danger" style="margin-top:25px"
+                                                                 ng-click="remove($index)">
+                                                                <i class="fa fa-trash fa-2x color-#9E9E9E"></i>
+                                                            </div>
+</div>
+  										
+											</div>
+										    
+										   </div>
+										   </div>
+										</div>
+										</div>  
+ 
+								   <!-- 3nd row ends-->
+								</div>
+								
+								</div>
+								
+
+
+
+								 <div class="col-lg-offset-1 col-lg-10 col-lg-offset-1 col-md-offset-1 col-md-10 col-md-offset-10 col-sm-offset-1 col-sm-10 col-sm-offset-1 col-xs-offset-1 col-xs-10 col-xs-offset-1">
+                                        <div class="pull-right m-tb20 m-right28">
+
+                                            <a href="" 
+                                               class="btn btn-success lender-btn-next background-red"
+                                               aria-controls="home" role="tab" data-toggle="tab"
+                                               ng-click="prevButtonBorrower()">Prev</a>
+                                            <a href="" aria-controls="messages" role="tab" data-toggle="tab"
+                                               class="btn btn-success lender-btn-next background-red"
+                                               ng-click="nextButtonBorrower()">Next</a>
+
+                                          
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- co-borrowers ends-->
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--main content ends-->

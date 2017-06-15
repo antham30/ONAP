@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ns0:command-request xmlns:ns0="http://www.example.org/NewXMLSchema">
+    <ns0:deployment-id>gov.hud.cares.ONAPBPMS:ONAPBPMS:1.6.3</ns0:deployment-id>
+    <ns0:ver>6.4.0.1</ns0:ver>
+    <ns0:start-process processId="ONAPBPMS.ONAPProcess">
+        <ns0:parameter>
+            <ns0:item key="borrower">
+                <ns0:value type="borrowr">
+                    <ns0:blkPlot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <ns0:borrowerTypeCode xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <ns0:city xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <ns0:personBirthDate>2016-07-05</ns0:personBirthDate>
+                    <ns0:firstName>John</ns0:firstName>
+                    <ns0:lastName>Doe</ns0:lastName>
+                    <ns0:lot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <ns0:middleInitial>Q</ns0:middleInitial>
+                    <ns0:ssn>198765432</ns0:ssn>
+                    <ns0:state xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <ns0:street xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <ns0:suffix xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <ns0:tribalAffiliationCode xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                    <ns0:underwritingTypeCode>Direct Guarantee (DG)</ns0:underwritingTypeCode>
+                    <ns0:zipCode xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                </ns0:value>
+            </ns0:item>
+        </ns0:parameter>
+    </ns0:start-process>
+</ns0:command-request>

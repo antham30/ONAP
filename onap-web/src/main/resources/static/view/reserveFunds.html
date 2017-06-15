@@ -1,0 +1,128 @@
+<div id="reserve-funds-container">
+	<!-- for IE -->
+	<div id="pdfContainer" ng-if="vm.isIE">
+		<div id="pdfOptions">
+			<span id="printPdf" ng-click="vm.printPdf('reserveFundsPdf')"
+				class="glyphicon glyphicon-print color-blue"></span> <span
+				id="downloadPdf" ng-click="vm.downloadPdf()"
+				class="glyphicon glyphicon-floppy-save color-blue"></span>
+		</div>
+		<canvas id="reserveFundsPdf"></canvas>
+	</div>
+	<!-- end for IE -->
+	<!-- for non-IE -->
+	<iframe ng-if="!vm.isIE" ng-src="{{vm.base64Pdf}}" width="100%"
+		height="1200"></iframe>
+	<!-- end for non-IE -->
+	<div class="container">
+		<div class="m-top60 row border2 eSigConsent">
+			<p>I hereby certify that all the information provided on this
+				form and in any accompanying documentation is true and accurate to
+				the best of my knowledge and belief. I acknowledge that if I
+				knowingly have made any false, fictitious, or fraudulent statement,
+				representation, or certification on this form or on any accompanying
+				documents, I may be subject to administrative action, as well as
+				civil and criminal penalties, including fines and/or imprisonment,
+				under applicable federal law, including but not limited to 18 U.S.C.
+				&sect;&sect;1001, 1010, and 1012, and 31 U.S.C. &sect;&sect;3729 and
+				3802.</p>
+		</div>
+	</div>
+	<div class="container">
+		<div class="m-top60 row">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+				<div class="form-horizontal">
+					<div class="row">
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<span>I have read above consent:</span> <i
+									class="fa fa-asterisk requiredField"></i> <input
+									type="checkbox" id="consent" name="consent" title="Consent"
+									ng-model="vm.consent" ng-disabled="vm.successfullySigned" />
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label for="firstName">First Name:</label> <i
+									class="fa fa-asterisk requiredField"></i> <input type="text"
+									id="firstName" name="firstName" class="form-control"
+									title="First Name" ng-model="vm.firstName"
+									ng-disabled="vm.successfullySigned" />
+							</div>
+						</div>
+						<div class="col-lg-1 col-md-6 col-sm-12 col-xs-12"></div>
+						<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label for="middleInitial">Middle Initial:</label> <input
+									type="text" id="middleInitial" name="middleInitial"
+									class="form-control middleInitialWidth" title="Middle Initial"
+									ng-model="vm.middleInitial" ng-disabled="vm.successfullySigned" />
+							</div>
+						</div>
+						<div class="col-lg-1 col-md-6 col-sm-12 col-xs-12"></div>
+						<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
+							<div class="form-group">
+								<label for="lastName">Last Name:</label> <i
+									class="fa fa-asterisk requiredField"></i> <input type="text"
+									id="lastName" name="lastName" class="form-control"
+									title="Last Name" ng-model="vm.lastName"
+									ng-disabled="vm.successfullySigned" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-11 col-lg-offset-1 col-md-12 col-sm-12 col-xs-12">
+			<div class="pull-right m-top25">
+				<button id="eSign"
+					ng-disabled="!vm.consent || !vm.lastName || !vm.firstName || vm.successfullySigned"
+					type="submit" class="btn m-right30 background-red"
+					ng-click="vm.signDocument()">eSign</button>
+				<button id="backToDashboard" class="btn m-right30 background-red"
+					ng-click="vm.backToDashBoard()" ng-show="vm.successfullySigned">
+					Go To Dashboard</button>
+				<button id="cancelEsign" class="btn m-right30 background-red"
+					ng-disabled="vm.successfullySigned" data-toggle="modal"
+					data-target="#cancelConfirmation">Cancel</button>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="modal fade rollIn" id="cancelConfirmation" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content cart-on-main">
+				<div class="modal-header background-red">
+					<button type="button" class="close close-login"
+						data-dismiss="modal">&times;</button>
+					<h4 class="modal-title align-center color-fff font_family_fft">Cancel</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="text-center m-btm20">
+							<div class="f-size18 m-btm20">Are you sure you want to
+								cancel eSign process?</div>
+							<div class="col-lg-12 m-btm20">
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+									<button
+										class="btn btn-block pull-left align-yesBtn background-gold"
+										ng-click="vm.cancelEsign()" data-dismiss="modal">Yes,
+										Return to Dashboard</button>
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+									<button
+										class="btn btn-block pull-right align-noBtn background-gold"
+										data-dismiss="modal">No</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

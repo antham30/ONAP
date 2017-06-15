@@ -1,0 +1,276 @@
+<div class="tab-content">
+	<div role="tabpanel" class="tab-pane active"
+		id="borrower-funds-to-close">
+		<div class="row">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+					<div class="form-group">
+						<label class="control-label" for="totalHousingExpense">Borrower
+							Total Housing Expense:</label> <input type="text"
+							title="totalHousingExpense" id="totalHousingExpense"
+							name="totalHousingExpense" class="form-control currencyFund"
+							ng-model="data.editable.totalHousingExpense" />
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+					<div class="form-group">
+						<label class="control-label" for="monthsInReserve">Months
+							in Reserve:</label> <input type="text" title="monthsInReserve"
+							id="monthsInReserve" name="monthsInReserve" class="form-control"
+							ng-model="data.editable.monthsInReserve" />
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+					<div class="form-group">
+						<label class="control-label" for="unpaidPrincipal">Unpaid
+							Principal Balance:</label> <input type="text" title="unpaidPrincipal"
+							id="unpaidPrincipal" name="unpaidPrincipal" class="form-control currencyFund"
+							ng-model="data.editable.unpaidPrincipal" />
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+					<div class="form-group">
+						<label class="control-label" for="totalAsset">Borrower
+							Total Assets:</label> <input type="text" title="totalAsset"
+							id="totalAsset" name="totalAsset" class="form-control currencyFund"
+							ng-model="data.editable.totalAssets" />
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+					<div class="form-group">
+						<label class="control-label" for="requiredInvestment">Required
+							Investment:</label> <input type="text" title="requiredInvestment"
+							id="requiredInvestment" name="requiredInvestment"
+							class="form-control currencyFund" ng-model="data.editable.requiredInvestment" />
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+					<div class="form-group">
+						<label class="control-label" for="sellerContributionAmt">Seller
+							Contribution Amount:</label> <input type="text"
+							title="sellerContributionAmt" id="sellerContributionAmt"
+							name="sellerContributionAmt" class="form-control currencyFund"
+							ng-model="data.editable.sellerContributionAmount" />
+					</div>
+					<div class="alert alert-danger" ng-show="data.editable.sellerContributionPercent > 6">
+						Seller Contribution % may not be greater than 6%. Seller Contribution Amount and/or Base Loan Amount needs to be adjusted.
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+					<div class="form-group">
+						<label class="control-label" for="totalLiabilities">Borrower
+							Total Liabilities:</label> <input type="text" title="totalLiabilities"
+							id="totalLiabilities" name="totalLiabilities"
+							class="form-control currencyFund" ng-model="data.editable.totalLiabilities" />
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+					<div class="form-group">
+						<label class="control-label" for="totalFixedPayments">Total
+							Fixed Payments:</label> <input type="text" title="totalFixedPayments"
+							id="totalFixedPayments" name="totalFixedPayments"
+							class="form-control currencyFund" ng-model="data.editable.totalFixedPayments"/>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+					<div class="form-group">
+						<label class="control-label" for="sellerContributionPerc">Seller
+							Contribution %:</label> <input type="text" title="sellerContributionPerc"
+							id="sellerContributionPerc" name="sellerContributionPerc"
+							class="form-control"
+							ng-model="data.editable.sellerContributionPercent" ng-value="{{vm.calculateSellerContributionPercent()}}" readonly/>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+					<div class="form-group">
+						<label class="control-label" for="borrowerGrossIncome">Borrower
+							Gross Income:</label> <input type="text" title="borrowerGrossIncome"
+							id="borrowerGrossIncome" name="borrowerGrossIncome"
+							class="form-control currencyFund" ng-model="data.editable.grossIncome" />
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+					<div class="form-group">
+						<label class="control-label" for="borrowerClosingCosts">Borrower
+							Closing Costs:</label> <input type="text" title="borrowerClosingCosts"
+							id="borrowerClosingCosts" name="borrowerClosingCosts"
+							class="form-control currencyFund" ng-model="data.editable.closingCosts" />
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+					<div class="form-group">
+						<label class="control-label" for="debtToIncomeRatio">Total
+							Fixed Debt to Income Ratio:</label> <input type="text"
+							title="debtToIncomeRatio" id="debtToIncomeRatio"
+							name="debtToIncomeRatio" class="form-control"
+							ng-model="data.editable.fixedDebtIncomeRatio"  ng-value="{{vm.calculateTotalFixedDebtToIncomeRatio()}}" readonly/>
+					<div ng-show="vm.debtToIncomeAmountError" class="color-red">
+					{{vm.debtToIncomeAmountErrorText}}
+					</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+					<div class="form-group">
+						<label class="control-label" for="secondaryFinancingAmt">Secondary
+							Financing Amount:</label> <input type="text"
+							title="secondaryFinancingAmt" id="secondaryFinancingAmt"
+							name="secondaryFinancingAmt" class="form-control currencyFund"
+							ng-model="data.editable.secondaryFinancingAmount" ng-change="vm.secondaryFinancingAmountValidation()" />
+					<div ng-show="secondaryFinancingAmount" class="color-red">Secondary
+							Financing Amount is required</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+					<div class="form-group">
+						<label class="control-label" for="secondaryFinancingSrc">Secondary
+							Financing Source:</label> <select class="form-control"
+							title="secondaryFinancingSrc" id="secondaryFinancingSrc"
+							ng-model="data.editable.secondaryFinancingSourceCode" ng-change="vm.secondaryFinancingSourceCodeValidation();">
+							<option value="">Select Secondary Financing
+								Source</option>
+							<option ng-selected = "data.editable.secondaryFinancingSourceCode == option.referenceCodeValue" ng-repeat="option in vm.secondaryFinancingOptions" value="{{option.referenceCodeValue}}">{{option.referenceCodeName}}</option>
+						</select>
+						<div ng-show="secondaryFinancingSourceCode" class="color-red">Secondary Financing
+								Source is required</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+					<div class="form-group">
+						<label class="control-label" for="eemImprovementAmt">EEM
+							Improvement Amount:</label> <input type="text" title="eemImprovementAmt"
+							id="eemImprovementAmt" name="eemImprovementAmt"
+							class="form-control currencyFund"
+							ng-model="data.editable.eemImprovementAmount" />
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row m-top30">
+			<div class="panel-group" id="fund-sub-tabs" role="tablist"
+				aria-multiselectable="true">
+				<div class="panel panel-default" ng-init="giftExpanded = false">
+					<div class="panel-heading" role="tab" id="headingOneOne">
+						<h4 class="panel-title">
+							<a href id="gift-title" ng-click="giftExpanded = !giftExpanded"
+								data-toggle="collapse" data-target="#collapseOneOne"
+								aria-expanded="false" aria-controls="collapseOneOne"> <span
+								id="expand-collapse-gift"
+								ng-class="{'glyphicon': true, 'glyphicon-plus': !giftExpanded, 'glyphicon-minus': giftExpanded}"></span>
+								Gift Letter(s)
+							</a>
+						</h4>
+					</div>
+					<div id="collapseOneOne" class="panel-collapse collapse"
+						role="tabpanel" aria-labelledby="headingOneOne">
+						<div class="panel-body">
+							<div role="tabpanel" class="tab-pane" id="giftTicket">
+								<div class="row" ng-repeat="ticket in data.editable.giftTickets" ng-init="vm.maskFieldsForGifts()">
+									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
+											<div class="form-group">
+												<label class="control-label" for="giftAmount{{$index}}">Gift
+													Amount:</label> <input type="text" title="giftAmount{{$index}}"
+													id="giftAmount{{$index}}" name="giftAmount{{$index}}"
+													class="form-control giftCurrencyFund" ng-model="ticket.amount" />
+											</div>
+											<div id="giftAmountErrorMsg{{$index}}" class="alert alert-danger" ng-show="vm.giftAmountError{{$index}}">
+												Gift Amount cannot be 0
+											</div>
+										</div>
+										<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+											<div class="form-group">
+												<label class="control-label" for="giftSource{{$index}}">Gift
+													Source:</label> <select class="form-control"
+													title="giftSource{{$index}}" id="giftSource{{$index}}"
+													ng-model="ticket.sourceCode">
+													<option value="">Select Gift Source</option>
+													<option ng-selected="ticket.sourceCode == option.referenceCodeValue" ng-repeat="option in vm.giftOptions" value="{{option.referenceCodeValue}}">{{option.referenceCodeDescription}}</option>
+												</select>
+											</div>
+											<div id="giftSourceErrorMsg{{$index}}" class="alert alert-danger" ng-show="vm.giftSourceError{{$index}}">
+												Gift Source cannot be empty
+											</div>
+										</div>
+										<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+											<div class="form-group">
+												<label class="control-label" for="giftComment{{$index}}">Gift Comment:</label>
+												<textarea title="giftComment{{$index}}"
+													id="giftComment{{$index}}" name="giftComment{{$index}}"
+													class="form-control" ng-model="ticket.comment" maxLength="255"></textarea>
+											</div>
+											<div id="giftCommentErrorMsg{{$index}}" class="alert alert-danger" ng-show="vm.giftCommentError{{$index}}">
+												Gift Comment cannot be empty
+											</div>
+										</div>
+										<div class="col-lg-1 col-md-6 col-sm-12 col-xs-12">
+											<div class="form-group">
+												<button id="giftDelete{{$index}}" class="giftTicketRemove" ng-click="removeGiftTicket(ticket)">Remove</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<button id="addGiftTicket" ng-show="data.editable.giftTickets.length < 2" ng-click="addGiftTicket()">Add Gift Letter</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-11 col-lg-offset-1 col-md-12 col-sm-12 col-xs-12">
+				<div class="pull-right m-top25">
+					<a id="saveBorrowerFunds" class="btn btn-success m-right30 lender-btn-next background-red" ng-click="vm.saveBorrowerFundToCloseData()" ng-disabled="!vm.validateForm() && vm.borrFundsvalidation()">Save</a>
+					<button id="clearBorrowerFunds" data-toggle="modal" data-target="#clearBorrowerFundData"
+						class="btn btn-success lender-btn-next background-red" ng-click="cancelButton()">Cancel</button>
+				</div>
+			</div>
+		</div>
+		
+		<div class="modal fade rollIn" id="clearBorrowerFundData" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content cart-on-main">
+					<div class="modal-header background-red">
+						<button type="button" class="close close-login"
+							data-dismiss="modal">&times;</button>
+						<h4 class="modal-title align-center color-fff font_family_fft">Remove</h4>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="text-center m-btm20">
+								<div class="f-size18 m-btm20">Are you sure you want to
+									discard unsaved changes?</div>
+								<div class="col-lg-offset-3 col-lg-6 col-lg-offset-3 m-btm20">
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+										<button class="btn btn-block pull-left align-yesBtn background-gold"
+											ng-click="vm.resetBorrowerFundData()">Yes</button>
+									</div>
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+										<button class="btn btn-block pull-right align-noBtn background-gold"
+											data-dismiss="modal">No</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

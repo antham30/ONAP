@@ -1,0 +1,399 @@
+ <!DOCTYPE html>
+<html ng-app="app" lang="en">
+<!-- User https://github.com/johnpapa/generator-hottowel Yeoman Project to generate proper style-guided -->
+
+<head>
+    <title>HUD ONAP Case Processing System</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="content-type"  context="text/html; charset=UTF-8"/>
+	<link type="text/css" rel="stylesheet" href="css/reset.css" />
+
+    <link type="text/css" rel="stylesheet" href="css/login.css" />
+    <link type="text/css" rel="stylesheet" href="css/usptostrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="css/main.css" />
+    <link type="text/css" rel="stylesheet" href="lib/loading-bar/loading-bar.css" />
+    <link type="text/css" rel="stylesheet" href="lib/jquery-ui/jquery-ui.min.css" />
+  
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/actions-menu.css">
+    <link rel="stylesheet" href="css/ng-table.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/jquery.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/media-queries.css" type="text/css"> 
+ 
+    <link href="css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="css/angular-datatables.css" rel="stylesheet" />
+	
+    <link href="font-awesome-4.4.0/css/font-awesome.min.css" rel=stylesheet type="text/css" media=all>
+    <link href="css/angular-block-ui.min.css" rel="stylesheet" />
+    <link href="css/toastr.min.css" rel="stylesheet" />
+   <!--[if gte IE 8]>
+ <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+<![endif]-->
+   
+  
+ 
+
+
+    <style>
+        .body-container {
+            margin-right: auto;
+            margin-left: auto;
+            background: #fff;
+        }
+        
+        @media ( max-width: 650px) {
+            .logo {
+                display: none;
+            }
+        }
+        
+        @media ( min-width: 768px) {}
+        
+        @media ( min-width: 992px) {
+            .body-container {
+                width: 1125px;
+            }
+        }
+        
+        .body-container--fluid {
+            width: 90%;
+        }
+        
+        .body-container:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+
+    
+</head>
+
+<body style="background: #ececec;">
+<div class="body-container">
+
+<!-- header -->
+<div class="app-header container-fluid">
+		<div class="row">
+		<div class="col-md-2 col-lg-2 col-sm-3 col-xs-1">
+		<img id="onaplogo" src="images/HUD/onap-logo.png" alt="ONAP" />
+		</div>
+			<div class="col-md-8 col-lg-8 col-sm-7 col-xs-10 text-left" id="main-title">
+				<h1>ONAP Loan Origination System</h1>
+				<h2>U.S. Department of Housing and Urban Development</h2>
+			</div>
+			
+			<div class="col-md-2 col-lg-2 col-sm-2 col-xs-1" id="hudlogo">
+				<img src="images/logo.png" alt="logo"/>
+			</div>
+		</div>
+</div>
+
+        <!-- Menu -->
+        <div ng-controller="BaseController as baseCtrl">
+        	<div ng-if="baseCtrl.userIsAuthenticated()">
+				<actions-menu></actions-menu>
+			</div>
+		</div> 
+		<!-- End menu -->
+        <div ng-if="authorizationFailure" class="ng-cloak">
+            <ng-include src="'view/error_accessDenied.view.html'"></ng-include>
+        </div>
+
+        <!-- Main content view -->
+        <!--TODO: commented out - security <div ng-if="!authorizationFailure">-->
+        <div ng-if="true">
+            <!--  			<div ng-view class="view-animate" class="ng-cloak"></div> -->
+           <div ng-view class="ng-cloak"></div>
+
+        </div>
+        <!-- Messages required note -->
+			<div class="row">
+				<div class="col-lg-11 col-lg-offset-1 col-md-11 col-md-offset-1 col-xs-12 m-top60">
+					<span class="color-red">*</span> Indicates required field</span>
+				</div>
+			</div>
+        <!-- End messages required note -->
+        <!-- Flash messages -->
+        <ng-include src="'view/includes/_flash.html'"></ng-include>
+        <!-- End flash messages -->
+        
+        
+        <!-- Inactivity warning modal -->
+	<div ng-controller="BaseController as baseCtrl">
+				<div class="modal fade rollIn" id="idleWarning" role="dialog">
+					<div class="modal-dialog">
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header background-red">
+								<button type="button" class="close close-login"
+									data-dismiss="modal">&times;</button>
+								<h4 class="modal-title align-center color-fff font_family_fft">Remove</h4>
+							</div>
+							<div class="modal-body">
+								<div class="row">
+									<div class="text-center m-btm20">
+										<div class="f-size18 m-btm20 col-md-offset-2 col-lg-offset-2 col-md-8 col-lg-8 col-xs-12 col-sm-12">You have been inactive for 10 minutes. You will automatically be logged out in {{baseCtrl.countdown}} seconds.</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+	</div>
+
+
+
+		<!-- End inactivity warning modal -->
+		
+		<!-- Inactivity warning modal -->
+				<div class="modal fade rollIn" id="indexSuccessModal" role="dialog">
+					<div class="modal-dialog">
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header background-red">
+								<button type="button" class="close close-login"
+									data-dismiss="modal">&times;</button>
+								<h4 class="modal-title align-center color-fff font_family_fft">Success</h4>
+							</div>
+							<div class="modal-body">
+								<div class="row">
+									<div class="text-center m-btm20">
+										<div class="f-size18 m-btm20 col-md-offset-2 col-lg-offset-2 col-md-8 col-lg-8 col-xs-12 col-sm-12">{{ $root.flashMessage }}</div>
+									</div>
+								</div>
+								<div class="col-lg-offset-5 col-lg-7 m-btm20">
+                                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6">
+                                            <button class="btn btn-danger btn-block align-noBtn background-gold" data-dismiss="modal">OK</button></div>
+                                </div>
+							</div>
+						</div>
+					</div>
+				</div>
+		<!-- End inactivity warning modal -->
+
+        <!-- Footer -->
+        
+ <div id="noprintfooter" class="footer" style="text-align:center">
+For technical assistance and/or questions relating to ONAP-LOS, please email <a href="mailto:support.onap.los@hud.gov" class="color-blue">support.onap.los@hud.gov</a>
+<br><br>
+
+<a href="http://espanol.hud.gov/" title="Busque Información en Español">Busque Información en Español</a>   |   
+<a href="HUD/accessibility" title="Accessibility">Accessibility</a>   |   
+<a href="HUD/contact" title="Contact Info">Contact Info</a>  |   
+<a href="HUD/privacy_policy" title="Privacy Policy">Privacy Policy</a>   |   
+<a href="HUD/program_offices/administration/foia" title="Freedom Of Information Act">FOIA</a>   |   
+<a href="HUD/library/bookshelf11" title="Web Management and Web Policies" target="_blank">Web Management and Web Policies</a> 
+
+<br>
+<a href="/portal/page/portal/HUD/program_offices/oig" title="Inspector General">Inspector General</a>  |  <a href="HUD/program_offices/eeo/nofearactfy" title="No Fear Act">No Fear Act</a>  |  <a href="http://www.paymentaccuracy.gov/" title="PaymentAccuracy.gov" target="_blank">PaymentAccuracy.gov</a> 
+<br>
+<br>
+
+</div>
+<div id="noprintfooter1" class="footer" style="text-align:center">
+<div style="background-color: #ECECEC;">
+<a class="footer-logo" href="http://www.hud.gov" title="The U.S. Department of Housing and Urban Development"><img src="images/footer1.jpg" alt="The U.S. Department of Housing and Urban Development" width="40" height="40"></a>
+<a class="footer-logo" href="http://whitehouse.gov" title="WhiteHouse.gov, Welcome to the White House"><img src="images/footer2.gif" alt="WhiteHouse.gov, Welcome to the White House" width="47" height="30"></a>
+<a class="footer-logo" href="http://www.usa.gov" title="The U.S. Governments Official Web Portal"><img src="images/footer3.gif" alt="The U.S. Governments Official Web Portal" width="80" height="24"></a>
+<a class="footer-logo" href="HUD/program_offices/fair_housing_equal_opp" title="Fair Housing"><img src="images/footer4.gif" alt="Fair Housing" width="30" height="20"></a>
+
+<hr width="455">
+U.S. Department of Housing and Urban Development<br>
+451 7th Street S.W., Washington, DC 20410<br>
+Telephone: (202) 708-1112 &nbsp;&nbsp;&nbsp;&nbsp;TTY: (202) 708-1455<br>
+<a class="color-bluetext bg-fff" href="HUD/localoffices">Find the address of the HUD office near you</a>
+
+</div>
+</div>
+
+ <!-- <script type="text/javascript">
+var pattern1 = /http:\/\/portal\.hud\.gov/i
+var pattern2 = /src/
+
+var qry = location.search;
+var url = location;
+
+qry = qry.replace(/\?/, '');
+qrys = qry.split("&");
+
+ if((pattern1.test(url)) && ((qrys.length==1 && qrys[0].length==0) || (qrys.length==1 && pattern2.test(qrys[0].toString())))) 
+ {
+  var fa = document.createElement('script');
+  fa.type = 'text/javascript';
+  fa.src = ("documents/huddoc?id=Univ-Federated-Analytics.js");
+  fa.setAttribute('id', '_fed_an_ua_tag');
+  fa.setAttribute('language', 'javascript');
+  document.body.appendChild(fa);
+ }
+</script>-->
+
+<script type="text/javascript"> 
+//<![CDATA[
+// var _tag=new WebTrends();
+//]]>
+</script>
+<script type="text/javascript"> 
+//<![CDATA[
+// _tag.dcsCustom=function(){
+// Add custom parameters here.
+//_tag.DCSext.param_name=param_value;
+// }
+// _tag.dcsCollect();
+//]]>
+</script>
+<noscript>
+<div><img alt="DCSIMG" id="DCSIMG" width="1" height="1" src="http://webtrendscs.hud.gov/dcsupu8ep10000wgaolwg4u6y_1o3b/njs.gif?dcsuri=/nojavascript&amp;WT.js=No&amp;DCS.dcscfg=1&amp;WT.tv=9.4.0&amp;dcssip=www.hud.gov"/></div>
+</noscript>
+<!-- end post footer -->
+        
+        
+    <!--  framework & plugins -->
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/angular.min.js"></script>
+	 
+    <script src="js/angular-datatables.min.js"></script>
+	<script src="js/jquery.dataTables.min.js"></script>
+	<script src="lib/jquery-ui/jquery-ui.min.js"></script>
+	<script src="js/dataTables.tableTools.min.js"></script>
+
+  
+  	<script src="js/bootstrap.min.js"></script>
+    <script src="lib/angular-1.2.20/angular-route.js"></script>
+    <!--  Need to get minified version -->
+    <script src="js/angular-ui-router.min.js"></script>
+    <script src="lib/ng-file-upload/ng-file-upload-shim.min.js"></script>
+    <script src="lib/ng-file-upload/ng-file-upload.min.js"></script>
+
+    <script src="js/angular-cookies.min.js"></script>
+    <script src="js/angular-idle.min.js"></script>
+   
+    <script src="lib/loading-bar/loading-bar.js"></script>
+    <script src="lib/elif.js"></script>
+    
+    
+    <script src="app.js"></script>
+    <script src="core/configure.js"></script>
+    <script src="core/routes.js"></script>
+    <script src="core/constants.js"></script>
+     
+
+    <script src="lib/aes.js"></script>
+    <script src="lib/AesUtil.js"></script>
+    <script src="lib/pbkdf2.js"></script>
+    <script src="lib/pdf.js"></script>
+    <script src="lib/jspdf.min.js"></script>
+    <script src="js/ng-table.min.js"></script>
+    
+    <!-- SERVICES -->
+    <script src="services/authentication.service.js"></script>
+    <script src="services/flash.service.js"></script>
+    <script src="services/loanSearch.service.js"></script>
+    <script src="services/loanDetails.service.js"></script>
+    <script src="services/cases.service.js"></script>
+    <script src="services/caseNumberRequestForm.service.js"></script>
+    <script src="services/logging.service.js"></script>
+    <script src="services/commonService.js"></script>
+    <script src="services/commonForm.service.js"></script>
+    <script src="services/caseUpdate.service.js"></script>
+    <script src="services/extApi.service.js"></script>
+    <script src="services/sharedData.service.js"></script>
+    <script src="services/calculator.service.js"></script>
+    <script src="services/document.service.js"></script>
+    <script src="services/user.service.js"></script>
+    <!-- git chnages -->
+    <!-- CONTROLLERS -->
+    <script src="controller/logoutController.js"></script>
+    <script src="controller/base.controller.js"></script>
+    <script src="controller/home.controller.js"></script>
+    <script src="controller/user.controller.js"></script>
+    <script src="controller/loanSearch.controller.js"></script>
+    <script src="controller/cancelSearch.controller.js"></script>
+    <script src="controller/extendExpireDate.controller.js"></script>
+    <script src="controller/loanDetails.controller.js"></script>
+    <script src="controller/caseNumberRequestForm.controller.js"></script>
+    <script src="controller/borrowerTabController.js"></script>
+    <script src="controller/changePasswordController.js"></script>
+    <script src="controller/lenderTabController.js"></script>
+    <script src="controller/cohortController.js"></script>
+    <script src="controller/dailyController.js"></script>
+    <script src="controller/loanTabController.js"></script>
+    <script src="controller/allTabController.js"></script>
+    <script src="controller/lenderDashboardController.js"></script>
+    <script src="controller/olgDashboardController.js"></script>
+    <script src="controller/olgCasesDashboardController.js"></script>
+    
+
+    <script src="controller/caseReviewController.js"></script>
+    <script src="controller/addressMaintenanceController.js"></script>
+	<script src="directives/case-update/lender-tab/lenderTab.controller.js"></script>
+	<script src="directives/case-update/lender-tab/lenderTab.directive.js"></script>
+	<script src="directives/case-update/borrower-tab/borrowerTab.controller.js"></script>
+	<script src="directives/case-update/borrower-tab/borrowerTab.directive.js"></script>
+	<script src="directives/case-update/property-tab/propertyTab.controller.js"></script>
+	<script src="directives/case-update/property-tab/propertyTab.directive.js"></script>
+	<script src="directives/case-update/loan-tab/loanTab.controller.js"></script>
+	<script src="directives/case-update/loan-tab/loanTab.directive.js"></script>
+	<script src="directives/case-update/documents-tab/documentsTab.controller.js"></script>
+	<script src="directives/case-update/documents-tab/documentsTab.directive.js"></script>
+	<script src="directives/case-update/endorsement-tab/endorsementTab.controller.js"></script>
+	<script src="directives/case-update/endorsement-tab/endorsementTab.directive.js"></script>
+	<script src="subsdy/subsdyService.js"></script>
+	<script src="subsdy/subsdyController.js"></script>
+	<script src="controller/ManageMortageLimitController.js"></script>
+	<script src="controller/ManageDgUnderwriters.js"></script>
+	<script src="controller/uploadLgFeeController.js"></script>
+    <!-- <script src="controller/reviewTabController.js"></script>-->
+    <script src="controller/propertyTabController.js"></script>
+    <script src="controller/uploadDocumentsController.js"></script>
+	<script src="controller/reserveFundsController.js"></script>
+    <script src="services/appraisalLogging.service.js"></script>
+    <script src="controller/appraisal-logging.controller.js"></script>
+    <script src="directives/appraisal-logging-forms/property/property-form.controller.js"></script>
+    <script src="directives/appraisal-logging-forms/property/property-form.directive.js"></script>
+    <script src="directives/appraisal-logging-forms/neighborhood/neighborhood-form.controller.js"></script>
+    <script src="directives/appraisal-logging-forms/neighborhood/neighborhood-form.directive.js"></script>
+    <script src="directives/appraisal-logging-forms/site/site-form.controller.js"></script>
+    <script src="directives/appraisal-logging-forms/site/site-form.directive.js"></script>
+    <script src="directives/appraisal-logging-forms/physical-char/physical-char-form.controller.js"></script>
+    <script src="directives/appraisal-logging-forms/physical-char/physical-char-form.directive.js"></script>
+    <script src="directives/appraisal-logging-forms/prior-sale-info/prior-sale-info-form.controller.js"></script>
+    <script src="directives/appraisal-logging-forms/prior-sale-info/prior-sale-info-form.directive.js"></script>
+    <script src="directives/appraisal-logging-forms/reconciliation/reconciliation-form.controller.js"></script>
+    <script src="directives/appraisal-logging-forms/reconciliation/reconciliation-form.directive.js"></script>
+    <script src="directives/case-update/loan/case-review-borrower-funds/case-review-borrower-funds.controller.js"></script>
+    <script src="directives/case-update/loan/case-review-borrower-funds/case-review-borrower-funds.directive.js"></script>
+    <script src="directives/case-update/loan/adjust-funds-reserved/adjust-funds-reserved.controller.js"></script>
+    <script src="directives/case-update/loan/adjust-funds-reserved/adjust-funds-reserved.directive.js"></script>
+    <script src="controller/login.controller.js"></script>
+    <script src="services/login-factory.js"></script>
+    <script src="directives/only-number.js"></script> 
+    <script src="directives/actions-menu/actions-menu.module.js"></script>
+    <script src="directives/focusOnShow.directive.js"></script>
+    <script src="directives/allowPattern.directive.js"></script>
+    <script src="services/actionsMenu.service.js"></script>
+    <script src="directives/actions-menu/actions-menu.controller.js"></script>
+    <script src="directives/actions-menu/actions-menu.directive.js"></script>
+    <script src="directives/case-details/case-details.module.js"></script>
+    <script src="directives/case-details/case-details.controller.js"></script>
+  	<script src="directives/case-details/case-details.directive.js"></script>
+  	<script src="directives/preventTypingGreater.js"></script>
+  	<script src="directives/endorsement/lg-fee-paid/lg-fee-paid-form.controller.js"></script>
+  	<script src="directives/endorsement/lg-fee-paid/lg-fee-paid-form.directive.js"></script>
+  	<script src="js/jquery.mask.min.js"></script>
+  	<script src="js/jquery.inputmask.bundle.min.js"></script>
+  	<script src="js/angular-messages.min.js"></script>
+  	<script src="js/angular-block-ui.min.js"></script>
+  	<script src="js/toastr.min.js"></script>
+  	<script src="js/FileSaver.js"></script>
+    <script src="core/main.js"></script>
+	 
+</div>
+</body>
+
+</html>

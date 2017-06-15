@@ -1,0 +1,274 @@
+.m-h-225{
+	min-height: 225px;
+}
+
+.m-r-10{
+	margin-right:10px;
+}
+
+.m-t-9{
+	margin-top:9px;
+}
+
+.login-border{
+	border-top:2px solid #1C4F82;
+	margin-bottom: 20px;
+}
+
+.panel-color{
+	 background-color: #1C4F82 !important;
+
+}
+
+.panel-shadow{
+	box-shadow: 0px 5px 0px #A7A7A7, 0px 6px 15px #A7A7A7, 1px 5px 8px #A7A7A7;
+	border-color: white !important;
+}
+
+.login-btn-color{
+	background-color: #208ED3 !important;
+	border-color: #208ED3 !important;
+}
+
+.reset-btn-color{
+	background-color: #4B4F51 !important;
+	border-color: #4B4F51 !important;
+}
+
+.a-color{
+	color: #6FA1CC !important;
+}
+
+.single-btn-color{
+	background-color: #93C245 !important;
+	border-color: #93C245 !important;
+}
+
+.login-text{
+	font-size: 20px;
+    color: #515151;
+}
+.home-text{
+	color: #B61B29;
+	margin-bottom:15px;
+	font-weight: bold;
+}
+
+.login-header-border{
+	border-top:1px solid #8297AF;
+	margin-bottom:20px;
+}
+
+.app-header{
+    width: 100%;
+    height: 140px;
+	background: #ffd769;
+	background: -moz-linear-gradient(top, #ffd769 0%, #efb401 100%);
+	background: -webkit-linear-gradient(top, #ffd769 0%,#efb401 100%);
+	background: linear-gradient(to bottom, #ffd769 0%,#efb401 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffd769', endColorstr='#efb401',GradientType=0 );
+}
+
+.w-22{
+	width:22px;
+}
+
+
+.connect-text{
+	color: #00295A;
+    font-weight: bold;
+    text-decoration: none;
+    padding-right:20px;
+    cursor:pointer;
+}
+
+.connect-text a:hover{
+	color: #600;
+    font-weight: bold;
+    text-decoration: none;
+}
+.fontsize-12{
+	font-size:12px;
+}
+.app-footer{
+	background-image: url('images/footer.jpg');
+	height: 131px;
+}
+
+.footer-content{
+	padding-top:50px;
+}
+
+.footer-images-pad{
+	padding: 20px 50px;
+}
+
+body{
+	    background-color: #ECECEC;
+}
+
+.footer-text a{
+	color: #00295A;
+    font-weight: bold;
+    text-decoration: none;
+    cursor:pointer;
+}
+
+.footer-text a:hover{
+		color: #701010;
+	    font-weight: bold;
+    text-decoration: underline;
+}
+
+.footer-link a{
+	color: #701010;
+}
+
+.footer-link a:hover{
+	text-decoration: underline;
+	cursor:pointer;
+}
+
+.error-color{
+	color:red;
+}
+
+.w-150{
+	width: 150px;
+}
+
+
+/*Start Wizard*/
+
+.bootstrapWizard {
+    display: block;
+    list-style: none;
+    padding: 0;
+    position: relative;
+    width: 100%
+}
+
+.bootstrapWizard a:hover,.bootstrapWizard a:active,.bootstrapWizard a:focus {
+    text-decoration: none
+}
+
+.bootstrapWizard li {
+    display: block;
+    float: left;
+    width: 25%;
+    text-align: center;
+    padding-left: 0
+}
+
+.bootstrapWizard li:before {
+    border-top: 3px solid #55606E;
+    content: "";
+    display: block;
+    font-size: 0;
+    overflow: hidden;
+    position: relative;
+    top: 11px;
+    right: 1px;
+    width: 100%;
+    z-index: 1
+}
+
+.bootstrapWizard li:first-child:before {
+    left: 50%;
+    max-width: 50%
+}
+
+.bootstrapWizard li:last-child:before {
+    max-width: 50%;
+    width: 50%
+}
+
+.bootstrapWizard li.complete .step {
+    background: #0aa66e;
+    padding: 1px 6px;
+    border: 3px solid #55606E
+}
+
+.bootstrapWizard li .step i {
+    font-size: 10px;
+    font-weight: 400;
+    position: relative;
+    top: -1.5px
+}
+
+.bootstrapWizard li .step {
+    background: #B2B5B9;
+    color: #fff;
+    display: inline;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 12px;
+    padding: 7px 13px;
+    border: 3px solid transparent;
+    border-radius: 50%;
+    line-height: normal;
+    position: relative;
+    text-align: center;
+    z-index: 2;
+    transition: all .1s linear 0s
+}
+
+.bootstrapWizard li.active .step,.bootstrapWizard li.active.complete .step {
+    background: #0091d9;
+    color: #fff;
+    font-weight: 700;
+    padding: 7px 13px;
+    font-size: 15px;
+    border-radius: 50%;
+    border: 3px solid #55606E
+}
+
+.bootstrapWizard li.complete .title,.bootstrapWizard li.active .title {
+    color: #2B3D53
+}
+
+.bootstrapWizard li .title {
+    color: #bfbfbf;
+    display: block;
+    font-size: 13px;
+    line-height: 15px;
+    max-width: 100%;
+    position: relative;
+    table-layout: fixed;
+    text-align: center;
+    top: 20px;
+    word-wrap: break-word;
+    z-index: 104
+}
+
+.wizard-actions {
+    display: block;
+    list-style: none;
+    padding: 0;
+    position: relative;
+    width: 100%
+}
+
+.wizard-actions li {
+    display: inline
+}
+
+.tab-content.transparent {
+    background-color: transparent
+}
+
+#cacheReload {
+	background: #4E8EA3 !important;
+	border: 1px solid transparent !important;
+}
+
+#noprintfooter {
+	padding: 60px 0 0 0;
+}
+
+.footer-logo {
+	display: inline-block;
+	margin: 3px 28px;
+}
+
+/*End Wizard*/

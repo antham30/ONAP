@@ -1,0 +1,55 @@
+<!--main content starts-->
+<div class="container">
+	<div class="row" id="lenderdashboard_container">
+		<div class="col-lg-12 col-md-12 col-xs-12">
+			<div class="table-responsive">
+				<div id="dashboardHeadMarkForOlgCasesDashboard"></div>
+				<table id="example" dt-column-defs="dtColumnDefs" datatable="ng"
+					dt-options="dtOptions"
+					class="table table-responsive display table-bordered"
+					cellspacing="0">
+					<thead id="dashboardHead">
+						<tr>
+							<th class="text-center nosort">Case Number</th>
+							<th class="text-center nosort">Lender Name</th>
+							<th class="text-center nosort">Primary Borrower</th>
+							<th class="text-center nosort">Case Status</th>
+							<th class="text-center nosort">Loan Purpose</th>
+							<th class="text-center">Case Registered Date</th>
+							<th class="text-center">Case Expiration Date</th>
+							<th class="text-center">Funds Reserved Date</th>
+							<th class="text-center">Funds Expiration Date</th>
+							<th class="text-center">Base Mortgage</th>
+							<th class="text-center">Mortgage w/ Fee </th>
+							<th class="text-center">Date Submitted for Endorsement</th>
+							<th class="text-center">Endorsement Date</th>
+							<th class="text-center">Amount Endorsed</th>
+							<th class="text-center">Reviewer</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="caseDetails in vm.getAllCaseDetails">
+							<td><a href
+								ng-click="vm.openCaseReview(caseDetails)">{{caseDetails.caseNumber}}</a>
+							</td>
+							<td>{{caseDetails.lndrName}}</td>
+							<td>{{caseDetails.primaryBorrower}}</td>
+							<td class="dashboardBorrowerStyle">{{caseDetails.caseStatusDesc}}</td>
+							<td class="loanPurposeColumn">{{caseDetails.loanPrps}}</td>
+							<td>{{caseDetails.caseRgstDt}}</td>
+							<td>{{caseDetails.caseExptDt}}</td>
+							<td>{{caseDetails.fundsRsvdDt}}</td>
+							<td>{{caseDetails.fundsExptDt}}</td>
+							<td>{{caseDetails.baseMortg}}</td>
+							<td>{{caseDetails.mortgWithLgFee}}</td>
+							<td>{{caseDetails.dtSbmtForEndrsmnt}}</td>
+							<td>{{caseDetails.loanEndrsmntDt}}</td>
+							<td>{{caseDetails.amountEndorsed}}</td>
+							<td>{{caseDetails.assignee}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

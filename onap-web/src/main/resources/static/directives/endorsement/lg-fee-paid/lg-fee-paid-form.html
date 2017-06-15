@@ -1,0 +1,68 @@
+<div class="panel-group">
+	<div class="panel panel-default">
+		<div class="panel-heading" id="headingOne">
+			<h4 class="panel-title">
+				Confirm LG Fee Paid
+			</h4>
+		</div>
+		<div role="tabpanel">
+			<div class="panel-body">
+				<div role="tabpanel" class="tab-pane" id="lgFeeClose">
+					<div class="row">
+						<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 ">
+							<div class="form-group">
+								<label for="agencyTrackingID">Pay.gov Tracking ID:</label>
+								<input type="text" id="agencyTrackingID" name="Agency Tracking ID"
+								class="form-control currency" title="Agency Tracking ID:" ng-model="vm.agencyTrackingNumber" />
+								<div ng-show="" class="color-red">
+									{{}}
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 ">
+							<div class="form-group">
+								<label for="lgAmountDue">LG Fee Amount Due:</label>
+								<div id="lgAmountDue">
+									{{vm.lgAmountDue}}
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 ">
+							<div class="form-group">
+								<label for="lgFeeAmountPaid">LG Fee Paid Amount</label>
+								<div id="lgFeeAmountPaid" ng-show="vm.foundLGPaidDetails">
+									{{vm.lgFeeAmountPaid}}
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 ">
+							<div class="form-group">
+								<label for="lgFeePaidDate">LG Fee Paid Date</label>
+								<div id="lgFeePaidDate" ng-show="vm.foundLGPaidDetails">
+									{{vm.lgFeePaidDate}}
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12 ">
+							<a href class="btn btn-success m-right30 background-red"
+							ng-click="vm.confirmTrackingId()" ng-disabled="vm.agencyTrackingNumber == '' || vm.agencyTrackingNumber == null" 
+							id="confirmAgencyID">Confirm</a>
+						</div>
+					</div>
+					<div class="row color-red" ng-show="vm.notExistInPayGov">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+							<b>Tracking ID you entered does not exist in Pay.gov.</b>
+						</div>
+					</div>
+					<div class="row color-red" ng-show="vm.noMatch">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+							<b>The LG Fee Amount Due and LG Fee Amount Paid do not match. This loan package may not be submitted for endorsement.</b>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

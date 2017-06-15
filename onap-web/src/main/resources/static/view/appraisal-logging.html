@@ -1,0 +1,44 @@
+		<div class="container" id="appraisal-logging">
+		<div class="row">
+		<div class="col-md-12 col-xs-12 col-lg-12">
+			<case-details case-number="appraisalCtrl.caseNumber"></case-details>
+		</div>
+		</div>
+		<div class="row">
+		<div class="col-md-12 col-xs-12 col-lg-12">
+			<div class="caseReview">
+			<ul class="nav nav-tabs" role="tablist">
+			  <li role="presentation" class="active"><a ng-click="appraisalCtrl.removeFlash(); appraisalCtrl.getPropertyData()" aria-controls="property" role="tab" href data-toggle="tab" data-target="#property">Property</a></li>
+			 <li role="presentation"><a ng-click="appraisalCtrl.removeFlash(); appraisalCtrl.getNeighborhoodData()" role="tab" aria-controls="neighborhood" href data-toggle="tab" data-target="#neighborhood">Neighborhood</a></li>
+			  <li role="presentation"><a ng-click="appraisalCtrl.removeFlash(); appraisalCtrl.getSiteData()" role="tab" aria-controls="site" href data-toggle="tab" data-target="#site">Site</a></li>
+			  <li role="presentation"><a ng-click="appraisalCtrl.removeFlash(); appraisalCtrl.getPhysicalCharData()" aria-controls="physicalCharacteristics" role="tab" href data-toggle="tab" data-target="#physicalCharacteristics">Physical Characteristics</a></li>
+			  <li role="presentation"><a ng-click="appraisalCtrl.removeFlash(); appraisalCtrl.getPriorSaleData()" aria-controls="priorSaleInformation" role="tab" href data-toggle="tab" data-target="#priorSaleInformation">Prior Sale Information</a></li>
+			   <li role="presentation"><a ng-click="appraisalCtrl.removeFlash(); appraisalCtrl.getReconciliationData()" aria-controls="reconciliation" role="tab" href data-toggle="tab" data-target="#reconciliation">Reconciliation</a></li>
+			</ul>
+		<div class="tab-content">
+			<div role="tabpanel" class="tab-pane active" id="property">
+				<property-form data="appraisalCtrl.propertyData" case-number="{{appraisalCtrl.caseNumber}}" case-id="{{appraisalCtrl.caseId}}"></property-form>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="neighborhood">
+				<neighborhood-form data="appraisalCtrl.neighborhoodData" case-number="{{appraisalCtrl.caseNumber}}"></neighborhood-form>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="site">
+				<site-form data="appraisalCtrl.siteData" case-number="{{appraisalCtrl.caseNumber}}"></site-form>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="physicalCharacteristics">
+				<physical-char-form data="appraisalCtrl.physicalCharData" loan-id="{{appraisalCtrl.caseId}}"></physical-char-form>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="priorSaleInformation">
+				<prior-sale-info-form data="appraisalCtrl.priorSaleInfoData"></prior-sale-info-form>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="reconciliation">
+				<reconciliation-form data="appraisalCtrl.reconciliationData" loan-id="{{appraisalCtrl.caseId}}"></reconciliation-form>
+			</div>
+			<button class="lender-btn-next pull-left btn background-red" 
+			   id="propertyCRBtn" 
+			   ng-click="appraisalCtrl.openPropertyTab(appraisalCtrl.caseId, appraisalCtrl.caseNumber)">Case Update</button>
+		</div>
+		</div>
+		</div>
+		</div>
+		</div>

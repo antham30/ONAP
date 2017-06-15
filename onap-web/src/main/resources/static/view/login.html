@@ -1,0 +1,30 @@
+<div class="container"id="loginbox">
+    <div class="row">
+      <div class="col-lg-offset-3 col-lg-6 col-lg-offset-3 col-md-offset-2 col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class=" login-header background-red">
+                <h4 class="modal-title">Login</h4>
+            </div>
+            <div class="login-body" >
+                        <form name="loginForm" novalidate>
+                            <div class="form-group">
+                                <input type="text" required id="emailInput" class="form-control" placeholder="Username"  data-ng-model="lc.model.userLogOn" title="emailinput">
+              					<div class="error-color" data-ng-if="loginForm.username.$error.required && lc.data.formSubmitted">Username is required</div>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" required id="info" class="form-control" placeholder="Enter Your Password" maxlength="8" data-ng-model="lc.model.userPwd"  title="pwd" autocomplete="off">
+              					<div class="error-color" data-ng-if="loginForm.info.$error.required && lc.data.formSubmitted">Password is required</div>
+              					
+                            </div>
+                            <div class="form-group">
+                            	<input class="btn login-btn btn-lg background-red" id="login_button" type="submit" data-ng-click="lc.onLogin()" value="Login"/>
+                                <a id="reset-link" href class="color-bluetext a-bold f-size16 cursor-pointer text-capitalize" data-ng-click="lc.onReset();">
+                                     Reset</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>

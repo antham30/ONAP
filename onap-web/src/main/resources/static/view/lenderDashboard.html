@@ -1,0 +1,48 @@
+<!--main content starts-->
+<div class="container">
+	<div class="row" id="lenderdashboard_container">
+		<div class="col-lg-12 col-md-12 col-xs-12">
+			<div class="table-responsive">
+				<div id="dashboardHeadMark"></div>
+				<table id="example" dt-column-defs="dtColumnDefs" datatable="ng"
+					dt-options="dtOptions"
+					class="table table-responsive display table-bordered"
+					cellspacing="0">
+					<thead id="dashboardHead">
+						<tr>
+							<th class="text-center nosort">Case Number</th>
+							<th class="text-center dashboardBorrowerStyle">Primary
+								Borrower</th>
+							<th class="text-center nosort">Case Status</th>
+							<th class="text-center">Loan Purpose</th>
+							<th class="text-center">Case Registered</th>
+							<th class="text-center">Case Expires</th>
+							<th class="text-center">Funds Reserved</th>
+							<th class="text-center">Funds Expire</th>
+							<th class="text-center">Base Mortgage</th>
+							<th class="text-center">Mortgage w/Fee</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="caseDetails in getAllCaseDetails" ng-class="{'color-red' : isSuspendedCase(caseDetails.caseStatus)}">
+							<td><a href
+								ng-click="openCaseReview(caseDetails.caseId, caseDetails.caseNumber)">{{caseDetails.caseNumber}}</a>
+							</td>
+							<td class="dashboardBorrowerStyle">{{caseDetails.borrowerName}}</td>
+							<td class="caseStatusColumn">{{caseDetails.caseStatus |
+								lowercase}}</td>
+							<td class="loanPurposeColumn">{{caseDetails.loanPurpose |
+								lowercase}}</td>
+							<td>{{caseDetails.caseAssignmentDate}}</td>
+							<td>{{caseDetails.caseExpirationDate}}</td>
+							<td>{{caseDetails.fundRsrvdDate}}</td>
+							<td>{{caseDetails.fundExpirationDate}}</td>
+							<td class="text-right">${{caseDetails.loanAmount}}</td>
+							<td class="text-right">${{caseDetails.loanGuaranteeFee}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

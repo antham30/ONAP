@@ -1,0 +1,273 @@
+<!--main content starts-->
+<div class="container">
+	<div class="row m-top60">
+		<div class=" col-lg-12  col-md-12 col-sm-12 col-xs-12">
+		<h1 class="f-size text-capitalize report-fsize color-theme"> Daily ARC Report </h1>
+			<div class="m-top40">
+		
+				 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+										         <label  class="control-label"><i
+                                                                            class="fa fa-asterisk requiredField"></i>
+                                                                        Start Date</label>
+                                                                    <input type="text" title="start date"
+                                                                           class="form-control"
+                                                                           data-toggle="tooltip" data-placement="bottom"
+                                                                           ng-calendar ng-model="cohort.sdob"
+                                                                           id="strtDateOne"
+                                                                           placeholder="Start Date" readonly/>
+
+                                                                   <div ng-if="errorStrtDate"
+                                                                         class="color-red fontsize-12">
+																		 <span ng-bind="errorStrtDateReqText"></span>
+                                                                    </div>
+																	<div ng-if="strtdateError"
+                                                                         class="color-red fontsize-12"> 
+																		 <span ng-bind="errorStrtLtEndText"></span>
+                                                                    </div>
+										   </div>
+										    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+										         <label  class="control-label"><i
+                                                                            class="fa fa-asterisk requiredField"></i>
+                                                                        End Date</label>
+                                                                    <input type="text" title="end date"
+                                                                           class="form-control"
+                                                                           data-toggle="tooltip" data-placement="bottom"
+                                                                           ng-calendar ng-model="cohort.edob"
+                                                                           id="strtDattwo"
+                                                                           placeholder="End Date" readonly/>
+
+                                                                    <div ng-if="errorendDate"
+                                                                         class="color-red fontsize-12"> <span ng-bind="errorEndDateReqText"></span>
+                                                                    </div>
+																	<div ng-if="enddateError"
+                                                                         class="color-red fontsize-12">
+																		  <span ng-bind="errorEndGtStrtText"></span>
+                                                                    </div>
+										   </div>
+										   <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 ">
+										        <button type="submit"
+                                                class="btn btn-success  m-top25"
+                                                ng-click="saveCohort($index)" style="margin-right:15px"> Submit
+                                        </button>
+										   </div>
+										    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 displayContent">
+											<button  id="btnExport" ng-click="exportData()" class="btn btn-default excelCss  m-top30" >
+              <span class="glyphicon glyphicon-share "></span> Export to Excel
+            </button>
+			 <br />
+			 
+  <br />
+			<div class="table-responsive"  id="table_wrapper">
+			<table border="1"  id="example" datatable="ng"  class="table table-responsive display table-bordered" cellspacing="0"  bordercolor="#222">
+        <thead>
+            <tr>
+      
+
+                <th class="text-center v-align">Status</th>
+				<th class="text-center v-align">Tran Status</th>
+				<th class="text-center v-align">Case #</th>
+				<th class="text-center v-align">Mortgage Amount</th>
+				<th class="text-center v-align">Date Assigned</th>
+				<th class="text-center v-align">Cohort Year</th>
+				<th class="text-center v-align">Cohort Number</th>
+				<th class="text-center v-align">Firm<br>Amount</th>
+				<th class="text-center v-align">Firm Date</th>
+				<th class="text-center v-align">LG Cert Amount</th>
+				<th class="text-center v-align">LG Cert Date</th>
+				<th class="text-center v-align">Cohort Mod Year </th>
+				<th class="text-center v-align">Cancellation Date</th>
+				<th class="text-center v-align">LG Fee Amount</th>
+				<th class="text-center v-align">LG Fee Date</th>
+				<th class="text-center v-align">Borrower</th>
+				<th class="text-center v-align">CoBorrower</th>
+				<th class="text-center v-align">Lender</th>
+				<th class="text-center v-align">Address</th>
+				<th class="text-center v-align">City</th>
+				<th class="text-center v-align">State </th>
+				<th class="text-center v-align">ZIP</th>
+				<th class="text-center v-align">Region</th>
+				<th class="text-center v-align">Loan Purpose</th>
+				<th class="text-center v-align">Subsidy Key</th>
+				<th class="text-center v-align">Subsidy Rate</th>
+				<th class="text-center v-align">Closing Date</th>
+				<th class="text-center v-align">First Payment Date</th>
+				<th class="text-center v-align">Maturity Date</th>
+				<th class="text-center v-align">Interest Rate</th>
+				<th class="text-center v-align">Land Type</th>
+				<th class="text-center v-align">DG / NDG</th>
+				<th class="text-center v-align">Trans Date</th>
+				<th class="text-center v-align">Trans Time</th>
+				<th class="text-center v-align"> Firm Change</th>
+				<th class="text-center v-align"> Cert Change </th>
+				
+				<!--th class="text-center v-align">Subsidy Id</th>
+				<th class="text-center v-align">Subsidy Rate</th-->
+				<!--<th class="text-center">Issued Date</th>
+				<th class="text-center">Issued Amount</th>-->
+
+				     </tr>
+        </thead>
+        
+        <tbody>
+
+           <tr ng-repeat="dailydata in seconde">
+
+						<td>{{dailydata.status}}</td>
+					   <td>{{dailydata.status}}</td>
+						<!--<td>FC</td>-->
+						<td>{{dailydata.onapCaseNumber}}</td>
+						<td class="text-right">${{dailydata.mortgageAmount}} </td>
+						
+						<td nowrap="nowrap">{{dailydata.dateAssigned}} </td>
+						<td>{{dailydata.cohortYear}} </td>
+						<td>{{dailydata.cohortNumber}} </td>
+						<td class="text-right">${{dailydata.firmAmount}}</td>
+						<td nowrap="nowrap">{{dailydata.firmDate}} </td>
+						<td class="text-right">${{dailydata.lGCertAmount}} </td>
+						<td>{{dailydata.lGCertDate}} </td>
+						<td>{{dailydata.cohortModYear}} </td>
+						<td>{{dailydata.cancellationDate}} </td>
+						<td class="text-right"> ${{dailydata.lGFeeAmount}}</td>
+						<td>{{dailydata.lGFeeDate}} </td>
+						<td>{{dailydata.borrowerName}} </td>
+						<td>{{dailydata.coBorrower }}</td>
+						<td>{{dailydata.lenderName}} </td>
+						<td>{{dailydata.address}} </td>
+						<td>{{dailydata.city}} </td>
+						<td>{{dailydata.state}} </td>
+						<td>{{dailydata.zip }}</td>
+						<td>{{dailydata.region}} </td>
+						<td>{{dailydata.loanPurpose}} </td>
+						<td>{{dailydata.subsidyId}} </td>
+						<td>{{dailydata.sbsdyRate}} </td>
+						<td>{{dailydata.closingDate}} </td>
+						<td>{{dailydata.firstPaymentDate}} </td>
+						<td>{{dailydata.maturityDate}} </td>
+						<td>{{dailydata.intrestRate}} </td>
+						<td>{{dailydata.landType}} </td>
+						<td>{{dailydata.dgNdg}} </td>
+						<td nowrap="nowrap">{{dailydata.transactionDate}} </td>
+						<td nowrap="nowrap">{{dailydata.transactionTime }}</td>
+						<td nowrap="nowrap">{{dailydata.firmChange}}</td>
+						<td nowrap="nowrap">NEW</td>
+						
+            </tr>
+           
+           
+        </tbody>
+    </table>
+	
+		</div>
+	 <div id="exportable" style="display:none">
+			<table border="1">
+      <thead>
+            <tr>
+      
+
+                <th class="text-center v-align">Status</th>
+				<th class="text-center v-align">Tran Status</th>
+				<th class="text-center v-align">Case #</th>
+				<th class="text-center v-align">Mortgage Amount</th>
+				<th class="text-center v-align">Date Assigned</th>
+				<th class="text-center v-align">Cohort Year</th>
+				<th class="text-center v-align">Cohort Number</th>
+				<th class="text-center v-align">Firm<br>Amount</th>
+				<th class="text-center v-align">Firm Date</th>
+				<th class="text-center v-align">LG Cert Amount</th>
+				<th class="text-center v-align">LG Cert Date</th>
+				<th class="text-center v-align">Cohort Mod Year </th>
+				<th class="text-center v-align">Cancellation Date</th>
+				<th class="text-center v-align">LG Fee Amount</th>
+				<th class="text-center v-align">LG Fee Date</th>
+				<th class="text-center v-align">Borrower</th>
+				<th class="text-center v-align">CoBorrower</th>
+				<th class="text-center v-align">Lender</th>
+				<th class="text-center v-align">Address</th>
+				<th class="text-center v-align">City</th>
+				<th class="text-center v-align">State </th>
+				<th class="text-center v-align">ZIP</th>
+				<th class="text-center v-align">Region</th>
+				<th class="text-center v-align">Loan Purpose</th>
+				<th class="text-center v-align">Subsidy Key</th>
+				<th class="text-center v-align">Subsidy Rate</th>
+				<th class="text-center v-align">Closing Date</th>
+				<th class="text-center v-align">First Payment Date</th>
+				<th class="text-center v-align">Maturity Date</th>
+				<th class="text-center v-align">Interest Rate</th>
+				<th class="text-center v-align">Land Type</th>
+				<th class="text-center v-align">DG / NDG</th>
+				<th class="text-center v-align">Trans Date</th>
+				<th class="text-center v-align">Trans Time</th>
+				<th class="text-center v-align"> Firm Change</th>
+				<th class="text-center v-align"> Cert Change </th>
+				
+				<!--th class="text-center v-align">Subsidy Id</th>
+				<th class="text-center v-align">Subsidy Rate</th-->
+				<!--<th class="text-center">Issued Date</th>
+				<th class="text-center">Issued Amount</th>-->
+
+				     </tr>
+        </thead>
+        
+        <tbody>
+
+           <tr ng-repeat="dailydata in seconde">
+
+						<td>{{dailydata.status}}</td>
+					   <td>{{dailydata.status}}</td>
+						<!--<td>FC</td>-->
+						<td>{{dailydata.onapCaseNumber}}</td>
+						<td class="text-right">${{dailydata.mortgageAmount}} </td>
+						
+						<td nowrap="nowrap">{{dailydata.dateAssigned}} </td>
+						<td>{{dailydata.cohortYear}} </td>
+						<td>{{dailydata.cohortNumber}} </td>
+						<td class="text-right">${{dailydata.firmAmount}}</td>
+						<td nowrap="nowrap">{{dailydata.firmDate}} </td>
+						<td class="text-right">${{dailydata.lGCertAmount}} </td>
+						<td>{{dailydata.lGCertDate}} </td>
+						<td>{{dailydata.cohortModYear}} </td>
+						<td>{{dailydata.cancellationDate}} </td>
+						<td class="text-right"> ${{dailydata.lGFeeAmount}}</td>
+						<td>{{dailydata.lGFeeDate}} </td>
+						<td>{{dailydata.borrowerName}} </td>
+						<td>{{dailydata.coBorrower }}</td>
+						<td>{{dailydata.lenderName}} </td>
+						<td>{{dailydata.address}} </td>
+						<td>{{dailydata.city}} </td>
+						<td>{{dailydata.state}} </td>
+						<td>{{dailydata.zip }}</td>
+						<td>{{dailydata.region}} </td>
+						<td>{{dailydata.loanPurpose}} </td>
+						<td>{{dailydata.subsidyId}} </td>
+						<td>{{dailydata.sbsdyRate}} </td>
+						<td>{{dailydata.closingDate}} </td>
+						<td>{{dailydata.firstPaymentDate}} </td>
+						<td>{{dailydata.maturityDate}} </td>
+						<td>{{dailydata.intrestRate}} </td>
+						<td>{{dailydata.landType}} </td>
+						<td>{{dailydata.dgNdg}} </td>
+						<td nowrap="nowrap">{{dailydata.transactionDate}} </td>
+						<td nowrap="nowrap">{{dailydata.transactionTime }}</td>
+						<td nowrap="nowrap">{{dailydata.firmChange}}</td>
+						<td nowrap="nowrap">NEW</td>
+						
+            </tr>
+           
+                   
+           
+        </tbody>
+    </table>
+	
+	</div>
+		
+											</div>
+									   
+				
+				<!-- Tab panes -->
+				</div>
+		</div>
+	</div>
+</div>
+
+<!--main content ends-->

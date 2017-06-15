@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "caseIntake": {
+      "type": "object",
+      "properties": {
+        "caseNumber": {
+          "type": "string"
+        },
+        "caseStatusCode": {
+          "type": "string"
+        },
+        "caseNumberRequestDate": {
+          "type": "string"
+        },
+        "caseStatusDate": {
+          "type": "string"
+        },
+        "underwritingTypeCode": {
+          "type": "string"
+        },
+        "loanPurposeCode": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "middleInitial": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "suffix": {
+          "type": "string"
+        },
+        "ssn": {
+          "type": "string"
+        },
+        "personBirthDate": {
+          "type": "string"
+        },
+        "borrowerTypeCode": {
+          "type": "string"
+        },
+        "tribalAffiliationCode": {
+          "type": "string"
+        },
+        "street": {
+          "type": "string"
+        },
+        "lot": {
+          "type": "string"
+        },
+        "blkPlot": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "stateCode": {
+          "type": "string"
+        },
+        "zipCode": {
+          "type": "string"
+        },
+        "documentId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "caseNumber",
+        "caseStatusCode",
+        "caseNumberRequestDate",
+        "caseStatusDate",
+        "underwritingTypeCode",
+        "loanPurposeCode",
+        "firstName",
+        "middleInitial",
+        "lastName",
+        "ssn",
+        "personBirthDate",
+        "borrowerTypeCode",
+        "tribalAffiliationCode",
+        "street",
+        "lot",
+        "blkPlot",
+        "city",
+        "stateCode",
+        "zipCode"
+      ]
+    }
+  },
+  "required": [
+    "caseIntake"
+  ]
+}

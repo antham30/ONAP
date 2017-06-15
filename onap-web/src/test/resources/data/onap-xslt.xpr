@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="17.1">
+    <meta>
+        <filters directoryPatterns="" filePatterns="" positiveFilePatterns="" showHiddenFiles="false"/>
+        <options/>
+    </meta>
+    <projectTree name="onap-xslt.xpr">
+        <file name="intake-result.xml"/>
+        <file name="onap-intake-source.xml"/>
+        <file name="onap-intake2bpm.xsl"/>
+    </projectTree>
+</project>

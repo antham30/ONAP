@@ -1,0 +1,212 @@
+<!--
+  This is the exemplar view.  Please follow this for proper coding guidance.
+
+  * This view has dependent javascript in the main.js file.  there are two bindings on loanSearchView scoped items.
+  -->
+
+<section id="content">
+    <div class="container" style="padding:25px;">
+        <form role="form" ng-submit="vm.searchLoans()">
+            <div class="form-group col-sm-offset-4">
+                <div id="loanIdDiv">
+                    <label for="caseId1" class="control-label">Search By Case #</label>
+                    <input type="text" style="float:none; margin-right:10px; width:200px;" 
+                    	   placeholder="###-######" ng-model="searchloanId" 
+                    	   class="form-control form-control-width-md ng-pristine ng-valid" id="caseId1" name="cancelacase" autofocus>
+                    <br>
+                    
+                </div>
+                <p>
+                    <input type="submit" id="cancelSearchBtn" style="max-width:100px;" type="submit" name="cancelabtn" class="btn background-red" value="Search">
+                </p>
+                <p>
+        </form>
+
+        <div class="clear"></div>
+        </div>
+        <div class="clearfix"></div>
+        <div ng-controller="LoanSearchController" ng-if="vm.loan">
+            <div style="padding: 10px;" class="col-sm-12" ng-show="vm.searchComplete && vm.loan.caseNumber">
+                <table class="table table-sortable table-bordered table-striped" role="grid" id="resultsTable" 
+				ng-if="!vm.isOLG">
+                    <thead>
+                        <tr role="row">
+                            <th class="sortable" aria-sort="ascending" role="columnheader" scope="col">Case Number</th>
+                            <th class="sortable" aria-sort="none" role="columnheader" scope="col">Date Registered</th>
+                            <th class="sortable" aria-sort="none" role="columnheader" scope="col">Case Expires</th>
+                            <th class="sortable" aria-sort="none" role="columnheader" scope="col">Case Status</th>
+                            <th class="sortable" aria-sort="none" role="columnheader" scope="col">Loan Purpose</th>
+                            <th class="sortable" aria-sort="none" role="columnheader" scope="col">Primary Borrower</th>
+                            <th class="sortable" aria-sort="none" role="columnheader" scope="col">Base Mortgage</th>
+                            <th class="sortable" aria-sort="none" role="columnheader" scope="col">LG Fee</th>
+                             <th class="sortable" aria-sort="none" role="columnheader" scope="col">Cancellation</th>
+                            <th class="sortable" aria-sort="none" role="columnheader" scope="col" 
+                            	ng-if="vm.showAppraisalBtn && vm.requiresAppraisalLogging(vm.loan)">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background-color: #fff">
+                            <td id="caseNumber">{{vm.loan.caseNumber}}
+                            </td>
+                            <td id="dateRegistered">{{vm.loan.dateRegistered}}</td>
+                            <td id="dateExpires">{{vm.loan.dateExpires}}</td>
+                            <td id="caseStatus">{{vm.loan.caseStatus}}</td>
+                            <td id="loanPurpose">{{vm.loan.loanPurpose}}</td>
+                            <td id="primaryBorrower">{{vm.loan.primaryBorrowerFirstName}} {{vm.loan.primaryBorrowerMiddleInitial}} {{vm.loan.primaryBorrowerLastName}}</td>
+                          	<td id="baseMortgage">{{vm.loan.baseMortgage | currency}}</td>
+                        	<td id="loanGuaranteeFee">{{vm.loan.loanGuaranteeFee | currency}}</td>
+                        	<td id="loanGuaranteeFee1"> <button data-toggle="modal" data-target="#clearData"
+                                                     class="btn btn-success lender-btn-next background-red" ng-click="cancelButton()">Case Cancellation</button></td>
+                        	<td id="action" ng-if="vm.showAppraisalBtn && vm.requiresAppraisalLogging(vm.loan)">
+                        	   <a class="btn background-red" id="appraisalLoggingBtn" 
+                               ng-href="{{$root.contextPath}}/#/appraisalLogging/{{vm.loan.caseId}}/{{vm.loan.caseNumber}}">Appraisal Logging</a>
+                        	</td>
+                       
+                        </tr>
+                    </tbody>
+                </table>
+               <div class="table-responsive">
+                <table class="table table-sortable table-bordered table-striped " role="grid" id="resultsTable"
+				ng-if="vm.isOLG">
+                    <thead>
+                        <tr role="row">
+						 
+                            <th class="sortable text-center v-align" aria-sort="ascending" role="columnheader" scope="col">Case Number</th>
+                            <th class="sortable text-center v-align" aria-sort="none" role="columnheader" scope="col">Primary Borrower</th>
+                            <th class="sortable text-center v-align" aria-sort="none" role="columnheader" scope="col">Case Status</th>
+                            <th class="sortable text-center v-align" aria-sort="none" role="columnheader" scope="col">Loan Purpose</th>
+                            <th class="sortable text-center v-align" aria-sort="none" role="columnheader" scope="col">Case Registered Date</th>
+                            <th class="sortable text-center v-align" aria-sort="none" role="columnheader" scope="col">Case Expiration Date</th>
+                            <th class="sortable text-center v-align" aria-sort="none" role="columnheader" scope="col">Funds Reserved Date</th>
+                            <th class="sortable text-center v-align" aria-sort="none" role="columnheader" scope="col">Funds Expiration Date</th>
+                            <th class="sortable text-center v-align" aria-sort="none" role="columnheader" scope="col">Base Mortgage</th>
+                            <th class="sortable text-center v-align" aria-sort="none" role="columnheader" scope="col">Mortgage w/Fee</th>
+                           
+                            <th class="sortable text-center v-align" aria-sort="none" role="columnheader" scope="col" 
+                            	>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background-color: #fff">
+                            <td id="caseNumber"><span ng-bind="vm.loan.caseNumber"></span>
+                            </td>
+                            <td >{{vm.loan.borrowerName}}</td>
+                            <td ><span ng-bind="vm.loan.caseStatus"></span></td>
+                            <td ><span ng-bind="vm.loan.loanPurpose"></span></td>
+                            
+							<td ><span ng-bind="vm.loan.caseAssignmentDate"></span></td>
+							
+                             <td>
+							<span  >{{vm.loan.caseExpirationDate}}</span>
+		                              		
+							</td> 
+							
+							<td ><span ng-bind="vm.loan.fundRsrvdDate"></span></td>
+							<td><span ng-bind="vm.loan.fundExpirationDate"></span>
+		                              		
+							</td>
+                           <td >$<span ng-bind="vm.loan.loanAmount"></span></td>
+						   <td >$<span ng-bind="vm.loan.loanGuaranteeFee"></span></td>
+                           
+                        	<td>
+							<button data-toggle="modal" data-target="#clearData"
+                                                     class="btn btn-success lender-btn-next background-red" ng-click="cancelButton()">Case Cancellation</button>
+							</td>
+                        	
+                       
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+
+			   Search results are cached.
+                <button class="btn btn-info" style="max-width:140px;margin-left:10px;" id="cacheReload" ng-click="vm.refreshCache();">Refresh</button>
+            </div>
+        </div>
+        <div class="modal fade rollIn" id="clearData" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content cancel-on-main" style="width:112%">
+                        <div class="modal-header background-red">
+                            <button type="button" class="close close-login" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title align-center color-fff font_family_fft"> Remove</h4>
+                        </div>
+                        
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="text-center m-btm20 hideText">
+                                    <div class="f-size18 m-btm20 hideText">Are you sure you want to cancel the funds reserved for the amount of {{vm.loan.baseMortgage | currency}}?</div>
+                                    
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 hideText">
+                                            <button class="btn btn-danger btn-block pull-right align-yesBtn background-gold" ng-click="vm.clearAllFields()">Yes</button></div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 hideText">
+                                            <button class="btn btn-danger btn-block pull-left align-noBtn background-gold"  data-dismiss="modal">No</button></div>
+                                    </div>
+								<div class="text-center m-btm20 showText">
+                                    <div class="f-size18 m-btm20 ">
+										<div class="col-lg-12  col-md-12 col-sm-12 col-xs-12">
+                                                <div class="form-group">
+                                                    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                                                        <label class="control-label f-size14"><i class="fa fa-asterisk requiredField"></i>Reason for Cancelling the case:</label>
+                                                    </div>
+                                                    <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+                                                       <select name="canceldrop" id="cancelDropdown"  title="Reason for cancelling"
+																ng-model="vm.loan.reasonCnclCase"  class="form-control" 
+																>
+															<option value="">Select Reason for Cancelling the case</option>
+															<option ng-repeat="purpose in loanCancel" 
+																	value="{{purpose.referenceCodeValue}}" 
+																	ng-selected="vm.loan.reasonCnclCase === purpose.referenceCodeValue">{{purpose.referenceCodeName}}
+															</option>
+													<!--<option value="LRCL">Cancelled withdrawn by Lender</option>
+													<option value="LRCB">Cancelled withdrawn by Borrower</option>-->
+														</select>
+                                                        <div ng-show="vm.errorCancelCase" class="color-red">Reason for Cancelling the case is required</div>
+                                                    </div>
+                                                </div>
+									</div>
+                                    
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                                            <button class="btn btn-danger btn-block background-gold center-block m-top20" ng-if="!vm.isOLGAdmin" ng-click="vm.submitCancelBtn()">Submit</button></div> 
+											<button class="btn btn-danger btn-block background-gold center-block m-top20" ng-if="vm.isOLGAdmin" ng-click="vm.submitCancelBtnOLGAdmin()">Submit</button></div>
+                                      
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			  <div class="modal fade rollIn" id="alertBox" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content cancel-on-main" style="width:112%">
+                        <div class="modal-header background-red">
+                            <button type="button" class="close close-login" data-dismiss="modal">&times;</button>
+                           
+                        </div>
+                        
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="text-center m-btm20 ">
+                                    <div class="f-size18 m-btm20 " style="padding:5px"> </div>
+                                    
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+                                            <button class="btn btn-danger btn-block pull-right align-yesBtn background-gold" ng-click="vm.submitCancelBtnOLGAdmin()">Yes</button></div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+                                            <button class="btn btn-danger btn-block pull-left align-noBtn background-gold"  data-dismiss="modal">No</button></div>
+                                    </div>
+							
+					   </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+</section>

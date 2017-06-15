@@ -1,0 +1,277 @@
+<!--main content starts-->
+<div class="container">
+    <div class="row ">
+        <div class="col-lg-12">
+            <div class="m-top60">
+
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist" id="registrationTabs">
+                    <li role="presentation" class="disabled disabledTab"><a href="#lender" aria-controls="home" role="tab" data-toggle="tab">Lender</a></li>
+                    <li role="presentation" class="disabled disabledTab"><a href="#borrower" aria-controls="profile" role="tab" data-toggle="tab">Borrower</a></li>
+                    <li role="presentation" class="active"><a href="#property" aria-controls="messages" role="tab" data-toggle="tab">Property</a></li>
+                    <li role="presentation" class="disabled disabledTab"><a href="#loan" aria-controls="settings" role="tab" data-toggle="tab">Loan</a></li>
+                   <!--  <li role="presentation" class="disabled disabledTab"><a href="#review" aria-controls="review" role="tab" data-toggle="tab">Review</a></li> -->
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content border-tab">
+
+                    <div role="tabpanel" class="tab-pane active" id="property">
+                        <h1 class="m-top40 f-size text-capitalize text-center color-theme"> Case registration </h1>
+                        <div class=" row">
+                        <div class=" m-top60">
+                            <div class=" col-lg-11">
+                                <div class="form-horizontal">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                <div class="form-group">
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-5">
+                                                        <label  class="control-label  pull-right">New Construction?</label>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-7">
+                                                        <input type="checkbox" title="cons" ng-model="property.sponseringbroker" value="" class="m-top10" ng-init="initfun()">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                <div class="form-group">
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-5">
+                                                        <label  class="control-label pull-right"><i class="fa fa-asterisk requiredField" ng-show="showStarLot"></i> Lot:</label>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-7">
+                                                        <input type="text" id="lot" class="form-control" ng-model="property.lot" placeholder="Lot" title="lot" required />
+                                                        <div ng-show="errorPropertyLot" class="color-red">{{errorPropertyLotText}}</div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+                                                <div class="form-group">
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-5">
+                                                        <label  class="control-label pull-right"><i class="fa fa-asterisk requiredField" ng-show="showStarAddress"></i> Street Address:</label>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-7">
+                                                        <input type="text" id="streetaddress" title="street" class="form-control" ng-model="property.streetAddress" placeholder="Street Address"/>
+                                                        <div ng-show="errorPropertyAddressOne" class="color-red">{{errorPropertyAddressOneText}}</div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                <div class="form-group">
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-5">
+                                                        <label class="control-label pull-right">Apt / Suite / Other:</label>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-7">
+                                                        <input type="text"  id="address2" title="address2" class="form-control" ng-model="property.addressTwo" maxlength="8" placeholder="Apt / Suite / Other" required />
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                <div class="form-group">
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-5">
+                                                        <label  class="control-label pull-right"><i class="fa fa-asterisk requiredField"></i> City:</label>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-7">
+                                                        <input type="text"  id="city" title="city" class="form-control" ng-model="property.city" placeholder="City" required />
+                                                        <div ng-show="errorPropertyCity" class="color-red">{{errorPropertyCityText}}</div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                <div class="form-group">
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-5">
+                                                        <label class="control-label pull-right"><i class="fa fa-asterisk requiredField"></i>State:</label>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-7">
+                                                        <select class="form-control" ng-model="property.state" ng-change="getCountiesForState(property.state)" title="state">
+                                                            <option value="" disabled>Select State</option>
+                                                            <option value="{{statePrefix.referenceCodeName}}" ng-repeat="statePrefix in statePrefix| orderBy:'referenceCodeName'" ng-selected="property.state == statePrefix.referenceCodeName">{{statePrefix.referenceCodeName}}</option>
+                                                        </select>
+                                                        <div ng-show="errorPropertyState" class="color-red">{{errorPropertyStateText}}</div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                <div class="form-group">
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-5">
+                                                        <label class="control-label pull-right"><i class="fa fa-asterisk requiredField"></i> County:</label>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-7">
+                                                        <!--  <input type="text" name="country" id="country" class="form-control" ng-model="property.country" placeholder="County" required /> -->
+                                                        <select class="form-control" ng-model="property.county" title="country" >
+                                                            <option value="" disabled>Select County</option>
+                                                            <option value="{{loanMACounty}}" ng-repeat="loanMACounty in loanMACounties" ng-selected="property.county == loanMACounty">{{loanMACounty}}</option>
+                                                        </select>
+                                                        <div ng-show="errorPropertyCountry" class="color-red">{{errorPropertyCountyText}}</div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                <div class="form-group">
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-5">
+                                                        <label class="control-label pull-right"><i class="fa fa-asterisk requiredField"></i> ZIP:</label>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-7">
+                                                        <input type="text" maxlength="5" id="zip" title="zipcode" class="form-control" ng-model="property.zipCode" placeholder="Zip" required />
+                                                        <div ng-show="errorPropertyZip" class="color-red">{{errorPropertyZipText}}</div>
+                                                        <div ng-show="errorPropertyZipCODEMessage" class="color-red">{{errorPropertyZipCODEMessageText}}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                <div class="form-group">
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-5">
+                                                        <label class="control-label pull-right"><i class="fa fa-asterisk requiredField"></i>Land Status:</label>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-7">
+                                                        <select class="form-control" ng-model="property.landStatus" ng-change="some()" title="landstatus">
+                                                            <option value="" disabled>Select Land Status</option>
+                                                            <option value="{{landStatus.referenceCodeValue}}" ng-repeat="landStatus in landStatus" ng-selected="property.landStatus == landStatus.referenceCodeValue">{{landStatus.referenceCodeName}}</option>
+                                                        </select>
+                                                        <div ng-show="errorPropertyLandStatus" class="color-red">{{errorPropertyLandStatusText}}</div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                <div class="form-group">
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-5">
+                                                        <label  class="control-label pull-right"><i class="fa fa-asterisk requiredField"></i> Number of Units:</label>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-7">
+                                                        <!-- <input type="text" name="numberOfUnits" id="numberOfUnits" class="form-control" ng-model="p.numberOfUnits" required /> -->
+                                                        <select  id="numberOfUnits" class="form-control" ng-model="property.numberOfUnits" title="units" required>
+                                                            <option value="" disabled>Select Number of Units</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                        </select>
+                                                        <div ng-show="errorPropertyNoUnits" class="color-red">{{errorPropertyNoUnitsText}}</div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+</div>
+                            </div>
+                            <!-- bia box-->
+                            <div class="clearfix"></div>
+                            <div class="row">
+                                <div class="  col-lg-11 col-md-offset-1 col-md-11 col-sm-12 col-xs-12 " ng-if="showPropertyBiaDiv" >
+                                    <div class="property-content">
+                                        <div class="login-header background-red">
+                                            <h4 class="modal-title">BIA Details</h4>
+                                        </div>
+                                        <div class="lender-body form-horizontal" >
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                    <div class="form-group">
+                                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5 ">
+														 
+                                                            <label  class="control-label pull-right"><i class="fa fa-asterisk requiredField" ng-show="showStarBias"></i>Reservation#:</label>
+                                                        </div>
+                                                        <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
+                                                            <input type="text" name="track" id="track" title="track" class="form-control" valid-number="" placeholder="Reservation" ng-model="property.reservation" />
+															<div ng-show="errorBiaReservNo" class="color-red">{{errorBiaReservNoText}}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5 ">
+                                                            <label  class="control-label pull-right"><i class="fa fa-asterisk requiredField" ng-show="showStarBias"></i>Track#:</label>
+                                                        </div>
+                                                        <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
+                                                            <input type="text" id="reservation" title="reservation" class="form-control" placeholder="Track" ng-model="property.trackingNumber" />
+															<div ng-show="errorBiaTrackNo" class="color-red">{{errorBiaTrackNoText}}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5 ">
+                                                            <label  class="control-label pull-right"><i class="fa fa-asterisk requiredField" ng-show="showStarBias"></i>Contract#:</label>
+                                                        </div>
+                                                        <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
+                                                            <input type="text"  title="contract" id="contract" class="form-control" placeholder="Contract" ng-model="property.contract" />
+															<div ng-show="errorBiaContract" class="color-red">{{errorBiaContractText}}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5">
+                                                            <label class="control-label pull-right"><i class="fa fa-asterisk requiredField" ng-show="showStarBias"></i>Name of Tribe with Land Jurisdiction:</label>
+                                                        </div>
+                                                        <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
+                                                            <select class="form-control" ng-model="property.landJurisdiction" title="tribe">
+                                                                <option value="" disabled>Name of Tribe</option>
+                                                                <option value="{{tribal.referenceCodeValue}}" ng-repeat="tribal in tribal |orderBy:'referenceCodeName'" ng-selected="property.landJurisdiction == tribal.referenceCodeValue">{{tribal.referenceCodeName}}</option>
+                                                            </select>
+															<div ng-show="errorBiaTribal" class="color-red">{{errorBiaTribalText}}</div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- bia box ends-->
+                            <div class="clearfix"></div>
+                            <div class="row">
+                                <div class="col-lg-offset-1 col-lg-10 col-lg-offset-1 ">
+                                    <div class="pull-right m-tb20">
+
+
+                                        <a href="df" class="btn btn-success lender-btn-next background-red"
+                                                aria-controls="messages" role="tab" data-toggle="tab" ng-click="previousButtonProperty()">Prev</a>
+                                        <a href="dfd" aria-controls="settings" role="tab" data-toggle="tab"
+                                           class="btn btn-success lender-btn-next background-red"
+                                           ng-click="nextButtonProperty()">Next</a>
+                                      
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--main content ends-->
